@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+.container {
+    padding: 30px;
+}
+
+.dashboard-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+}
+
+.card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.card-title {
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.total {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1d4ed8;
+}
+
+.record-button {
+    border: none;
+    background: #1d4ed8;
+    color: #fff;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.record-button:hover {
+    background: #1e40af;
+}
+
+.section {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+}
+
+.section-header {
+    padding: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.section-header h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.search-input {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-input:focus,
+.student-search:focus {
+    border-color: #1d4ed8;
+    box-shadow: 0 0 0 3px rgba(29,78,216,.1);
+}
+
+.table-scroll {
+    height: 350px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    min-width: 650px;
+    border-collapse: collapse;
+}
+
+thead {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+th,
+td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+th {
+    background: #1d4ed8;
+    color: #fff;
+    font-size: 14px;
+}
+
+td {
+    font-size: 14px;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+.amount {
+    font-weight: 600;
+}
+
+.message {
+    text-align: center;
+    padding: 30px;
+    color: #6b7280;
+}
+
+.error {
+    color: #b91c1c;
+}
+
+
+/* PAYMENT MODAL */
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    background: #fff;
+    width: 100%;
+    max-width: 500px;
+    border-radius: 14px;
+    box-shadow: 0 10px 40px rgba(0,0,0,.2);
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 22px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header h2 {
+    font-size: 19px;
+}
+
+.close-button {
+    border: none;
+    background: transparent;
+    font-size: 25px;
+    cursor: pointer;
+    color: #6b7280;
+}
+
+.modal-body {
+    padding: 22px;
+}
+
+.current-year {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 18px;
+}
+
+.field {
+    margin-bottom: 18px;
+}
+
+.field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.student-search {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 11px 13px;
+    font-size: 14px;
+    outline: none;
+}
+
+.student-results {
+    max-height: 180px;
+    overflow-y: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    margin-top: 5px;
+    display: none;
+}
+
+.student-result {
+    padding: 11px 13px;
+    cursor: pointer;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.student-result:hover {
+    background: #eff6ff;
+}
+
+.student-result-number {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.student-result-name {
+    font-size: 13px;
+    margin-top: 3px;
+}
+
+.student-result-program {
+    color: #6b7280;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.selected-student {
+    background: #f0f7ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 13px;
+    display: none;
+}
+
+.selected-student strong {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.selected-student small {
+    display: block;
+    color: #6b7280;
+    margin-top: 3px;
+}
+
+.change-student {
+    border: none;
+    background: none;
+    color: #1d4ed8;
+    cursor: pointer;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+
+/* TERM BUTTONS */
+
+.terms {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.term-option {
+    border: 1px solid #d1d5db;
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.term-option:hover:not(:disabled) {
+    border-color: #1d4ed8;
+}
+
+.term-option.selected {
+    background: #eff6ff;
+    border-color: #1d4ed8;
+    color: #1d4ed8;
+    font-weight: 600;
+}
+
+.term-option.paid {
+    background: #dcfce7;
+    border-color: #86efac;
+    color: #15803d;
+    cursor: not-allowed;
+    font-weight: 600;
+}
+
+.term-option.paid::after {
+    content: " ✓";
+}
+
+.term-option:disabled {
+    opacity: 1;
+}
+
+.amount-display {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 13px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1d4ed8;
+}
+
+.payment-message {
+    display: none;
+    padding: 11px 13px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 13px;
+}
+
+.payment-message.success {
+    display: block;
+    background: #ecfdf5;
+    color: #047857;
+}
+
+.payment-message.error {
+    display: block;
+    background: #fef2f2;
+    color: #b91c1c;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 18px 22px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.cancel-button,
+.submit-button {
+    border: none;
+    border-radius: 8px;
+    padding: 11px 18px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.submit-button {
+    background: #1d4ed8;
+    color: #fff;
+    font-weight: 600;
+}
+
+.submit-button:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+@media (max-width:700px) {
+    .container {
+        padding: 15px;
+    }
+
+    .card-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .record-button {
+        width: 100%;
+    }
+
+    .terms {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="dashboard-card">
+
+        <div class="card-top">
+
+            <div>
+                <div class="card-title">
+                    Total Collections
+                </div>
+
+                <div
+                    class="total"
+                    id="totalCollections">
+                    Loading...
+                </div>
+            </div>
+
+            <button
+                class="record-button"
+                id="recordPaymentButton">
+                ＋ Record Payment
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="section">
+
+        <div class="section-header">
+
+            <h2>
+                Collection by School Year
+            </h2>
+
+            <input
+                type="search"
+                id="yearSearch"
+                class="search-input"
+                placeholder="Search school year...">
+
+        </div>
+
+        <div class="table-scroll">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>School Year</th>
+                        <th>Expected Collection</th>
+                        <th>Total Collected</th>
+                    </tr>
+                </thead>
+
+                <tbody id="yearTableBody">
+
+                    <tr>
+                        <td
+                            colspan="3"
+                            class="message">
+                            Loading...
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PAYMENT MODAL -->
+
+<div
+    class="modal"
+    id="paymentModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>
+                Record Payment
+            </h2>
+
+            <button
+                class="close-button"
+                id="closePaymentButton">
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <div class="current-year">
+                Current School Year:
+                <strong id="currentSchoolYear">
+                    Loading...
+                </strong>
+            </div>
+
+
+            <div
+                id="paymentMessage"
+                class="payment-message">
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Search Student
+                </label>
+
+                <input
+                    type="search"
+                    id="studentSearch"
+                    class="student-search"
+                    placeholder="Search student number, name, or program...">
+
+                <div
+                    id="studentResults"
+                    class="student-results">
+                </div>
+
+
+                <div
+                    id="selectedStudent"
+                    class="selected-student">
+
+                    <strong
+                        id="selectedStudentName">
+                    </strong>
+
+                    <small
+                        id="selectedStudentNumber">
+                    </small>
+
+                    <small
+                        id="selectedStudentProgram">
+                    </small>
+
+                    <button
+                        type="button"
+                        class="change-student"
+                        id="changeStudent">
+                        Change student
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Term
+                </label>
+
+                <div class="terms">
+
+                    <button
+                        type="button"
+                        class="term-option"
+                        data-term="Term 1">
+                        Term 1
+                    </button>
+
+                    <button
+                        type="button"
+                        class="term-option"
+                        data-term="Term 2">
+                        Term 2
+                    </button>
+
+                    <button
+                        type="button"
+                        class="term-option"
+                        data-term="Term 3">
+                        Term 3
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="field">
+
+                <label>
+                    Amount
+                </label>
+
+                <div class="amount-display">
+                    ₱50.00
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                class="cancel-button"
+                id="cancelPaymentButton">
+                Cancel
+            </button>
+
+            <button
+                type="button"
+                class="submit-button"
+                id="submitPaymentButton"
+                disabled>
+                Record Payment
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbzQUEBhCmA5ycd7NRhBRUfAATnM-Od6X4x7BJnwhIDVnY6WyL7jfMnXyvTezHuM54on/exec";
+
+
+let allTransactions = [];
+let allEnrollments = [];
+let allStudents = [];
+
+let selectedStudent = null;
+let selectedTerm = "";
+
+
+/* =========================
+   DASHBOARD
+========================= */
+
+async function loadDashboard() {
+
+    try {
+
+        const [
+            transactionsResponse,
+            enrollmentsResponse,
+            studentsResponse
+        ] = await Promise.all([
+
+            fetch(
+                `${API_URL}?action=getTransactions`
+            ),
+
+            fetch(
+                `${API_URL}?action=getEnrollments`
+            ),
+
+            fetch(
+                `${API_URL}?action=getStudents`
+            )
+
+        ]);
+
+
+        allTransactions =
+            await transactionsResponse.json();
+
+        allEnrollments =
+            await enrollmentsResponse.json();
+
+        allStudents =
+            await studentsResponse.json();
+
+
+        calculateTotal();
+
+        renderYearCollections();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        document
+            .getElementById(
+                "totalCollections"
+            )
+            .innerHTML =
+            `<span class="error">
+                Failed to load
+            </span>`;
+
+    }
+
+}
+
+
+/* =========================
+   TOTAL
+========================= */
+
+function calculateTotal() {
+
+    const total =
+        allTransactions.reduce(
+            (sum, transaction) =>
+                sum +
+                (
+                    Number(
+                        transaction.amount
+                    ) || 0
+                ),
+            0
+        );
+
+
+    document
+        .getElementById(
+            "totalCollections"
+        )
+        .textContent =
+        `₱${formatAmount(total)}`;
+
+}
+
+
+/* =========================
+   CURRENT SCHOOL YEAR
+========================= */
+
+function getCurrentSchoolYear() {
+
+    const today =
+        new Date();
+
+    const year =
+        today.getFullYear();
+
+    const month =
+        today.getMonth() + 1;
+
+    const startYear =
+        month >= 6
+            ? year
+            : year - 1;
+
+    return `${startYear}-${startYear + 1}`;
+
+}
+
+
+/* =========================
+   CURRENT STUDENTS
+========================= */
+
+function getCurrentStudents() {
+
+    const currentYear =
+        getCurrentSchoolYear();
+
+    const studentMap =
+        new Map(
+            allStudents.map(
+                student => [
+                    String(
+                        student.studentNumber || ""
+                    ).trim(),
+                    student
+                ]
+            )
+        );
+
+
+    const uniqueStudents =
+        new Map();
+
+
+    allEnrollments.forEach(
+        enrollment => {
+
+            const year =
+                String(
+                    enrollment.schoolYear || ""
+                ).trim();
+
+            const number =
+                String(
+                    enrollment.studentNumber || ""
+                ).trim();
+
+
+            if (
+                year !== currentYear ||
+                !number
+            ) {
+                return;
+            }
+
+
+            const student =
+                studentMap.get(number);
+
+
+            uniqueStudents.set(
+                number,
+                {
+                    studentNumber:
+                        number,
+
+                    studentName:
+                        student
+                            ?.studentName || "",
+
+                    program:
+                        enrollment.program || "",
+
+                    schoolYear:
+                        year
+                }
+            );
+
+        }
+    );
+
+
+    return Array.from(
+        uniqueStudents.values()
+    );
+
+}
+
+
+/* =========================
+   YEAR TABLE
+========================= */
+
+function renderYearCollections() {
+
+    const tableBody =
+        document.getElementById(
+            "yearTableBody"
+        );
+
+
+    const search =
+        document
+            .getElementById(
+                "yearSearch"
+            )
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const yearTotals = {};
+    const yearStudents = {};
+
+
+    allTransactions.forEach(
+        transaction => {
+
+            const year =
+                String(
+                    transaction.schoolYear || ""
+                ).trim();
+
+
+            if (!year) {
+                return;
+            }
+
+
+            if (!yearTotals[year]) {
+                yearTotals[year] = 0;
+            }
+
+
+            yearTotals[year] +=
+                Number(
+                    transaction.amount
+                ) || 0;
+
+        }
+    );
+
+
+    allEnrollments.forEach(
+        enrollment => {
+
+            const year =
+                String(
+                    enrollment.schoolYear || ""
+                ).trim();
+
+            const number =
+                String(
+                    enrollment.studentNumber || ""
+                ).trim();
+
+
+            if (
+                !year ||
+                !number
+            ) {
+                return;
+            }
+
+
+            if (!yearStudents[year]) {
+                yearStudents[year] =
+                    new Set();
+            }
+
+
+            yearStudents[year].add(
+                number
+            );
+
+        }
+    );
+
+
+    const years =
+        Array.from(
+            new Set([
+                ...Object.keys(yearTotals),
+                ...Object.keys(yearStudents)
+            ])
+        )
+        .filter(year =>
+            year
+                .toLowerCase()
+                .includes(search)
+        )
+        .sort(
+            (a, b) =>
+                b.localeCompare(a)
+        );
+
+
+    tableBody.innerHTML = "";
+
+
+    if (!years.length) {
+
+        tableBody.innerHTML = `
+            <tr>
+                <td
+                    colspan="3"
+                    class="message">
+                    No school year found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    years.forEach(year => {
+
+        const studentCount =
+            yearStudents[year]
+                ? yearStudents[year].size
+                : 0;
+
+
+        const expected =
+            studentCount * 150;
+
+
+        const collected =
+            yearTotals[year] || 0;
+
+
+        const row =
+            document.createElement("tr");
+
+
+        row.innerHTML = `
+
+            <td>
+                ${escapeHtml(year)}
+            </td>
+
+            <td class="amount">
+                ₱${formatAmount(expected)}
+            </td>
+
+            <td class="amount">
+                ₱${formatAmount(collected)}
+            </td>
+
+        `;
+
+
+        tableBody.appendChild(row);
+
+    });
+
+}
+
+
+/* =========================
+   PAYMENT MODAL
+========================= */
+
+function openPaymentModal() {
+
+    selectedStudent = null;
+    selectedTerm = "";
+
+
+    document
+        .getElementById(
+            "currentSchoolYear"
+        )
+        .textContent =
+        getCurrentSchoolYear();
+
+
+    document
+        .getElementById(
+            "studentSearch"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "studentSearch"
+        )
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById(
+            "studentResults"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "selectedStudent"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "paymentMessage"
+        )
+        .style.display =
+        "none";
+
+
+    resetTermButtons();
+
+    updateSubmitButton();
+
+
+    document
+        .getElementById(
+            "paymentModal"
+        )
+        .classList.add("show");
+
+
+    document
+        .getElementById(
+            "studentSearch"
+        )
+        .focus();
+
+}
+
+
+function closePaymentModal() {
+
+    document
+        .getElementById(
+            "paymentModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+function resetTermButtons() {
+
+    document
+        .querySelectorAll(
+            ".term-option"
+        )
+        .forEach(button => {
+
+            button.disabled = false;
+
+            button.classList.remove(
+                "paid",
+                "selected"
+            );
+
+        });
+
+}
+
+
+/* =========================
+   SEARCH STUDENTS
+========================= */
+
+function searchStudents() {
+
+    const input =
+        document
+            .getElementById(
+                "studentSearch"
+            )
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const results =
+        document.getElementById(
+            "studentResults"
+        );
+
+
+    if (!input) {
+
+        results.innerHTML = "";
+
+        results.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    const students =
+        getCurrentStudents()
+            .filter(student => {
+
+                const number =
+                    String(
+                        student.studentNumber || ""
+                    )
+                    .toLowerCase();
+
+                const name =
+                    String(
+                        student.studentName || ""
+                    )
+                    .toLowerCase();
+
+                const program =
+                    String(
+                        student.program || ""
+                    )
+                    .toLowerCase();
+
+
+                return (
+                    number.includes(input) ||
+                    name.includes(input) ||
+                    program.includes(input)
+                );
+
+            })
+            .slice(0, 20);
+
+
+    results.innerHTML = "";
+
+
+    if (!students.length) {
+
+        results.innerHTML = `
+            <div class="student-result">
+                No enrolled student found.
+            </div>
+        `;
+
+        results.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    students.forEach(student => {
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "student-result";
+
+
+        item.innerHTML = `
+
+            <div class="student-result-number">
+                ${escapeHtml(
+                    student.studentNumber
+                )}
+            </div>
+
+            <div class="student-result-name">
+                ${escapeHtml(
+                    student.studentName
+                )}
+            </div>
+
+            <div class="student-result-program">
+                ${escapeHtml(
+                    student.program || "No program"
+                )}
+            </div>
+
+        `;
+
+
+        item.addEventListener(
+            "click",
+            () =>
+                selectStudent(student)
+        );
+
+
+        results.appendChild(item);
+
+    });
+
+
+    results.style.display =
+        "block";
+
+}
+
+
+/* =========================
+   SELECT STUDENT
+========================= */
+
+function selectStudent(student) {
+
+    selectedStudent =
+        student;
+
+    selectedTerm = "";
+
+
+    document
+        .getElementById(
+            "studentSearch"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "studentResults"
+        )
+        .style.display =
+        "none";
+
+
+    document
+        .getElementById(
+            "selectedStudent"
+        )
+        .style.display =
+        "block";
+
+
+    document
+        .getElementById(
+            "selectedStudentName"
+        )
+        .textContent =
+        student.studentName;
+
+
+    document
+        .getElementById(
+            "selectedStudentNumber"
+        )
+        .textContent =
+        `Student Number: ${student.studentNumber}`;
+
+
+    document
+        .getElementById(
+            "selectedStudentProgram"
+        )
+        .textContent =
+        `Program: ${student.program || "No program"}`;
+
+
+    updateTermButtons();
+
+    updateSubmitButton();
+
+}
+
+
+/* =========================
+   CHECK PAID TERMS
+========================= */
+
+function updateTermButtons() {
+
+    if (!selectedStudent) {
+        resetTermButtons();
+        return;
+    }
+
+
+    const currentYear =
+        getCurrentSchoolYear();
+
+
+    const paidTerms =
+        new Set();
+
+
+    allTransactions.forEach(
+        transaction => {
+
+            const transactionYear =
+                String(
+                    transaction.schoolYear || ""
+                ).trim();
+
+            const studentNumber =
+                String(
+                    transaction.studentNumber || ""
+                ).trim();
+
+            const term =
+                String(
+                    transaction.term || ""
+                ).trim();
+
+
+            if (
+                transactionYear === currentYear &&
+                studentNumber ===
+                    String(
+                        selectedStudent.studentNumber
+                    ).trim()
+            ) {
+                paidTerms.add(term);
+            }
+
+        }
+    );
+
+
+    document
+        .querySelectorAll(
+            ".term-option"
+        )
+        .forEach(button => {
+
+            const term =
+                button.dataset.term;
+
+
+            button.classList.remove(
+                "paid",
+                "selected"
+            );
+
+
+            if (
+                paidTerms.has(term)
+            ) {
+
+                button.disabled = true;
+
+                button.classList.add(
+                    "paid"
+                );
+
+            } else {
+
+                button.disabled = false;
+
+            }
+
+        });
+
+
+    if (
+        selectedTerm &&
+        paidTerms.has(selectedTerm)
+    ) {
+        selectedTerm = "";
+    }
+
+}
+
+
+/* =========================
+   CHANGE STUDENT
+========================= */
+
+function changeStudent() {
+
+    selectedStudent = null;
+    selectedTerm = "";
+
+
+    document
+        .getElementById(
+            "selectedStudent"
+        )
+        .style.display =
+        "none";
+
+
+    const search =
+        document.getElementById(
+            "studentSearch"
+        );
+
+
+    search.value = "";
+
+    search.style.display =
+        "block";
+
+
+    resetTermButtons();
+
+    updateSubmitButton();
+
+    search.focus();
+
+}
+
+
+/* =========================
+   SELECT TERM
+========================= */
+
+function selectTerm(term) {
+
+    const button =
+        document.querySelector(
+            `.term-option[data-term="${term}"]`
+        );
+
+
+    if (
+        !button ||
+        button.disabled
+    ) {
+        return;
+    }
+
+
+    selectedTerm =
+        term;
+
+
+    document
+        .querySelectorAll(
+            ".term-option"
+        )
+        .forEach(item => {
+
+            item.classList.toggle(
+                "selected",
+                item.dataset.term === term
+            );
+
+        });
+
+
+    updateSubmitButton();
+
+}
+
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+function updateSubmitButton() {
+
+    document
+        .getElementById(
+            "submitPaymentButton"
+        )
+        .disabled =
+        !selectedStudent ||
+        !selectedTerm;
+
+}
+
+
+/* =========================
+   RECORD PAYMENT
+========================= */
+
+async function submitPayment() {
+
+    if (
+        !selectedStudent ||
+        !selectedTerm
+    ) {
+        return;
+    }
+
+
+    const button =
+        document.getElementById(
+            "submitPaymentButton"
+        );
+
+
+    const message =
+        document.getElementById(
+            "paymentMessage"
+        );
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "Recording...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL,
+                {
+                    method: "POST",
+
+                    body:
+                        JSON.stringify({
+
+                            action:
+                                "recordPayment",
+
+                            studentNumber:
+                                selectedStudent.studentNumber,
+
+                            term:
+                                selectedTerm
+
+                        })
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!result.success) {
+            throw new Error(
+                result.message ||
+                "Payment could not be recorded."
+            );
+        }
+
+
+        message.className =
+            "payment-message success";
+
+
+        message.textContent =
+            `Payment recorded successfully. Transaction ID: ${result.transactionId}`;
+
+
+        message.style.display =
+            "block";
+
+
+        await loadDashboard();
+
+
+        setTimeout(
+            () => {
+                closePaymentModal();
+            },
+            1500
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        message.className =
+            "payment-message error";
+
+
+        message.textContent =
+            error.message ||
+            "Failed to record payment.";
+
+
+        message.style.display =
+            "block";
+
+
+        updateSubmitButton();
+
+    } finally {
+
+        button.textContent =
+            "Record Payment";
+
+    }
+
+}
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function formatAmount(amount) {
+
+    return Number(amount || 0)
+        .toLocaleString(
+            "en-PH",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+}
+
+
+function escapeHtml(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================
+   EVENTS
+========================= */
+
+document
+    .getElementById(
+        "recordPaymentButton"
+    )
+    .addEventListener(
+        "click",
+        openPaymentModal
+    );
+
+
+document
+    .getElementById(
+        "closePaymentButton"
+    )
+    .addEventListener(
+        "click",
+        closePaymentModal
+    );
+
+
+document
+    .getElementById(
+        "cancelPaymentButton"
+    )
+    .addEventListener(
+        "click",
+        closePaymentModal
+    );
+
+
+document
+    .getElementById(
+        "changeStudent"
+    )
+    .addEventListener(
+        "click",
+        changeStudent
+    );
+
+
+document
+    .getElementById(
+        "studentSearch"
+    )
+    .addEventListener(
+        "input",
+        searchStudents
+    );
+
+
+document
+    .querySelectorAll(
+        ".term-option"
+    )
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () =>
+                selectTerm(
+                    button.dataset.term
+                )
+        );
+
+    });
+
+
+document
+    .getElementById(
+        "submitPaymentButton"
+    )
+    .addEventListener(
+        "click",
+        submitPayment
+    );
+
+
+document
+    .getElementById(
+        "yearSearch"
+    )
+    .addEventListener(
+        "input",
+        renderYearCollections
+    );
+
+
+document
+    .getElementById(
+        "paymentModal"
+    )
+    .addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target.id ===
+                "paymentModal"
+            ) {
+                closePaymentModal();
+            }
+
+        }
+    );
+
+
+loadDashboard();
+
+</script>
+
+</body>
+</html>

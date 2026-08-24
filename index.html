@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CAS Fund</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        .app {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 240px;
+            background: #1d4ed8;
+            color: white;
+            padding: 25px 15px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            padding: 0 10px;
+            margin-bottom: 30px;
+        }
+
+        .nav {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-button {
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: white;
+            text-align: left;
+            padding: 13px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .nav-button:hover,
+        .nav-button.active {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .main {
+            flex: 1;
+            min-width: 0;
+            background: #f5f7fb;
+        }
+
+        .page {
+            width: 100%;
+            height: 100vh;
+            border: none;
+            display: block;
+        }
+
+        @media (max-width: 700px) {
+            .sidebar {
+                width: 190px;
+            }
+
+            .logo {
+                font-size: 19px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                CAS Fund
+            </div>
+
+            <nav class="nav">
+
+                <button
+                    class="nav-button active"
+                    data-page="Dashboard/dashboard.html">
+                    Dashboard
+                </button>
+
+                <button
+                    class="nav-button"
+                    data-page="Students/students.html">
+                    Students List
+                </button>
+
+                <button
+                    class="nav-button"
+                    data-page="Transactions/transactions.html">
+                    Transactions
+                </button>
+
+                <button
+                    class="nav-button"
+                    data-page="Events/events.html">
+                    Events
+                </button>
+
+            </nav>
+
+        </aside>
+
+        <main class="main">
+
+            <iframe
+                id="pageFrame"
+                class="page"
+                src="Dashboard/dashboard.html"
+                title="CAS Fund">
+            </iframe>
+
+        </main>
+
+    </div>
+
+    <script>
+        const pageFrame =
+            document.getElementById("pageFrame");
+
+        const navButtons =
+            document.querySelectorAll(".nav-button");
+
+        navButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const page =
+                    button.getAttribute("data-page");
+
+                pageFrame.src = page;
+
+                navButtons.forEach(item => {
+                    item.classList.remove("active");
+                });
+
+                button.classList.add("active");
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
