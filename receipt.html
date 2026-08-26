@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAS Fund | Payment Receipt</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f9;
+    color: #1f2937;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.receipt {
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.receipt-header {
+    background: #0f3d5e;
+    color: white;
+    padding: 28px;
+    text-align: center;
+}
+
+.receipt-header h1 {
+    font-size: 25px;
+    margin-bottom: 6px;
+}
+
+.receipt-header p {
+    font-size: 13px;
+    opacity: .8;
+}
+
+.receipt-body {
+    padding: 30px;
+}
+
+.receipt-title {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.receipt-title h2 {
+    font-size: 21px;
+    margin-bottom: 5px;
+}
+
+.receipt-title p {
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.transaction-id {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 14px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.transaction-id span {
+    display: block;
+    color: #6b7280;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.transaction-id strong {
+    font-size: 16px;
+    letter-spacing: .5px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.info-item {
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 10px;
+}
+
+.info-label {
+    color: #6b7280;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.info-value {
+    font-size: 14px;
+    font-weight: 600;
+    word-break: break-word;
+}
+
+.amount-box {
+    border-top: 2px solid #0f3d5e;
+    border-bottom: 2px solid #0f3d5e;
+    padding: 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.amount-label {
+    font-weight: bold;
+}
+
+.amount {
+    font-size: 25px;
+    font-weight: bold;
+    color: #0f3d5e;
+}
+
+.status {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.status span {
+    display: inline-block;
+    background: #dcfce7;
+    color: #166534;
+    padding: 7px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.receipt-footer {
+    border-top: 1px solid #e5e7eb;
+    padding-top: 20px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+button {
+    border: none;
+    padding: 11px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.print-btn {
+    background: #0f3d5e;
+    color: white;
+}
+
+.close-btn {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+}
+
+.error {
+    text-align: center;
+    padding: 60px 20px;
+    color: #b91c1c;
+}
+
+@media print {
+
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .receipt {
+        max-width: none;
+        border: none;
+        box-shadow: none;
+    }
+
+    .actions {
+        display: none;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="receipt">
+
+    <div class="receipt-header">
+
+        <h1>
+            CAS FUND
+        </h1>
+
+        <p>
+            Fund Collection System
+        </p>
+
+    </div>
+
+    <div
+        id="receiptContent"
+        class="receipt-body">
+
+        <div class="loading">
+            Loading receipt...
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* =========================================
+   GET RECEIPT DATA
+========================================= */
+
+function getReceiptData() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const encodedData =
+        params.get("data");
+
+    if (!encodedData) {
+
+        return null;
+
+    }
+
+    try {
+
+        return JSON.parse(
+            encodedData
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Receipt data parsing error:",
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* =========================================
+   GENERATE FALLBACK TRANSACTION ID
+========================================= */
+
+function getTransactionId(
+    transaction
+) {
+
+    if (
+        transaction.transactionId
+    ) {
+
+        return String(
+            transaction.transactionId
+        );
+
+    }
+
+    if (
+        transaction.id
+    ) {
+
+        return String(
+            transaction.id
+        );
+
+    }
+
+    /*
+     * Some older transactions may not
+     * have a transaction ID.
+     *
+     * Create a readable fallback ID
+     * so the receipt can still display.
+     */
+
+    const timestamp =
+        transaction.date
+            ? new Date(
+                transaction.date
+            ).getTime()
+            : Date.now();
+
+    return (
+        "CAS-" +
+        String(
+            timestamp
+        )
+    );
+
+}
+
+
+/* =========================================
+   LOAD RECEIPT
+========================================= */
+
+function loadReceipt() {
+
+    const container =
+        document.getElementById(
+            "receiptContent"
+        );
+
+    const transaction =
+        getReceiptData();
+
+
+    if (
+        !transaction
+        ||
+        typeof transaction !== "object"
+    ) {
+
+        container.innerHTML = `
+
+            <div class="error">
+
+                Unable to load receipt.
+
+                <br><br>
+
+                No valid transaction data
+                was provided.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    renderReceipt(
+        transaction
+    );
+
+}
+
+
+/* =========================================
+   RENDER RECEIPT
+========================================= */
+
+function renderReceipt(
+    transaction
+) {
+
+    const container =
+        document.getElementById(
+            "receiptContent"
+        );
+
+
+    const transactionId =
+        getTransactionId(
+            transaction
+        );
+
+
+    const rawDate =
+        transaction.date;
+
+
+    const date =
+        rawDate
+            ? new Date(rawDate)
+            : null;
+
+
+    const formattedDate =
+        date &&
+        !isNaN(
+            date.getTime()
+        )
+
+            ?
+
+        date.toLocaleString(
+            undefined,
+            {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "numeric",
+                minute: "2-digit"
+            }
+        )
+
+            :
+
+        escapeHTML(
+            rawDate || ""
+        );
+
+
+    const studentNumber =
+        escapeHTML(
+            transaction.studentNumber
+        );
+
+
+    const studentName =
+        escapeHTML(
+            transaction.studentName
+        );
+
+
+    const program =
+        escapeHTML(
+            transaction.program
+        );
+
+
+    const schoolYear =
+        escapeHTML(
+            transaction.schoolYear
+        );
+
+
+    const term =
+        escapeHTML(
+            transaction.term
+        );
+
+
+    const amount =
+        Number(
+            transaction.amount || 0
+        );
+
+
+    container.innerHTML = `
+
+        <div class="receipt-title">
+
+            <h2>
+                Payment Receipt
+            </h2>
+
+            <p>
+                Official CAS Fund payment record
+            </p>
+
+        </div>
+
+
+        <div class="transaction-id">
+
+            <span>
+                Transaction ID
+            </span>
+
+            <strong>
+                ${escapeHTML(transactionId)}
+            </strong>
+
+        </div>
+
+
+        <div class="info-grid">
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+                    Student Number
+                </div>
+
+                <div class="info-value">
+                    ${studentNumber}
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+                    Student Name
+                </div>
+
+                <div class="info-value">
+                    ${studentName}
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+                    Program
+                </div>
+
+                <div class="info-value">
+                    ${program}
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+                    School Year
+                </div>
+
+                <div class="info-value">
+                    ${schoolYear}
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+                    Payment Term
+                </div>
+
+                <div class="info-value">
+                    ${term}
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-label">
+                    Date
+                </div>
+
+                <div class="info-value">
+                    ${formattedDate}
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="amount-box">
+
+            <span class="amount-label">
+                Amount Paid
+            </span>
+
+            <span class="amount">
+                ₱${amount.toFixed(2)}
+            </span>
+
+        </div>
+
+
+        <div class="status">
+
+            <span>
+                PAYMENT RECEIVED
+            </span>
+
+        </div>
+
+
+        <div class="receipt-footer">
+
+            This receipt confirms the recorded
+            CAS Fund payment.
+
+            <br>
+
+            Please keep this receipt for your records.
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="print-btn"
+                onclick="window.print()">
+
+                Print Receipt
+
+            </button>
+
+
+            <button
+                class="close-btn"
+                onclick="window.close()">
+
+                Close
+
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+loadReceipt();
+
+</script>
+
+</body>
+</html>
