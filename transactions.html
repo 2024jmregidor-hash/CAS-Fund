@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CAS FUND | Complete Transactions</title>
+
+<link rel="icon"
+type="image/png"
+href="https://mmclcassc.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png">
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f9;
+    color: #1f2937;
+}
+
+.page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.header {
+    background: #0f3d5e;
+    color: white;
+    padding: 22px 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    font-size: 25px;
+    margin-bottom: 5px;
+}
+
+.header p {
+    font-size: 14px;
+    opacity: .8;
+}
+
+.toolbar {
+    background: white;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.toolbar select,
+.toolbar input {
+    padding: 11px 13px;
+    border: 1px solid #d1d5db;
+    border-radius: 7px;
+    font-family: inherit;
+    outline: none;
+}
+
+.toolbar select {
+    min-width: 180px;
+}
+
+.toolbar input {
+    flex: 1;
+    min-width: 250px;
+}
+
+.toolbar select:focus,
+.toolbar input:focus {
+    border-color: #0f3d5e;
+}
+
+.btn {
+    border: none;
+    padding: 10px 16px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: #0f3d5e;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #0b304a;
+}
+
+.btn-secondary {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.btn-secondary:hover {
+    background: #d1d5db;
+}
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.summary-title {
+    color: #6b7280;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.summary-value {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.table-container {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 13px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+th {
+    background: #f8fafc;
+    font-size: 13px;
+    color: #4b5563;
+}
+
+td {
+    font-size: 14px;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.empty,
+.loading,
+.error {
+    text-align: center;
+    padding: 45px;
+}
+
+.empty,
+.loading {
+    color: #6b7280;
+}
+
+.error {
+    color: #b91c1c;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.badge-school-year {
+    background: #e0f2fe;
+    color: #075985;
+}
+
+.back {
+    margin-bottom: 18px;
+}
+
+@media (max-width: 800px) {
+
+    .page {
+        padding: 15px;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+    }
+
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .toolbar input,
+    .toolbar select {
+        width: 100%;
+        min-width: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="back">
+        <a
+            href="index.html"
+            class="btn btn-secondary">
+
+            ← Back to CAS FUND
+
+        </a>
+    </div>
+
+    <div class="header">
+
+        <h1>
+            CAS FUND
+        </h1>
+
+        <p>
+            Complete Transaction History
+        </p>
+
+    </div>
+
+
+    <div class="toolbar">
+
+        <select
+            id="schoolYearFilter"
+            onchange="renderTransactions()">
+
+            <option value="ALL">
+                All School Years
+            </option>
+
+            <option value="2025-2026">
+                2025-2026
+            </option>
+
+            <option value="2026-2027" selected>
+                2026-2027
+            </option>
+
+            <option value="2027-2028">
+                2027-2028
+            </option>
+
+        </select>
+
+
+        <input
+            type="text"
+            id="transactionSearch"
+            placeholder="Search student number, name, program, term..."
+            oninput="renderTransactions()"
+        >
+
+
+        <button
+            class="btn btn-primary"
+            onclick="loadTransactions()">
+
+            Refresh
+
+        </button>
+
+    </div>
+
+
+    <div class="summary">
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                Transactions
+            </div>
+
+            <div
+                class="summary-value"
+                id="transactionCount">
+
+                0
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                Total Collected
+            </div>
+
+            <div
+                class="summary-value"
+                id="totalCollected">
+
+                ₱0.00
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-card">
+
+            <div class="summary-title">
+                School Year
+            </div>
+
+            <div
+                class="summary-value"
+                id="selectedSchoolYear">
+
+                2026-2027
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Student No.
+                    </th>
+
+                    <th>
+                        Student Name
+                    </th>
+
+                    <th>
+                        Program
+                    </th>
+
+                    <th>
+                        School Year
+                    </th>
+
+                    <th>
+                        Term
+                    </th>
+
+                    <th>
+                        Amount
+                    </th>
+
+                    <th>
+                        Receipt
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="transactionsTable">
+
+                <tr>
+
+                    <td
+                        colspan="8"
+                        class="loading">
+
+                        Loading transactions...
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const TRANSACTION_API_URL =
+    "https://script.google.com/macros/s/AKfycbzOY63c-59sL4VziVsUxwJHiqG-irjplIF45WeGiKT52gnNaBxDTLr2OuhoSVs4duod5g/exec";
+
+
+let transactions = [];
+
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+function formatCurrency(value) {
+
+    return Number(value || 0)
+        .toLocaleString(
+            "en-PH",
+            {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }
+        );
+
+}
+
+
+async function loadTransactions() {
+
+    const table =
+        document.getElementById(
+            "transactionsTable"
+        );
+
+
+    table.innerHTML = `
+        <tr>
+            <td colspan="8" class="loading">
+                Loading transactions...
+            </td>
+        </tr>
+    `;
+
+
+    try {
+
+        const response =
+            await fetch(
+                TRANSACTION_API_URL +
+                "?action=transactions&t=" +
+                Date.now(),
+                {
+                    method: "GET",
+                    cache: "no-store"
+                }
+            );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Transaction API HTTP error " +
+                response.status
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !data ||
+            !data.success
+        ) {
+
+            throw new Error(
+                data?.error ||
+                "Transaction API returned an error."
+            );
+
+        }
+
+
+        transactions =
+            Array.isArray(
+                data.transactions
+            )
+                ?
+                data.transactions
+                :
+                [];
+
+
+        renderTransactions();
+
+
+    } catch (error) {
+
+        console.error(
+            "Transaction loading error:",
+            error
+        );
+
+
+        table.innerHTML = `
+            <tr>
+                <td
+                    colspan="8"
+                    class="error">
+
+                    Failed to load transactions.
+
+                    <br><br>
+
+                    ${escapeHTML(
+                        error.message
+                    )}
+
+                </td>
+            </tr>
+        `;
+
+    }
+
+}
+
+
+function renderTransactions() {
+
+    const table =
+        document.getElementById(
+            "transactionsTable"
+        );
+
+
+    const filter =
+        document.getElementById(
+            "schoolYearFilter"
+        ).value;
+
+
+    const search =
+        document.getElementById(
+            "transactionSearch"
+        ).value
+            .toLowerCase()
+            .trim();
+
+
+    document.getElementById(
+        "selectedSchoolYear"
+    ).textContent =
+        filter === "ALL"
+            ?
+            "All Years"
+            :
+            filter;
+
+
+    let filtered =
+        transactions.filter(
+            transaction => {
+
+                const schoolYear =
+                    String(
+                        transaction.schoolYear ?? ""
+                    ).trim();
+
+
+                const studentNumber =
+                    String(
+                        transaction.studentNumber ?? ""
+                    ).toLowerCase();
+
+
+                const studentName =
+                    String(
+                        transaction.studentName ?? ""
+                    ).toLowerCase();
+
+
+                const program =
+                    String(
+                        transaction.program ?? ""
+                    ).toLowerCase();
+
+
+                const term =
+                    String(
+                        transaction.term ?? ""
+                    ).toLowerCase();
+
+
+                const matchesYear =
+                    filter === "ALL" ||
+                    schoolYear === filter;
+
+
+                const matchesSearch =
+                    !search ||
+
+                    studentNumber.includes(search) ||
+
+                    studentName.includes(search) ||
+
+                    program.includes(search) ||
+
+                    term.includes(search) ||
+
+                    schoolYear.includes(search);
+
+
+                return (
+                    matchesYear &&
+                    matchesSearch
+                );
+
+            }
+        );
+
+
+    const total =
+        filtered.reduce(
+            (
+                sum,
+                transaction
+            ) =>
+
+                sum +
+                Number(
+                    transaction.amount || 0
+                ),
+
+            0
+        );
+
+
+    document.getElementById(
+        "transactionCount"
+    ).textContent =
+        filtered.length;
+
+
+    document.getElementById(
+        "totalCollected"
+    ).textContent =
+        "₱" +
+        formatCurrency(total);
+
+
+    if (!filtered.length) {
+
+        table.innerHTML = `
+            <tr>
+                <td
+                    colspan="8"
+                    class="empty">
+
+                    No transactions found.
+
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    filtered =
+        filtered
+            .slice()
+            .reverse();
+
+
+    table.innerHTML =
+        filtered
+            .map(
+                transaction => {
+
+                    const date =
+                        transaction.date
+                            ?
+                            new Date(
+                                transaction.date
+                            ).toLocaleDateString()
+                            :
+                            "";
+
+
+                    const amount =
+                        Number(
+                            transaction.amount || 0
+                        );
+
+
+                    const data =
+                        encodeURIComponent(
+                            JSON.stringify(
+                                transaction
+                            )
+                        );
+
+
+                    return `
+
+                        <tr>
+
+                            <td>
+                                ${escapeHTML(date)}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(
+                                    transaction.studentNumber
+                                )}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(
+                                    transaction.studentName
+                                )}
+                            </td>
+
+                            <td>
+                                ${escapeHTML(
+                                    transaction.program
+                                )}
+                            </td>
+
+                            <td>
+
+                                <span
+                                    class="badge badge-school-year">
+
+                                    ${escapeHTML(
+                                        transaction.schoolYear
+                                    )}
+
+                                </span>
+
+                            </td>
+
+                            <td>
+                                ${escapeHTML(
+                                    transaction.term
+                                )}
+                            </td>
+
+                            <td>
+                                ₱${formatCurrency(amount)}
+                            </td>
+
+                            <td>
+
+                                <button
+                                    class="btn btn-primary"
+                                    onclick='openReceipt(${JSON.stringify(
+                                        transaction
+                                    )})'>
+
+                                    Receipt
+
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
+
+function openReceipt(transaction) {
+
+    if (
+        !transaction ||
+        typeof transaction !== "object"
+    ) {
+
+        alert(
+            "Unable to generate receipt."
+        );
+
+        return;
+
+    }
+
+
+    const data =
+        encodeURIComponent(
+            JSON.stringify(
+                transaction
+            )
+        );
+
+
+    const receiptUrl =
+        "receipt.html?data=" +
+        data;
+
+
+    const receiptWindow =
+        window.open(
+            receiptUrl,
+            "_blank"
+        );
+
+
+    if (!receiptWindow) {
+
+        alert(
+            "The receipt was blocked by your browser. Please allow pop-ups for this website."
+        );
+
+    }
+
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        loadTransactions();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
