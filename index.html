@@ -6,66 +6,39 @@
 
 <title>CAS FUND | Fund Collection System</title>
 
-<link
-    rel="icon"
-    type="image/png"
-    href="https://2024jmregidor-hash.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png"
->
+<link rel="icon" type="image/png"
+href="https://2024jmregidor-hash.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png">
 
-<meta
-    property="og:title"
-    content="CAS FUND | Fund Collection System"
->
+<meta property="og:title" content="CAS FUND | Fund Collection System">
+<meta property="og:description" content="CAS Fund Collection System">
+<meta property="og:image" content="https://2024jmregidor-hash.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png">
+<meta property="og:url" content="https://2024jmregidor-hash.github.io/CAS-SC-FINANCE-REPORT/">
+<meta property="og:type" content="website">
 
-<meta
-    property="og:description"
-    content="CAS Fund Collection System"
->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="CAS FUND | Fund Collection System">
+<meta name="twitter:description" content="CAS Fund Collection System">
+<meta name="twitter:image" content="https://2024jmregidor-hash.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png">
 
-<meta
-    property="og:image"
-    content="https://2024jmregidor-hash.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png"
->
-
-<meta
-    property="og:url"
-    content="https://2024jmregidor-hash.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png"
->
-
-<meta
-    property="og:type"
-    content="website"
->
-
-<meta
-    name="twitter:card"
-    content="summary_large_image"
->
-
-<meta
-    name="twitter:title"
-    content="CAS FUND | Fund Collection System"
->
-
-<meta
-    name="twitter:description"
-    content="CAS Fund Collection System"
->
-
-<meta
-    name="twitter:image"
-    content="https://2024jmregidor-hash.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png"
->
 <style>
 
-.dashboard-payment-btn {
-    margin-top: 15px;
-    padding: 9px 14px;
-    font-size: 13px;
-    font-weight: 600;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-  
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f9;
+    color: #1f2937;
+}
+
+
+/* =========================================
+   APP LOADER
+========================================= */
+
 .app-loader {
     position: fixed;
     inset: 0;
@@ -125,6 +98,7 @@
     color: #6b7280;
     font-size: 13px;
     margin-bottom: 22px;
+    line-height: 1.5;
 }
 
 .loader-status {
@@ -143,6 +117,9 @@
 }
 
 .loader-status span {
+    width: 18px;
+    display: inline-block;
+    text-align: center;
     font-size: 17px;
     color: #9ca3af;
 }
@@ -155,18 +132,33 @@
     color: #dc2626;
 }
 
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+.loader-status span.loading {
+    color: #0f3d5e;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f6f9;
-    color: #1f2937;
+.loader-box.failed {
+    border-color: #fecaca;
 }
+
+.loader-box.failed .loader-spinner {
+    display: none;
+}
+
+.loader-error-icon {
+    font-size: 42px;
+    color: #dc2626;
+    margin-bottom: 15px;
+}
+
+.loader-reload-btn {
+    margin-top: 20px;
+    min-width: 150px;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
 
 .sidebar {
     position: fixed;
@@ -217,6 +209,11 @@ body {
     color: white;
 }
 
+
+/* =========================================
+   MAIN
+========================================= */
+
 .main {
     margin-left: 240px;
     min-height: 100vh;
@@ -266,6 +263,11 @@ body {
     color: #6b7280;
 }
 
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
 .cards {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -295,6 +297,14 @@ body {
     color: #6b7280;
     font-size: 13px;
     margin-top: 7px;
+}
+
+.dashboard-payment-btn {
+    margin-top: 15px;
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    width: auto;
 }
 
 .progress-card {
@@ -349,6 +359,11 @@ body {
     font-size: 25px;
 }
 
+
+/* =========================================
+   TABLES
+========================================= */
+
 .table-container {
     background: white;
     border-radius: 12px;
@@ -382,6 +397,11 @@ tr:last-child td {
     border-bottom: none;
 }
 
+
+/* =========================================
+   BUTTONS
+========================================= */
+
 .btn {
     border: none;
     padding: 10px 16px;
@@ -404,6 +424,16 @@ tr:last-child td {
     color: #374151;
 }
 
+.btn:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   TOOLBAR
+========================================= */
+
 .toolbar {
     display: flex;
     justify-content: space-between;
@@ -422,6 +452,11 @@ tr:last-child td {
 .search:focus {
     border-color: #0f3d5e;
 }
+
+
+/* =========================================
+   BADGES
+========================================= */
 
 .badge {
     display: inline-block;
@@ -446,6 +481,11 @@ tr:last-child td {
     color: #991b1b;
 }
 
+
+/* =========================================
+   STATES
+========================================= */
+
 .empty {
     text-align: center;
     padding: 40px;
@@ -463,6 +503,11 @@ tr:last-child td {
     padding: 40px;
     color: #b91c1c;
 }
+
+
+/* =========================================
+   MODAL
+========================================= */
 
 .modal {
     display: none;
@@ -517,6 +562,11 @@ tr:last-child td {
     margin-top: 20px;
 }
 
+
+/* =========================================
+   STUDENT SEARCH
+========================================= */
+
 .student-search {
     width: 100%;
     padding: 11px;
@@ -553,6 +603,11 @@ tr:last-child td {
 .student-result small {
     color: #6b7280;
 }
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
 
 @media (max-width: 900px) {
 
@@ -611,24 +666,40 @@ tr:last-child td {
     }
 
 }
+
 </style>
 </head>
 
 <body>
 
-  <div id="appLoader" class="app-loader">
-    <div class="loader-box">
-        <div class="loader-logo">CAS FUND</div>
 
-        <div class="loader-spinner"></div>
+<!-- =========================================
+     APPLICATION LOADER
+========================================= -->
 
-        <h2>Loading System</h2>
+<div id="appLoader" class="app-loader">
+
+    <div class="loader-box" id="loaderBox">
+
+        <div class="loader-logo">
+            CAS FUND
+        </div>
+
+        <div
+            class="loader-spinner"
+            id="loaderSpinner">
+        </div>
+
+        <h2 id="loaderTitle">
+            Loading System
+        </h2>
 
         <p id="loaderMessage">
             Preparing CAS Fund...
         </p>
 
         <div class="loader-status">
+
             <div>
                 <span id="studentsStatusIcon">○</span>
                 Students
@@ -638,16 +709,38 @@ tr:last-child td {
                 <span id="transactionsStatusIcon">○</span>
                 Transactions
             </div>
+
         </div>
+
+        <button
+            id="reloadButton"
+            class="btn btn-primary loader-reload-btn"
+            onclick="reloadApplication()"
+            style="display:none;">
+
+            ↻ Reload Page
+
+        </button>
+
     </div>
+
 </div>
 
+
+<!-- =========================================
+     SIDEBAR
+========================================= -->
 
 <aside class="sidebar">
 
     <div class="logo">
+
         CAS FUND
-        <span>Fund Collection System</span>
+
+        <span>
+            Fund Collection System
+        </span>
+
     </div>
 
     <nav class="nav">
@@ -655,24 +748,36 @@ tr:last-child td {
         <button
             class="active"
             onclick="showPage('dashboard', this)">
+
             Dashboard
+
         </button>
 
         <button
             onclick="showPage('students', this)">
+
             Students
+
         </button>
 
         <button
             onclick="showPage('transactions', this)">
+
             Transactions
+
         </button>
 
     </nav>
 
 </aside>
 
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
 <main class="main">
+
 
 <header class="topbar">
 
@@ -686,7 +791,13 @@ tr:last-child td {
 
 </header>
 
+
 <section class="content">
+
+
+<!-- =========================================
+     DASHBOARD
+========================================= -->
 
 <div id="dashboard" class="page active">
 
@@ -702,31 +813,39 @@ tr:last-child td {
 
     </div>
 
-<div class="cards">
 
-<div class="card">
+    <div class="cards">
 
-    <div class="card-title">
-        Total Collected
-    </div>
 
-    <div
-        class="card-value"
-        id="totalCollected">
-        ₱0.00
-    </div>
+        <div class="card">
 
-    <div class="card-subtitle">
-        Actual payments received
-    </div>
+            <div class="card-title">
+                Total Collected
+            </div>
 
-    <button
-        class="btn btn-primary dashboard-payment-btn"
-        onclick="openPaymentModal()">
-        + Record Payment
-    </button>
+            <div
+                class="card-value"
+                id="totalCollected">
 
-</div>
+                ₱0.00
+
+            </div>
+
+            <div class="card-subtitle">
+                Actual payments received
+            </div>
+
+            <button
+                class="btn btn-primary dashboard-payment-btn"
+                onclick="openPaymentModal()">
+
+                + Record Payment
+
+            </button>
+
+        </div>
+
+
         <div class="card">
 
             <div class="card-title">
@@ -736,7 +855,9 @@ tr:last-child td {
             <div
                 class="card-value"
                 id="expectedCollection">
+
                 ₱0.00
+
             </div>
 
             <div class="card-subtitle">
@@ -744,6 +865,7 @@ tr:last-child td {
             </div>
 
         </div>
+
 
         <div class="card">
 
@@ -754,7 +876,9 @@ tr:last-child td {
             <div
                 class="card-value"
                 id="collectionPercentage">
+
                 0%
+
             </div>
 
             <div class="card-subtitle">
@@ -763,9 +887,9 @@ tr:last-child td {
 
         </div>
 
-    </div>
 
     </div>
+
 
     <div class="progress-card">
 
@@ -792,7 +916,9 @@ tr:last-child td {
 
     </div>
 
+
     <div class="status-grid">
+
 
         <div class="status-card">
 
@@ -806,6 +932,7 @@ tr:last-child td {
 
         </div>
 
+
         <div class="status-card">
 
             <h3>
@@ -817,6 +944,7 @@ tr:last-child td {
             </strong>
 
         </div>
+
 
         <div class="status-card">
 
@@ -830,9 +958,15 @@ tr:last-child td {
 
         </div>
 
+
     </div>
 
 </div>
+
+
+<!-- =========================================
+     STUDENTS
+========================================= -->
 
 <div id="students" class="page">
 
@@ -848,6 +982,7 @@ tr:last-child td {
 
     </div>
 
+
     <div class="toolbar">
 
         <input
@@ -861,10 +996,13 @@ tr:last-child td {
         <button
             class="btn btn-primary"
             onclick="loadStudents()">
+
             Refresh Students
+
         </button>
 
     </div>
+
 
     <div class="table-container">
 
@@ -907,6 +1045,11 @@ tr:last-child td {
 
 </div>
 
+
+<!-- =========================================
+     TRANSACTIONS
+========================================= -->
+
 <div id="transactions" class="page">
 
     <div class="page-title">
@@ -921,6 +1064,7 @@ tr:last-child td {
 
     </div>
 
+
     <div class="toolbar">
 
         <input
@@ -934,10 +1078,13 @@ tr:last-child td {
         <button
             class="btn btn-primary"
             onclick="openPaymentModal()">
+
             + Record Payment
+
         </button>
 
     </div>
+
 
     <div class="table-container">
 
@@ -984,9 +1131,15 @@ tr:last-child td {
 
 </div>
 
+
 </section>
 
 </main>
+
+
+<!-- =========================================
+     PAYMENT MODAL
+========================================= -->
 
 <div
     class="modal"
@@ -997,6 +1150,7 @@ tr:last-child td {
         <h2>
             Record Payment
         </h2>
+
 
         <div class="form-group">
 
@@ -1024,6 +1178,7 @@ tr:last-child td {
             >
 
         </div>
+
 
         <div class="form-group">
 
@@ -1053,6 +1208,7 @@ tr:last-child td {
 
         </div>
 
+
         <div class="form-group">
 
             <label>
@@ -1069,18 +1225,24 @@ tr:last-child td {
 
         </div>
 
+
         <div class="modal-actions">
 
             <button
                 class="btn btn-secondary"
                 onclick="closePaymentModal()">
+
                 Cancel
+
             </button>
 
             <button
                 class="btn btn-primary"
+                id="recordPaymentButton"
                 onclick="recordPayment()">
+
                 Record Payment
+
             </button>
 
         </div>
@@ -1089,27 +1251,54 @@ tr:last-child td {
 
 </div>
 
+
 <script>
+
+
+/* =========================================
+   API CONFIGURATION
+========================================= */
 
 const STUDENT_API_URL =
     "https://script.google.com/macros/s/AKfycbwKGC1E3oZURPncmJh6_ooAFS2HmV-5UHDGDrrXcr7BNZYT76RM3l9KyZoQc2CNy4NuZA/exec";
 
+
 const TRANSACTION_API_URL =
     "https://script.google.com/macros/s/AKfycbzOY63c-59sL4VziVsUxwJHiqG-irjplIF45WeGiKT52gnNaBxDTLr2OuhoSVs4duod5g/exec";
 
-const ACTIVE_SCHOOL_YEAR = "2026-2027";
 
-const PAYMENT_PER_TERM = 50;
+const ACTIVE_SCHOOL_YEAR =
+    "2026-2027";
 
-const TOTAL_TERMS = 3;
+
+const PAYMENT_PER_TERM =
+    50;
+
+
+const TOTAL_TERMS =
+    3;
+
 
 const PAYMENT_PER_STUDENT =
     PAYMENT_PER_TERM * TOTAL_TERMS;
+
+
+/* =========================================
+   APPLICATION STATE
+========================================= */
 
 let students = [];
 
 let transactions = [];
 
+let studentsLoaded = false;
+
+let transactionsLoaded = false;
+
+
+/* =========================================
+   HTML ESCAPING
+========================================= */
 
 function escapeHTML(value) {
 
@@ -1123,103 +1312,399 @@ function escapeHTML(value) {
 }
 
 
-function searchPaymentStudents() {
-    const input = document.getElementById("paymentStudentSearch");
-    const results = document.getElementById("paymentStudentResults");
-    const search = input.value.toLowerCase().trim();
+function escapeStudentHTML(value) {
 
-    document.getElementById("paymentStudent").value = "";
+    return escapeHTML(value);
 
-    if (!search) {
-        results.innerHTML = "";
-        results.style.display = "none";
-        return;
-    }
-
-    const matches = students
-        .filter(student =>
-            String(student.number).toLowerCase().includes(search) ||
-            String(student.name).toLowerCase().includes(search) ||
-            String(student.program).toLowerCase().includes(search)
-        )
-        .slice(0, 10);
-
-    if (!matches.length) {
-        results.innerHTML = `
-            <div class="student-result">
-                No students found.
-            </div>
-        `;
-
-        results.style.display = "block";
-        return;
-    }
-
-    results.innerHTML = matches.map((student, index) => `
-        <div
-            class="student-result"
-            data-student-index="${index}"
-            style="cursor:pointer;">
-
-            <strong>${escapeStudentHTML(student.number)}</strong>
-            — ${escapeStudentHTML(student.name)}
-
-            <br>
-
-            <small>
-                ${escapeStudentHTML(student.program)}
-            </small>
-
-        </div>
-    `).join("");
-
-    /*
-     * Store the matching students temporarily.
-     */
-    results._matches = matches;
-
-    results.style.display = "block";
 }
 
 
 /* =========================================
-   STUDENT RESULT CLICK HANDLER
+   LOADER STATUS
 ========================================= */
 
-document.addEventListener("click", function(event) {
+function updateLoaderStatus(type, status) {
 
-    const result =
-        event.target.closest(".student-result");
+    const icon =
+        document.getElementById(
+            type + "StatusIcon"
+        );
 
-    if (!result) {
+    if (!icon) {
         return;
     }
+
+    icon.classList.remove(
+        "loaded",
+        "failed",
+        "loading"
+    );
+
+
+    if (status === "loading") {
+
+        icon.textContent = "◌";
+
+        icon.classList.add(
+            "loading"
+        );
+
+    }
+
+
+    if (status === "loaded") {
+
+        icon.textContent = "✓";
+
+        icon.classList.add(
+            "loaded"
+        );
+
+    }
+
+
+    if (status === "failed") {
+
+        icon.textContent = "✕";
+
+        icon.classList.add(
+            "failed"
+        );
+
+    }
+
+}
+
+
+function updateLoaderMessage(message) {
+
+    const element =
+        document.getElementById(
+            "loaderMessage"
+        );
+
+    if (element) {
+
+        element.textContent =
+            message;
+
+    }
+
+}
+
+
+/* =========================================
+   LOADER FAILURE
+========================================= */
+
+function showLoadFailure(error) {
+
+    const loader =
+        document.getElementById(
+            "appLoader"
+        );
+
+    const box =
+        document.getElementById(
+            "loaderBox"
+        );
+
+    const spinner =
+        document.getElementById(
+            "loaderSpinner"
+        );
+
+    const title =
+        document.getElementById(
+            "loaderTitle"
+        );
+
+    const message =
+        document.getElementById(
+            "loaderMessage"
+        );
+
+    const reloadButton =
+        document.getElementById(
+            "reloadButton"
+        );
+
+
+    box.classList.add(
+        "failed"
+    );
+
+
+    spinner.style.display =
+        "none";
+
+
+    title.textContent =
+        "Unable to Load CAS Fund";
+
+
+    let errorMessage =
+        "We couldn't retrieve the required data.";
+
+
+    if (error && error.message) {
+
+        errorMessage =
+            error.message;
+
+    }
+
+
+    message.textContent =
+        errorMessage;
+
+
+    reloadButton.style.display =
+        "inline-block";
+
+
+    loader.classList.remove(
+        "hidden"
+    );
+
+
+    loader.style.display =
+        "flex";
+
+
+    console.error(
+        "CAS Fund startup failed:",
+        error
+    );
+
+}
+
+
+/* =========================================
+   HIDE LOADER
+========================================= */
+
+function hideAppLoader() {
+
+    const loader =
+        document.getElementById(
+            "appLoader"
+        );
+
+    if (!loader) {
+        return;
+    }
+
+
+    loader.classList.add(
+        "hidden"
+    );
+
+
+    setTimeout(() => {
+
+        loader.style.display =
+            "none";
+
+    }, 400);
+
+}
+
+
+/* =========================================
+   RELOAD
+========================================= */
+
+function reloadApplication() {
+
+    window.location.reload();
+
+}
+
+
+/* =========================================
+   PAYMENT STUDENT SEARCH
+========================================= */
+
+function searchPaymentStudents() {
+
+    const input =
+        document.getElementById(
+            "paymentStudentSearch"
+        );
 
     const results =
         document.getElementById(
             "paymentStudentResults"
         );
 
-    const index =
-        Number(
-            result.dataset.studentIndex
+    const hidden =
+        document.getElementById(
+            "paymentStudent"
         );
 
-    const matches =
-        results._matches || [];
 
-    const student =
-        matches[index];
+    const search =
+        input.value
+            .toLowerCase()
+            .trim();
 
-    if (!student) {
+
+    hidden.value =
+        "";
+
+
+    if (!search) {
+
+        results.innerHTML =
+            "";
+
+        results.style.display =
+            "none";
+
         return;
+
     }
 
-    selectPaymentStudent(
-        student.number
-    );
 
-});
+    const matches =
+        students
+            .filter(student =>
+
+                String(
+                    student.number
+                )
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                String(
+                    student.name
+                )
+                    .toLowerCase()
+                    .includes(search)
+
+                ||
+
+                String(
+                    student.program
+                )
+                    .toLowerCase()
+                    .includes(search)
+
+            )
+            .slice(0, 10);
+
+
+    if (!matches.length) {
+
+        results.innerHTML = `
+            <div class="student-result">
+                No students found.
+            </div>
+        `;
+
+        results.style.display =
+            "block";
+
+        results._matches =
+            [];
+
+        return;
+
+    }
+
+
+    results._matches =
+        matches;
+
+
+    results.innerHTML =
+        matches
+            .map(
+                (student, index) => `
+
+                    <div
+                        class="student-result"
+                        data-student-index="${index}">
+
+                        <strong>
+                            ${escapeStudentHTML(student.number)}
+                        </strong>
+
+                        — ${escapeStudentHTML(student.name)}
+
+                        <br>
+
+                        <small>
+                            ${escapeStudentHTML(student.program)}
+                        </small>
+
+                    </div>
+
+                `
+            )
+            .join("");
+
+
+    results.style.display =
+        "block";
+
+}
+
+
+/* =========================================
+   STUDENT RESULT CLICK
+========================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const result =
+            event.target.closest(
+                ".student-result"
+            );
+
+
+        if (!result) {
+            return;
+        }
+
+
+        const results =
+            document.getElementById(
+                "paymentStudentResults"
+            );
+
+
+        const index =
+            Number(
+                result.dataset.studentIndex
+            );
+
+
+        const matches =
+            results._matches ||
+            [];
+
+
+        const student =
+            matches[index];
+
+
+        if (!student) {
+            return;
+        }
+
+
+        selectPaymentStudent(
+            student.number
+        );
+
+    }
+);
 
 
 /* =========================================
@@ -1233,33 +1718,32 @@ function selectPaymentStudent(
     const student =
         students.find(
             student =>
-                String(student.number) ===
-                String(studentNumber)
+                String(
+                    student.number
+                ) ===
+                String(
+                    studentNumber
+                )
         );
+
 
     if (!student) {
         return;
     }
 
-    /*
-     * Store the real student number.
-     */
+
     document.getElementById(
         "paymentStudent"
     ).value =
         student.number;
 
-    /*
-     * Show selected student.
-     */
+
     document.getElementById(
         "paymentStudentSearch"
     ).value =
         `${student.number} - ${student.name}`;
 
-    /*
-     * Hide dropdown.
-     */
+
     document.getElementById(
         "paymentStudentResults"
     ).style.display =
@@ -1269,83 +1753,104 @@ function selectPaymentStudent(
 
 
 /* =========================================
-   ESCAPE STUDENT TEXT
+   LOCAL CACHE
 ========================================= */
 
-function escapeStudentHTML(value) {
-
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
 function saveTransactions() {
 
-    localStorage.setItem(
-        "cas_transactions",
-        JSON.stringify(transactions)
-    );
+    try {
+
+        localStorage.setItem(
+            "cas_transactions",
+            JSON.stringify(
+                transactions
+            )
+        );
+
+    } catch (error) {
+
+        console.warn(
+            "Could not save transaction cache:",
+            error
+        );
+
+    }
 
 }
 
+
+/* =========================================
+   LOAD STUDENTS
+========================================= */
 
 async function loadStudents() {
 
-  updateLoaderStatus(
-    "students",
-    "loading"
-);
+    updateLoaderStatus(
+        "students",
+        "loading"
+    );
 
-updateLoaderMessage(
-    "Loading students..."
-);
-  
+
+    updateLoaderMessage(
+        "Loading students..."
+    );
+
+
     const table =
         document.getElementById(
             "studentsTable"
         );
 
-    table.innerHTML = `
-        <tr>
-            <td colspan="5" class="loading">
-                Loading students...
-            </td>
-        </tr>
-    `;
+
+    if (table) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="5" class="loading">
+                    Loading students...
+                </td>
+            </tr>
+        `;
+
+    }
+
 
     try {
 
         const response =
             await fetch(
-                STUDENT_API_URL,
+                STUDENT_API_URL +
+                "?t=" +
+                Date.now(),
                 {
                     method: "GET",
                     cache: "no-store"
                 }
             );
 
+
         if (!response.ok) {
 
             throw new Error(
-                "HTTP error " +
+                "Student API HTTP error " +
                 response.status
             );
 
         }
 
+
         const data =
             await response.json();
+
 
         if (!Array.isArray(data)) {
 
             throw new Error(
-                "Invalid student data."
+                "Student API returned invalid data."
             );
 
         }
+
 
         students =
             data
@@ -1367,14 +1872,20 @@ updateLoaderMessage(
                         ).trim()
 
                 }))
-                .filter(student =>
-                    student.number !== ""
+                .filter(
+                    student =>
+                        student.number !== ""
                 );
 
-                updateLoaderStatus(
-    "students",
-    "loaded"
-);
+
+        studentsLoaded =
+            true;
+
+
+        updateLoaderStatus(
+            "students",
+            "loaded"
+        );
 
 
         renderStudents();
@@ -1383,84 +1894,128 @@ updateLoaderMessage(
 
         updateDashboard();
 
+
+        return true;
+
     } catch (error) {
 
-      updateLoaderStatus(
-    "students",
-    "failed"
-);
+        studentsLoaded =
+            false;
 
-updateLoaderMessage(
-    "Failed to load students."
-);
+
+        updateLoaderStatus(
+            "students",
+            "failed"
+        );
+
 
         console.error(
             "Student loading error:",
             error
         );
 
-        table.innerHTML = `
-            <tr>
-                <td colspan="5" class="error">
 
-                    Failed to load students.
+        if (table) {
 
-                    <br><br>
+            table.innerHTML = `
+                <tr>
+                    <td colspan="5" class="error">
 
-                    ${escapeHTML(error.message)}
+                        Failed to load students.
 
-                </td>
-            </tr>
-        `;
+                        <br><br>
+
+                        ${escapeHTML(
+                            error.message
+                        )}
+
+                    </td>
+                </tr>
+            `;
+
+        }
+
+
+        throw error;
 
     }
 
 }
 
 
+/* =========================================
+   LOAD TRANSACTIONS
+========================================= */
+
 async function loadTransactions() {
 
-  updateLoaderStatus(
-    "transactions",
-    "loading"
-);
+    updateLoaderStatus(
+        "transactions",
+        "loading"
+    );
 
-updateLoaderMessage(
-    "Loading transactions..."
-);
-  
+
+    updateLoaderMessage(
+        "Loading transactions..."
+    );
+
+
+    const table =
+        document.getElementById(
+            "transactionsTable"
+        );
+
+
+    if (table) {
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="6" class="loading">
+                    Loading transactions...
+                </td>
+            </tr>
+        `;
+
+    }
+
+
     try {
 
         const response =
             await fetch(
                 TRANSACTION_API_URL +
-                "?action=transactions",
+                "?action=transactions&t=" +
+                Date.now(),
                 {
                     method: "GET",
                     cache: "no-store"
                 }
             );
 
+
         if (!response.ok) {
 
             throw new Error(
-                "HTTP " +
+                "Transaction API HTTP error " +
                 response.status
             );
 
         }
 
+
         const data =
             await response.json();
 
-        if (!data.success) {
+
+        if (!data || !data.success) {
 
             throw new Error(
-                data.error ||
-                "Failed to load transactions."
+                data?.error ||
+                "Transaction API returned an error."
             );
 
         }
+
 
         transactions =
             Array.isArray(
@@ -1469,12 +2024,19 @@ updateLoaderMessage(
                 ? data.transactions
                 : [];
 
-        updateLoaderStatus(
-    "transactions",
-    "loaded"
-);
-                
+
+        transactionsLoaded =
+            true;
+
+
         saveTransactions();
+
+
+        updateLoaderStatus(
+            "transactions",
+            "loaded"
+        );
+
 
         renderTransactions();
 
@@ -1482,48 +2044,58 @@ updateLoaderMessage(
 
         updateDashboard();
 
+
+        return true;
+
     } catch (error) {
 
-      updateLoaderStatus(
-    "transactions",
-    "failed"
-);
+        transactionsLoaded =
+            false;
 
-updateLoaderMessage(
-    "Failed to load transactions."
-);
-      
+
+        updateLoaderStatus(
+            "transactions",
+            "failed"
+        );
+
+
         console.error(
             "Transaction loading error:",
             error
         );
 
-        document.getElementById(
-            "transactionsTable"
-        ).innerHTML = `
 
-            <tr>
+        if (table) {
 
-                <td
-                    colspan="6"
-                    class="error">
+            table.innerHTML = `
+                <tr>
+                    <td colspan="6" class="error">
 
-                    Failed to load transactions.
+                        Failed to load transactions.
 
-                    <br><br>
+                        <br><br>
 
-                    ${escapeHTML(error.message)}
+                        ${escapeHTML(
+                            error.message
+                        )}
 
-                </td>
+                    </td>
+                </tr>
+            `;
 
-            </tr>
+        }
 
-        `;
+
+        throw error;
 
     }
 
 }
 
+
+/* =========================================
+   NAVIGATION
+========================================= */
 
 function showPage(
     pageId,
@@ -1531,22 +2103,50 @@ function showPage(
 ) {
 
     document
-        .querySelectorAll(".page")
+        .querySelectorAll(
+            ".page"
+        )
         .forEach(page =>
-            page.classList.remove("active")
+            page.classList.remove(
+                "active"
+            )
         );
 
-    document
-        .getElementById(pageId)
-        .classList.add("active");
+
+    const page =
+        document.getElementById(
+            pageId
+        );
+
+
+    if (page) {
+
+        page.classList.add(
+            "active"
+        );
+
+    }
+
 
     document
-        .querySelectorAll(".nav button")
+        .querySelectorAll(
+            ".nav button"
+        )
         .forEach(btn =>
-            btn.classList.remove("active")
+            btn.classList.remove(
+                "active"
+            )
         );
 
-    button.classList.add("active");
+
+    if (button) {
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
 
     const titles = {
 
@@ -1561,10 +2161,13 @@ function showPage(
 
     };
 
+
     document.getElementById(
         "pageHeading"
     ).textContent =
-        titles[pageId];
+        titles[pageId] ||
+        "CAS FUND";
+
 
     if (pageId === "students") {
 
@@ -1572,11 +2175,13 @@ function showPage(
 
     }
 
+
     if (pageId === "transactions") {
 
         renderTransactions();
 
     }
+
 
     if (pageId === "dashboard") {
 
@@ -1587,6 +2192,10 @@ function showPage(
 }
 
 
+/* =========================================
+   STUDENT TOTAL
+========================================= */
+
 function getStudentTotal(
     studentNumber
 ) {
@@ -1594,10 +2203,13 @@ function getStudentTotal(
     return transactions
 
         .filter(transaction =>
+
             String(
                 transaction.studentNumber
             ) ===
-            String(studentNumber)
+            String(
+                studentNumber
+            )
 
             &&
 
@@ -1606,10 +2218,15 @@ function getStudentTotal(
                 ACTIVE_SCHOOL_YEAR
             ) ===
             ACTIVE_SCHOOL_YEAR
+
         )
 
         .reduce(
-            (total, transaction) =>
+            (
+                total,
+                transaction
+            ) =>
+
                 total +
                 Number(
                     transaction.amount || 0
@@ -1621,7 +2238,13 @@ function getStudentTotal(
 }
 
 
-function getStudentStatus(total) {
+/* =========================================
+   STUDENT STATUS
+========================================= */
+
+function getStudentStatus(
+    total
+) {
 
     if (
         total >=
@@ -1636,6 +2259,7 @@ function getStudentStatus(total) {
 
     }
 
+
     if (total > 0) {
 
         return `
@@ -1646,6 +2270,7 @@ function getStudentStatus(total) {
 
     }
 
+
     return `
         <span class="badge badge-unpaid">
             Unpaid
@@ -1655,6 +2280,10 @@ function getStudentStatus(total) {
 }
 
 
+/* =========================================
+   RENDER STUDENTS
+========================================= */
+
 function renderStudents() {
 
     const table =
@@ -1662,35 +2291,48 @@ function renderStudents() {
             "studentsTable"
         );
 
+
+    if (!table) {
+        return;
+    }
+
+
+    const searchInput =
+        document.getElementById(
+            "studentSearch"
+        );
+
+
     const search =
-        document
-            .getElementById(
-                "studentSearch"
-            )
-            .value
-            .toLowerCase()
-            .trim();
+        searchInput
+            ? searchInput.value
+                .toLowerCase()
+                .trim()
+            : "";
+
 
     const filtered =
-        students.filter(student =>
+        students.filter(
+            student =>
 
-            student.number
-                .toLowerCase()
-                .includes(search)
+                student.number
+                    .toLowerCase()
+                    .includes(search)
 
-            ||
+                ||
 
-            student.name
-                .toLowerCase()
-                .includes(search)
+                student.name
+                    .toLowerCase()
+                    .includes(search)
 
-            ||
+                ||
 
-            student.program
-                .toLowerCase()
-                .includes(search)
+                student.program
+                    .toLowerCase()
+                    .includes(search)
 
         );
+
 
     if (filtered.length === 0) {
 
@@ -1700,7 +2342,11 @@ function renderStudents() {
                     colspan="5"
                     class="empty">
 
-                    No students found.
+                    ${
+                        studentsLoaded
+                            ? "No students found."
+                            : "No student data loaded."
+                    }
 
                 </td>
             </tr>
@@ -1709,6 +2355,7 @@ function renderStudents() {
         return;
 
     }
+
 
     table.innerHTML =
         filtered
@@ -1719,20 +2366,27 @@ function renderStudents() {
                         student.number
                     );
 
+
                 return `
 
                     <tr>
 
                         <td>
-                            ${escapeHTML(student.number)}
+                            ${escapeHTML(
+                                student.number
+                            )}
                         </td>
 
                         <td>
-                            ${escapeHTML(student.name)}
+                            ${escapeHTML(
+                                student.name
+                            )}
                         </td>
 
                         <td>
-                            ${escapeHTML(student.program)}
+                            ${escapeHTML(
+                                student.program
+                            )}
                         </td>
 
                         <td>
@@ -1740,7 +2394,9 @@ function renderStudents() {
                         </td>
 
                         <td>
-                            ${getStudentStatus(total)}
+                            ${getStudentStatus(
+                                total
+                            )}
                         </td>
 
                     </tr>
@@ -1753,37 +2409,49 @@ function renderStudents() {
 }
 
 
+/* =========================================
+   PAYMENT MODAL
+========================================= */
+
 function openPaymentModal() {
 
     document.getElementById(
         "paymentStudentSearch"
     ).value = "";
 
+
     document.getElementById(
         "paymentStudent"
     ).value = "";
 
+
     document.getElementById(
         "paymentStudentResults"
     ).innerHTML = "";
+
 
     document.getElementById(
         "paymentStudentResults"
     ).style.display =
         "none";
 
+
     document.getElementById(
         "paymentTerm"
     ).value = "";
+
 
     document.getElementById(
         "paymentAmount"
     ).value =
         PAYMENT_PER_TERM;
 
+
     document.getElementById(
         "paymentModal"
-    ).classList.add("show");
+    ).classList.add(
+        "show"
+    );
 
 }
 
@@ -1794,10 +2462,16 @@ function closePaymentModal() {
         .getElementById(
             "paymentModal"
         )
-        .classList.remove("show");
+        .classList.remove(
+            "show"
+        );
 
 }
 
+
+/* =========================================
+   RECORD PAYMENT
+========================================= */
 
 async function recordPayment() {
 
@@ -1806,10 +2480,12 @@ async function recordPayment() {
             "paymentStudent"
         ).value.trim();
 
+
     const term =
         document.getElementById(
             "paymentTerm"
         ).value;
+
 
     const amount =
         Number(
@@ -1817,6 +2493,7 @@ async function recordPayment() {
                 "paymentAmount"
             ).value
         );
+
 
     if (
         !studentNumber ||
@@ -1832,12 +2509,18 @@ async function recordPayment() {
 
     }
 
+
     const student =
         students.find(
             s =>
-                String(s.number) ===
-                String(studentNumber)
+                String(
+                    s.number
+                ) ===
+                String(
+                    studentNumber
+                )
         );
+
 
     if (!student) {
 
@@ -1849,30 +2532,37 @@ async function recordPayment() {
 
     }
 
+
     const duplicate =
-        transactions.some(transaction =>
+        transactions.some(
+            transaction =>
 
-            String(
-                transaction.schoolYear ??
+                String(
+                    transaction.schoolYear ??
+                    ACTIVE_SCHOOL_YEAR
+                ) ===
                 ACTIVE_SCHOOL_YEAR
-            ) ===
-            ACTIVE_SCHOOL_YEAR
 
-            &&
+                &&
 
-            String(
-                transaction.studentNumber
-            ) ===
-            String(student.number)
+                String(
+                    transaction.studentNumber
+                ) ===
+                String(
+                    student.number
+                )
 
-            &&
+                &&
 
-            String(
-                transaction.term
-            ) ===
-            String(term)
+                String(
+                    transaction.term
+                ) ===
+                String(
+                    term
+                )
 
         );
+
 
     if (duplicate) {
 
@@ -1883,6 +2573,21 @@ async function recordPayment() {
         return;
 
     }
+
+
+    const button =
+        document.getElementById(
+            "recordPaymentButton"
+        );
+
+
+    button.disabled =
+        true;
+
+
+    button.textContent =
+        "Recording...";
+
 
     const params =
         new URLSearchParams({
@@ -1910,18 +2615,22 @@ async function recordPayment() {
 
         });
 
+
     try {
 
         const response =
             await fetch(
                 TRANSACTION_API_URL +
                 "?" +
-                params.toString(),
+                params.toString() +
+                "&t=" +
+                Date.now(),
                 {
                     method: "GET",
                     cache: "no-store"
                 }
             );
+
 
         if (!response.ok) {
 
@@ -1932,8 +2641,10 @@ async function recordPayment() {
 
         }
 
+
         const result =
             await response.json();
+
 
         if (!result.success) {
 
@@ -1944,8 +2655,10 @@ async function recordPayment() {
 
         }
 
+
         let transaction =
             result.transaction;
+
 
         if (
             !transaction ||
@@ -1979,25 +2692,31 @@ async function recordPayment() {
 
         }
 
+
         transaction.studentNumber =
             transaction.studentNumber ??
             student.number;
+
 
         transaction.studentName =
             transaction.studentName ??
             student.name;
 
+
         transaction.program =
             transaction.program ??
             student.program;
+
 
         transaction.term =
             transaction.term ??
             term;
 
+
         transaction.schoolYear =
             transaction.schoolYear ??
             ACTIVE_SCHOOL_YEAR;
+
 
         transaction.amount =
             Number(
@@ -2005,33 +2724,37 @@ async function recordPayment() {
                 amount
             );
 
+
         transaction.date =
             transaction.date ??
             new Date().toISOString();
 
-        transactions.push(
-            transaction
-        );
-
-        saveTransactions();
-
-        renderTransactions();
-
-        renderStudents();
-
-        updateDashboard();
 
         closePaymentModal();
 
+
+        alert(
+            "Payment recorded successfully."
+        );
+
+
         /*
-         * OPEN SEPARATE RECEIPT.HTML
+         * Refresh from Google Sheets.
+         * This prevents the local page from becoming
+         * different from the actual transaction sheet.
+         */
+
+        await loadTransactions();
+
+
+        /*
+         * Open receipt using the returned transaction.
          */
 
         generateReceipt(
             transaction
         );
 
-        await loadTransactions();
 
     } catch (error) {
 
@@ -2040,15 +2763,29 @@ async function recordPayment() {
             error
         );
 
+
         alert(
             "Failed to record payment.\n\n" +
             error.message
         );
 
+    } finally {
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            "Record Payment";
+
     }
 
 }
 
+
+/* =========================================
+   RENDER TRANSACTIONS
+========================================= */
 
 function renderTransactions() {
 
@@ -2057,14 +2794,25 @@ function renderTransactions() {
             "transactionsTable"
         );
 
+
+    if (!table) {
+        return;
+    }
+
+
+    const searchInput =
+        document.getElementById(
+            "transactionSearch"
+        );
+
+
     const search =
-        document
-            .getElementById(
-                "transactionSearch"
-            )
-            .value
-            .toLowerCase()
-            .trim();
+        searchInput
+            ? searchInput.value
+                .toLowerCase()
+                .trim()
+            : "";
+
 
     const filtered =
         transactions.filter(
@@ -2081,6 +2829,7 @@ function renderTransactions() {
                             )
                     );
 
+
                 const studentName =
                     transaction.studentName ||
                     (
@@ -2088,6 +2837,7 @@ function renderTransactions() {
                             ? student.name
                             : ""
                     );
+
 
                 return (
 
@@ -2118,6 +2868,7 @@ function renderTransactions() {
             }
         );
 
+
     if (filtered.length === 0) {
 
         table.innerHTML = `
@@ -2127,7 +2878,11 @@ function renderTransactions() {
                     colspan="6"
                     class="empty">
 
-                    No transactions found.
+                    ${
+                        transactionsLoaded
+                            ? "No transactions found."
+                            : "No transaction data loaded."
+                    }
 
                 </td>
 
@@ -2137,6 +2892,7 @@ function renderTransactions() {
         return;
 
     }
+
 
     table.innerHTML =
         filtered
@@ -2155,6 +2911,7 @@ function renderTransactions() {
                             )
                     );
 
+
                 const studentName =
                     transaction.studentName ||
                     (
@@ -2163,12 +2920,14 @@ function renderTransactions() {
                             : "Unknown Student"
                     );
 
+
                 const date =
                     transaction.date
                         ? new Date(
                             transaction.date
                         ).toLocaleDateString()
                         : "";
+
 
                 return `
 
@@ -2205,8 +2964,7 @@ function renderTransactions() {
                         <td>
 
                             <button
-                                class="btn btn-primary"
-                                onclick='generateReceipt(${JSON.stringify(transaction)})'>
+                                class="btn btn-primary receipt-btn">
 
                                 Receipt
 
@@ -2221,23 +2979,69 @@ function renderTransactions() {
             })
             .join("");
 
+
+    /*
+     * Attach receipt buttons safely.
+     * This avoids putting JSON directly inside HTML attributes.
+     */
+
+    const buttons =
+        table.querySelectorAll(
+            ".receipt-btn"
+        );
+
+
+    const visibleTransactions =
+        filtered
+            .slice()
+            .reverse();
+
+
+    buttons.forEach(
+        (button, index) => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    generateReceipt(
+                        visibleTransactions[index]
+                    );
+
+                }
+            );
+
+        }
+    );
+
 }
 
+
+/* =========================================
+   DASHBOARD
+========================================= */
 
 function updateDashboard() {
 
     const currentTransactions =
-        transactions.filter(transaction =>
-            String(
-                transaction.schoolYear ??
+        transactions.filter(
+            transaction =>
+
+                String(
+                    transaction.schoolYear ??
+                    ACTIVE_SCHOOL_YEAR
+                ) ===
                 ACTIVE_SCHOOL_YEAR
-            ) ===
-            ACTIVE_SCHOOL_YEAR
         );
+
 
     const totalCollected =
         currentTransactions.reduce(
-            (total, transaction) =>
+            (
+                total,
+                transaction
+            ) =>
+
                 total +
                 Number(
                     transaction.amount || 0
@@ -2246,47 +3050,59 @@ function updateDashboard() {
             0
         );
 
+
     const expectedCollection =
         students.length *
         PAYMENT_PER_STUDENT;
 
-    let paid = 0;
 
-    let partial = 0;
+    let paid =
+        0;
 
-    let unpaid = 0;
 
-    students.forEach(student => {
+    let partial =
+        0;
 
-        const total =
-            getStudentTotal(
-                student.number
-            );
 
-        if (
-            total >=
-            PAYMENT_PER_STUDENT
-        ) {
+    let unpaid =
+        0;
 
-            paid++;
+
+    students.forEach(
+        student => {
+
+            const total =
+                getStudentTotal(
+                    student.number
+                );
+
+
+            if (
+                total >=
+                PAYMENT_PER_STUDENT
+            ) {
+
+                paid++;
+
+            }
+
+            else if (
+                total > 0
+            ) {
+
+                partial++;
+
+            }
+
+            else {
+
+                unpaid++;
+
+            }
 
         }
+    );
 
-        else if (
-            total > 0
-        ) {
-
-            partial++;
-
-        }
-
-        else {
-
-            unpaid++;
-
-        }
-
-    });
 
     const percentage =
         expectedCollection > 0
@@ -2294,29 +3110,35 @@ function updateDashboard() {
             (
                 totalCollected /
                 expectedCollection
-            ) * 100
+            ) *
+            100
             :
             0;
+
 
     document.getElementById(
         "totalCollected"
     ).textContent =
         `₱${totalCollected.toFixed(2)}`;
 
+
     document.getElementById(
         "expectedCollection"
     ).textContent =
         `₱${expectedCollection.toFixed(2)}`;
+
 
     document.getElementById(
         "collectionPercentage"
     ).textContent =
         `${percentage.toFixed(1)}%`;
 
+
     document.getElementById(
         "progressText"
     ).textContent =
         `${percentage.toFixed(1)}%`;
+
 
     document.getElementById(
         "progressFill"
@@ -2326,15 +3148,18 @@ function updateDashboard() {
             100
         )}%`;
 
+
     document.getElementById(
         "paidStudents"
     ).textContent =
         paid;
 
+
     document.getElementById(
         "partialStudents"
     ).textContent =
         partial;
+
 
     document.getElementById(
         "unpaidStudents"
@@ -2345,10 +3170,12 @@ function updateDashboard() {
 
 
 /* =========================================
-   SEPARATE RECEIPT.HTML
+   RECEIPT
 ========================================= */
 
-function generateReceipt(transaction) {
+function generateReceipt(
+    transaction
+) {
 
     if (
         !transaction ||
@@ -2363,20 +3190,26 @@ function generateReceipt(transaction) {
 
     }
 
+
     const data =
         encodeURIComponent(
-            JSON.stringify(transaction)
+            JSON.stringify(
+                transaction
+            )
         );
+
 
     const receiptUrl =
         "receipt.html?data=" +
         data;
+
 
     const receiptWindow =
         window.open(
             receiptUrl,
             "_blank"
         );
+
 
     if (!receiptWindow) {
 
@@ -2388,79 +3221,32 @@ function generateReceipt(transaction) {
 
 }
 
-function updateLoaderStatus(
-    type,
-    status
-) {
-
-    const icon =
-        document.getElementById(
-            type + "StatusIcon"
-        );
-
-    if (!icon) {
-        return;
-    }
-
-    icon.classList.remove(
-        "loaded",
-        "failed"
-    );
-
-    if (status === "loading") {
-        icon.textContent = "◌";
-    }
-
-    if (status === "loaded") {
-        icon.textContent = "✓";
-        icon.classList.add("loaded");
-    }
-
-    if (status === "failed") {
-        icon.textContent = "✕";
-        icon.classList.add("failed");
-    }
-}
-
-function updateLoaderMessage(
-    message
-) {
-
-    const element =
-        document.getElementById(
-            "loaderMessage"
-        );
-
-    if (element) {
-        element.textContent = message;
-    }
-
-}
-
-function hideAppLoader() {
-
-    const loader =
-        document.getElementById(
-            "appLoader"
-        );
-
-    if (!loader) {
-        return;
-    }
-
-    loader.classList.add("hidden");
-
-    setTimeout(() => {
-
-        loader.style.display =
-            "none";
-
-    }, 400);
-
-}
 
 /* =========================================
-   START APPLICATION
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+========================================= */
+
+document
+    .getElementById("paymentModal")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                this
+            ) {
+
+                closePaymentModal();
+
+            }
+
+        }
+    );
+
+
+/* =========================================
+   APPLICATION STARTUP
 ========================================= */
 
 async function initializeApp() {
@@ -2469,10 +3255,12 @@ async function initializeApp() {
         "Starting CAS Fund..."
     );
 
+
     updateLoaderStatus(
         "students",
         "loading"
     );
+
 
     updateLoaderStatus(
         "transactions",
@@ -2480,31 +3268,73 @@ async function initializeApp() {
     );
 
 
-    await loadStudents();
+    try {
+
+        /*
+         * Load students first.
+         * Transactions depend on student information
+         * for displaying names and calculating totals.
+         */
+
+        await loadStudents();
 
 
-    updateLoaderMessage(
-        "Loading transactions..."
-    );
+        updateLoaderMessage(
+            "Students loaded. Loading transactions..."
+        );
 
 
-    await loadTransactions();
+        await loadTransactions();
 
 
-    updateLoaderMessage(
-        "System ready!"
-    );
+        updateLoaderMessage(
+            "System ready!"
+        );
 
 
-    setTimeout(() => {
+        /*
+         * Give the success state a short moment
+         * so the user can see both green checks.
+         */
 
-        hideAppLoader();
+        setTimeout(
+            () => {
 
-    }, 400);
+                hideAppLoader();
+
+            },
+            500
+        );
+
+
+    } catch (error) {
+
+        /*
+         * IMPORTANT:
+         * Do not hide the loader if either API fails.
+         */
+
+        showLoadFailure(
+            error
+        );
+
+    }
 
 }
 
-initializeApp();
+
+/* =========================================
+   START
+========================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        initializeApp();
+
+    }
+);
 
 </script>
 
