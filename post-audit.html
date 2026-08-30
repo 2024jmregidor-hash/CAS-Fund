@@ -1,0 +1,2684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1.0"
+>
+
+<title>CAS FUND | Post-Audit</title>
+
+<link
+    rel="icon"
+    href="https://mmclcassc.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png"
+>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:
+Inter,
+Segoe UI,
+Arial,
+Helvetica,
+sans-serif;
+background:#f3f6fa;
+color:#172033;
+line-height:1.45;
+-webkit-font-smoothing:antialiased;
+}
+
+button{
+font-family:inherit;
+cursor:pointer;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+background:
+linear-gradient(
+135deg,
+#063b8c 0%,
+#0b5ed7 55%,
+#1677e8 100%
+);
+color:#fff;
+padding:30px 40px;
+box-shadow:
+0 4px 18px rgba(11,94,215,.18);
+}
+
+.header-inner{
+max-width:1200px;
+margin:auto;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+}
+
+.header h1{
+font-size:29px;
+font-weight:800;
+}
+
+.header p{
+font-size:12px;
+opacity:.88;
+margin-top:5px;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:30px;
+}
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-bottom:22px;
+}
+
+.title{
+font-size:22px;
+font-weight:800;
+}
+
+.subtitle{
+font-size:12px;
+color:#7b8798;
+margin-top:4px;
+}
+
+.btn{
+border:0;
+border-radius:9px;
+padding:11px 17px;
+font-size:12px;
+font-weight:700;
+}
+
+.btn-primary{
+background:#0b5ed7;
+color:#fff;
+}
+
+.btn-light{
+background:#fff;
+color:#344054;
+border:1px solid #dfe5ec;
+}
+
+/* =========================================================
+   EVENT IDENTITY
+========================================================= */
+
+.event-card{
+background:#fff;
+border:1px solid #e1e7ee;
+border-radius:15px;
+padding:22px;
+margin-bottom:20px;
+box-shadow:
+0 3px 14px rgba(20,40,70,.045);
+}
+
+.event-id{
+font-size:10px;
+font-weight:800;
+color:#8b95a4;
+letter-spacing:.5px;
+}
+
+.event-name{
+font-size:22px;
+font-weight:800;
+margin-top:4px;
+}
+
+.event-meta{
+display:flex;
+flex-wrap:wrap;
+gap:18px;
+margin-top:12px;
+font-size:11px;
+color:#697486;
+}
+
+.status{
+display:inline-flex;
+align-items:center;
+gap:5px;
+padding:6px 10px;
+border-radius:20px;
+font-size:9px;
+font-weight:800;
+background:#dff6ea;
+color:#087f5b;
+}
+
+.status::before{
+content:"";
+width:5px;
+height:5px;
+border-radius:50%;
+background:currentColor;
+}
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.summary{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px;
+margin-bottom:20px;
+}
+
+.card{
+background:#fff;
+border:1px solid #e1e7ee;
+border-radius:14px;
+padding:20px;
+box-shadow:
+0 3px 14px rgba(20,40,70,.045);
+}
+
+.card-label{
+font-size:9px;
+font-weight:800;
+text-transform:uppercase;
+letter-spacing:.7px;
+color:#778294;
+}
+
+.card-value{
+font-size:24px;
+font-weight:800;
+margin-top:8px;
+}
+
+.card-note{
+font-size:10px;
+color:#8993a2;
+margin-top:6px;
+}
+
+.income{
+color:#198754;
+}
+
+.expense{
+color:#dc3545;
+}
+
+.net{
+color:#0b5ed7;
+}
+
+.variance{
+color:#6f42c1;
+}
+
+/* =========================================================
+   PANELS
+========================================================= */
+
+.panel{
+background:#fff;
+border:1px solid #e1e7ee;
+border-radius:15px;
+margin-bottom:20px;
+overflow:hidden;
+box-shadow:
+0 3px 14px rgba(20,40,70,.045);
+}
+
+.panel-header{
+padding:19px 22px;
+border-bottom:1px solid #edf0f4;
+}
+
+.panel-header h2{
+font-size:17px;
+font-weight:800;
+}
+
+.panel-header p{
+font-size:11px;
+color:#7b8594;
+margin-top:4px;
+}
+
+.panel-body{
+padding:22px;
+}
+
+/* =========================================================
+   COMPARISON
+========================================================= */
+
+.comparison-table{
+width:100%;
+border-collapse:collapse;
+}
+
+.comparison-table th{
+background:#f7f9fc;
+font-size:9px;
+font-weight:800;
+text-transform:uppercase;
+letter-spacing:.5px;
+color:#697486;
+text-align:left;
+padding:13px;
+border-bottom:1px solid #e2e7ed;
+}
+
+.comparison-table td{
+padding:15px 13px;
+font-size:12px;
+border-bottom:1px solid #edf0f4;
+}
+
+.comparison-table tr:last-child td{
+border-bottom:0;
+}
+
+.money{
+font-weight:800;
+white-space:nowrap;
+}
+
+.positive{
+color:#198754;
+}
+
+.negative{
+color:#dc3545;
+}
+
+.neutral{
+color:#697486;
+}
+
+/* =========================================================
+   PERFORMANCE
+========================================================= */
+
+.performance-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+}
+
+.performance-box{
+border:1px solid #e4e9ef;
+border-radius:12px;
+padding:17px;
+background:#fafbfd;
+}
+
+.performance-title{
+font-size:10px;
+font-weight:800;
+text-transform:uppercase;
+letter-spacing:.5px;
+color:#697486;
+}
+
+.performance-value{
+font-size:18px;
+font-weight:800;
+margin-top:6px;
+}
+
+.performance-note{
+font-size:10px;
+color:#8993a2;
+margin-top:4px;
+}
+
+/* =========================================================
+   VERDICT
+========================================================= */
+
+.verdict{
+border-radius:13px;
+padding:22px;
+border:1px solid #e1e7ee;
+background:#fafbfd;
+}
+
+.verdict-title{
+font-size:11px;
+font-weight:800;
+text-transform:uppercase;
+letter-spacing:.7px;
+color:#697486;
+}
+
+.verdict-main{
+font-size:22px;
+font-weight:800;
+margin-top:6px;
+}
+
+.verdict-text{
+font-size:12px;
+color:#596476;
+margin-top:8px;
+line-height:1.6;
+}
+
+.verdict.good{
+border-left:5px solid #198754;
+}
+
+.verdict.warning{
+border-left:5px solid #f0ad00;
+}
+
+.verdict.bad{
+border-left:5px solid #dc3545;
+}
+
+/* =========================================================
+   RECOMMENDATIONS
+========================================================= */
+
+.suggestion{
+display:flex;
+gap:12px;
+padding:15px;
+border:1px solid #e4e9ef;
+border-radius:11px;
+background:#fafbfd;
+margin-bottom:10px;
+}
+
+.suggestion:last-child{
+margin-bottom:0;
+}
+
+.suggestion-icon{
+width:30px;
+height:30px;
+border-radius:8px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#e9f2ff;
+color:#0b5ed7;
+font-weight:800;
+flex-shrink:0;
+}
+
+.suggestion-title{
+font-size:11px;
+font-weight:800;
+}
+
+.suggestion-text{
+font-size:10px;
+color:#697486;
+margin-top:3px;
+line-height:1.5;
+}
+
+/* =========================================================
+   ACTUAL TRANSACTIONS
+========================================================= */
+
+.transaction-list{
+width:100%;
+overflow-x:auto;
+}
+
+.transaction-table{
+width:100%;
+border-collapse:collapse;
+}
+
+.transaction-table th{
+background:#f7f9fc;
+font-size:9px;
+font-weight:800;
+text-transform:uppercase;
+letter-spacing:.5px;
+color:#697486;
+text-align:left;
+padding:12px;
+}
+
+.transaction-table td{
+font-size:11px;
+padding:13px 12px;
+border-bottom:1px solid #edf0f4;
+}
+
+.loading{
+text-align:center;
+padding:50px;
+color:#697486;
+font-size:12px;
+}
+
+.empty{
+text-align:center;
+padding:45px 20px;
+color:#8993a2;
+font-size:12px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+text-align:center;
+font-size:10px;
+color:#8993a2;
+padding:18px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+.summary{
+grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+@media(max-width:650px){
+
+.header{
+padding:23px 20px;
+}
+
+.header-inner{
+align-items:flex-start;
+}
+
+.container{
+padding:20px 15px 30px;
+}
+
+.topbar{
+align-items:flex-start;
+flex-direction:column;
+}
+
+.topbar .btn{
+width:100%;
+}
+
+.summary{
+grid-template-columns:1fr;
+}
+
+.performance-grid{
+grid-template-columns:1fr;
+}
+
+.event-meta{
+flex-direction:column;
+gap:6px;
+}
+
+}
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+body{
+background:#fff;
+}
+
+.header{
+background:#fff;
+color:#172033;
+box-shadow:none;
+}
+
+.btn{
+display:none;
+}
+
+.container{
+max-width:none;
+padding:10px;
+}
+
+.panel,
+.card,
+.event-card{
+box-shadow:none;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="header">
+
+<div class="header-inner">
+
+<div>
+
+<h1>CAS FUND</h1>
+
+<p>Post-Event Audit & Financial Evaluation</p>
+
+</div>
+
+</div>
+
+</header>
+
+<main class="container">
+
+<div class="topbar">
+
+<div>
+
+<div class="title">
+Post-Audit
+</div>
+
+<div class="subtitle">
+Final financial comparison and evaluation of the completed event.
+</div>
+
+</div>
+
+<button
+class="btn btn-light"
+onclick="goBack()">
+
+← Back to Events
+
+</button>
+
+</div>
+
+
+<!-- =======================================================
+     EVENT
+======================================================= -->
+
+<section
+class="event-card"
+id="eventIdentity">
+
+<div class="loading">
+Loading event...
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     SUMMARY
+======================================================= -->
+
+<section class="summary">
+
+<div class="card">
+
+<div class="card-label">
+Actual Income
+</div>
+
+<div
+class="card-value income"
+id="actualIncome">
+
+₱0.00
+
+</div>
+
+<div class="card-note">
+Total income recorded for this event
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-label">
+Actual Expenses
+</div>
+
+<div
+class="card-value expense"
+id="actualExpenses">
+
+₱0.00
+
+</div>
+
+<div class="card-note">
+Total expenses recorded for this event
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-label">
+Actual Net Result
+</div>
+
+<div
+class="card-value net"
+id="actualNet">
+
+₱0.00
+
+</div>
+
+<div class="card-note">
+Actual income minus actual expenses
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-label">
+Overall Variance
+</div>
+
+<div
+class="card-value variance"
+id="overallVariance">
+
+₱0.00
+
+</div>
+
+<div class="card-note">
+Actual result compared with planned result
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     OVERALL COMPARISON
+======================================================= -->
+
+<section class="panel">
+
+<div class="panel-header">
+
+<h2>
+Overall Financial Comparison
+</h2>
+
+<p>
+Pre-Audit projection compared with the actual completed event.
+</p>
+
+</div>
+
+<div class="panel-body">
+
+<table class="comparison-table">
+
+<thead>
+
+<tr>
+
+<th>
+Financial Item
+</th>
+
+<th>
+Pre-Audit
+</th>
+
+<th>
+Actual
+</th>
+
+<th>
+Variance
+</th>
+
+<th>
+Assessment
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+Expected / Actual Income
+</td>
+
+<td
+class="money"
+id="expectedIncome">
+₱0.00
+</td>
+
+<td
+class="money income"
+id="comparisonActualIncome">
+₱0.00
+</td>
+
+<td
+class="money"
+id="incomeVariance">
+₱0.00
+</td>
+
+<td id="incomeAssessment">
+—
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Expected / Actual Expenses
+</td>
+
+<td
+class="money"
+id="expectedExpenses">
+₱0.00
+</td>
+
+<td
+class="money expense"
+id="comparisonActualExpenses">
+₱0.00
+</td>
+
+<td
+class="money"
+id="expenseVariance">
+₱0.00
+</td>
+
+<td id="expenseAssessment">
+—
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Expected / Actual Net Result
+</td>
+
+<td
+class="money"
+id="expectedNet">
+₱0.00
+</td>
+
+<td
+class="money"
+id="comparisonActualNet">
+₱0.00
+</td>
+
+<td
+class="money"
+id="netVariance">
+₱0.00
+</td>
+
+<td id="netAssessment">
+—
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     PERFORMANCE
+======================================================= -->
+
+<section class="panel">
+
+<div class="panel-header">
+
+<h2>
+Performance Analysis
+</h2>
+
+<p>
+Key indicators generated from the event's final financial records.
+</p>
+
+</div>
+
+<div class="panel-body">
+
+<div class="performance-grid">
+
+<div class="performance-box">
+
+<div class="performance-title">
+Income Performance
+</div>
+
+<div
+class="performance-value"
+id="incomePerformance">
+
+—
+
+</div>
+
+<div
+class="performance-note"
+id="incomePerformanceNote">
+
+—
+
+</div>
+
+</div>
+
+
+<div class="performance-box">
+
+<div class="performance-title">
+Expense Performance
+</div>
+
+<div
+class="performance-value"
+id="expensePerformance">
+
+—
+
+</div>
+
+<div
+class="performance-note"
+id="expensePerformanceNote">
+
+—
+
+</div>
+
+</div>
+
+
+<div class="performance-box">
+
+<div class="performance-title">
+Budget Utilization
+</div>
+
+<div
+class="performance-value"
+id="budgetUtilization">
+
+—
+
+</div>
+
+<div
+class="performance-note"
+id="budgetUtilizationNote">
+
+—
+
+</div>
+
+</div>
+
+
+<div class="performance-box">
+
+<div class="performance-title">
+Financial Result
+</div>
+
+<div
+class="performance-value"
+id="financialResult">
+
+—
+
+</div>
+
+<div
+class="performance-note"
+id="financialResultNote">
+
+—
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     VERDICT
+======================================================= -->
+
+<section class="panel">
+
+<div class="panel-header">
+
+<h2>
+Post-Audit Verdict
+</h2>
+
+<p>
+Overall evaluation based on the planned and actual financial results.
+</p>
+
+</div>
+
+<div class="panel-body">
+
+<div
+class="verdict"
+id="verdictBox">
+
+<div class="verdict-title">
+Final Verdict
+</div>
+
+<div
+class="verdict-main"
+id="verdictMain">
+
+Evaluating...
+
+</div>
+
+<div
+class="verdict-text"
+id="verdictText">
+
+Please wait while the event financial records are analyzed.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     SUGGESTIONS
+======================================================= -->
+
+<section class="panel">
+
+<div class="panel-header">
+
+<h2>
+Recommendations & Suggestions
+</h2>
+
+<p>
+Automatic recommendations generated from the post-audit comparison.
+</p>
+
+</div>
+
+<div
+class="panel-body"
+id="suggestions">
+
+<div class="loading">
+Generating recommendations...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     TRANSACTIONS
+======================================================= -->
+
+<section class="panel">
+
+<div class="panel-header">
+
+<h2>
+Actual Event Transactions
+</h2>
+
+<p>
+All financial transactions linked to this Event ID.
+</p>
+
+</div>
+
+<div
+class="panel-body"
+id="transactionContainer">
+
+<div class="loading">
+Loading transactions...
+</div>
+
+</div>
+
+</section>
+
+
+<div class="footer">
+
+CAS FUND • Post-Event Audit System
+
+</div>
+
+</main>
+
+
+<script>
+
+/* =========================================================
+   API
+========================================================= */
+
+const EVENT_TRANSACTION_API_URL =
+"https://script.google.com/macros/s/AKfycbx4OatrrXO4TAbTpG87mqTxGY9tn2s4rqXQ3y2NSL1DFwrRM7-OZJYeWDTHRWIqkQMFLg/exec";
+
+const PRE_AUDIT_API_URL =
+"https://script.google.com/macros/s/AKfycbwt8SePjlzyHGZ7-w7s-phygdxxKSTbCfaZiXT8x_pvtkPT6J2HJr3rYcVn7x6wP4Mq/exec";
+
+const EVENT_API_URL =
+"https://script.google.com/macros/s/AKfycbyqvQXIrBivAapKICFHPCLQHie6Dcnw84QBDbNfome16n2AF88Im8FtRntwaD93Ree8/exec";
+
+
+/* =========================================================
+   EVENT ID
+========================================================= */
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const EVENT_ID =
+String(
+params.get("eventId") || ""
+).trim();
+
+
+/* =========================================================
+   GLOBALS
+========================================================= */
+
+let eventRecord = null;
+
+let preAuditRecord = null;
+
+let transactions = [];
+
+let actualIncome = 0;
+
+let actualExpenses = 0;
+
+let actualNet = 0;
+
+let expectedIncome = 0;
+
+let expectedExpenses = 0;
+
+let expectedNet = 0;
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+    if(!EVENT_ID){
+
+        showError(
+            "No Event ID was provided."
+        );
+
+        return;
+
+    }
+
+    loadPostAudit();
+
+});
+
+
+/* =========================================================
+   GENERIC GET
+========================================================= */
+
+async function getJson(
+url
+){
+
+    const response =
+        await fetch(
+            url,
+            {
+                method:"GET",
+                cache:"no-store"
+            }
+        );
+
+    if(!response.ok){
+
+        throw new Error(
+            "HTTP " +
+            response.status
+        );
+
+    }
+
+    const data =
+        await response.json();
+
+    if(
+        !data ||
+        data.success === false
+    ){
+
+        throw new Error(
+            data?.message ||
+            data?.error ||
+            "Request failed."
+        );
+
+    }
+
+    return data;
+
+}
+
+
+/* =========================================================
+   GET FIELD
+========================================================= */
+
+function getField(
+object,
+names
+){
+
+    if(!object){
+
+        return "";
+
+    }
+
+    for(
+        const name of names
+    ){
+
+        if(
+            Object.prototype.hasOwnProperty.call(
+                object,
+                name
+            )
+        ){
+
+            const value =
+                object[name];
+
+            if(
+                value !== undefined &&
+                value !== null &&
+                String(value).trim() !== ""
+            ){
+
+                return value;
+
+            }
+
+        }
+
+    }
+
+    return "";
+
+}
+
+
+/* =========================================================
+   AMOUNT
+========================================================= */
+
+function getAmount(
+value
+){
+
+    if(
+        typeof value === "string"
+    ){
+
+        value =
+            value
+            .replace(/₱/g,"")
+            .replace(/,/g,"")
+            .trim();
+
+    }
+
+    const number =
+        Number(
+            value || 0
+        );
+
+    return Number.isFinite(number)
+        ? number
+        : 0;
+
+}
+
+
+/* =========================================================
+   TRANSACTION EVENT ID
+========================================================= */
+
+function getTransactionEventId(
+transaction
+){
+
+    return String(
+
+        getField(
+            transaction,
+            [
+                "eventId",
+                "Event ID",
+                "EventID",
+                "eventID",
+                "event_id",
+                "event",
+                "Event",
+                "linkedEventId",
+                "Linked Event ID"
+            ]
+        ) || ""
+
+    ).trim();
+
+}
+
+
+/* =========================================================
+   TRANSACTION TYPE
+========================================================= */
+
+function getTransactionType(
+transaction
+){
+
+    return String(
+
+        getField(
+            transaction,
+            [
+                "type",
+                "Type",
+                "transactionType",
+                "Transaction Type",
+                "TransactionType",
+                "transaction_type"
+            ]
+        ) || ""
+
+    )
+    .trim()
+    .toUpperCase();
+
+}
+
+
+/* =========================================================
+   LOAD POST AUDIT
+========================================================= */
+
+async function loadPostAudit(){
+
+    try{
+
+        await loadEvent();
+
+        await loadPreAudit();
+
+        await loadTransactions();
+
+        calculateResults();
+
+        renderEverything();
+
+    }
+
+    catch(error){
+
+        console.error(
+            error
+        );
+
+        showError(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD EVENT
+========================================================= */
+
+async function loadEvent(){
+
+    const data =
+        await getJson(
+            EVENT_API_URL +
+            "?action=list&t=" +
+            Date.now()
+        );
+
+    const events =
+        Array.isArray(data.events)
+        ?
+        data.events
+        :
+        [];
+
+    eventRecord =
+        events.find(
+            event =>
+                String(event.id).trim() ===
+                EVENT_ID
+        );
+
+    if(!eventRecord){
+
+        throw new Error(
+            "Event ID " +
+            EVENT_ID +
+            " could not be found."
+        );
+
+    }
+
+    if(
+        String(eventRecord.status || "")
+        .trim()
+        .toLowerCase() !==
+        "completed"
+    ){
+
+        throw new Error(
+            "This event is not marked as Completed yet."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   LOAD PRE-AUDIT
+========================================================= */
+
+async function loadPreAudit(){
+
+    const data =
+        await getJson(
+            PRE_AUDIT_API_URL +
+            "?action=getPreAudit&eventId=" +
+            encodeURIComponent(
+                EVENT_ID
+            ) +
+            "&t=" +
+            Date.now()
+        );
+
+    let record =
+        data.preAudit ||
+        data.data ||
+        null;
+
+    if(
+        Array.isArray(record)
+    ){
+
+        record =
+            record.find(
+                item =>
+
+                    String(
+                        getField(
+                            item,
+                            [
+                                "eventId",
+                                "Event ID",
+                                "id"
+                            ]
+                        ) || ""
+                    ).trim() ===
+                    EVENT_ID
+            );
+
+    }
+
+    preAuditRecord =
+        record || {};
+
+}
+
+
+/* =========================================================
+   LOAD TRANSACTIONS
+========================================================= */
+
+async function loadTransactions(){
+
+    const data =
+        await getJson(
+            EVENT_TRANSACTION_API_URL +
+            "?action=transactions&t=" +
+            Date.now()
+        );
+
+    const all =
+        Array.isArray(data.transactions)
+        ?
+        data.transactions
+        :
+        Array.isArray(data.data)
+        ?
+        data.data
+        :
+        Array.isArray(data.records)
+        ?
+        data.records
+        :
+        [];
+
+    transactions =
+        all.filter(
+            transaction =>
+
+                getTransactionEventId(
+                    transaction
+                ) ===
+                EVENT_ID
+
+        );
+
+}
+
+
+/* =========================================================
+   CALCULATE
+========================================================= */
+
+function calculateResults(){
+
+    expectedIncome =
+        getAmount(
+            getField(
+                preAuditRecord,
+                [
+                    "totalExpectedIncome",
+                    "expectedIncome",
+                    "total_expected_income",
+                    "expected_income",
+                    "income",
+                    "Expected Income",
+                    "Total Expected Income"
+                ]
+            )
+        );
+
+    expectedExpenses =
+        getAmount(
+            getField(
+                preAuditRecord,
+                [
+                    "totalExpectedExpenses",
+                    "expectedExpenses",
+                    "total_expected_expenses",
+                    "expected_expenses",
+                    "expenses",
+                    "Expected Expenses",
+                    "Total Expected Expenses"
+                ]
+            )
+        );
+
+
+    actualIncome = 0;
+
+    actualExpenses = 0;
+
+
+    transactions.forEach(
+        function(transaction){
+
+            const type =
+                getTransactionType(
+                    transaction
+                );
+
+            const amount =
+                getAmount(
+                    getField(
+                        transaction,
+                        [
+                            "amount",
+                            "Amount",
+                            "transactionAmount",
+                            "Transaction Amount",
+                            "TransactionAmount"
+                        ]
+                    )
+                );
+
+            if(
+                amount <= 0
+            ){
+
+                return;
+
+            }
+
+            if(
+                type === "INCOME" ||
+                type === "REVENUE"
+            ){
+
+                actualIncome +=
+                    amount;
+
+            }
+
+            else if(
+                type === "EXPENSE"
+            ){
+
+                actualExpenses +=
+                    amount;
+
+            }
+
+        }
+    );
+
+
+    actualNet =
+        actualIncome -
+        actualExpenses;
+
+    expectedNet =
+        expectedIncome -
+        expectedExpenses;
+
+}
+
+
+/* =========================================================
+   RENDER EVERYTHING
+========================================================= */
+
+function renderEverything(){
+
+    renderEvent();
+
+    renderSummary();
+
+    renderComparison();
+
+    renderPerformance();
+
+    renderVerdict();
+
+    renderSuggestions();
+
+    renderTransactions();
+
+}
+
+
+/* =========================================================
+   EVENT
+========================================================= */
+
+function renderEvent(){
+
+    document.getElementById(
+        "eventIdentity"
+    ).innerHTML = `
+
+        <div class="event-id">
+            ${escapeHtml(EVENT_ID)}
+        </div>
+
+        <div class="event-name">
+            ${escapeHtml(
+                eventRecord.name
+            )}
+        </div>
+
+        <div class="event-meta">
+
+            <span>
+                📅 ${escapeHtml(
+                    formatDate(
+                        eventRecord.date
+                    )
+                )}
+            </span>
+
+            <span>
+                📍 ${escapeHtml(
+                    eventRecord.location ||
+                    "No location"
+                )}
+            </span>
+
+            <span>
+                👥 ${Number(
+                    eventRecord.participants || 0
+                ).toLocaleString()} participants
+            </span>
+
+            <span>
+                👤 ${escapeHtml(
+                    eventRecord.organizer ||
+                    "No organizer"
+                )}
+            </span>
+
+            <span class="status">
+                Completed
+            </span>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+function renderSummary(){
+
+    document.getElementById(
+        "actualIncome"
+    ).textContent =
+        money(actualIncome);
+
+    document.getElementById(
+        "actualExpenses"
+    ).textContent =
+        money(actualExpenses);
+
+    document.getElementById(
+        "actualNet"
+    ).textContent =
+        money(actualNet);
+
+    document.getElementById(
+        "overallVariance"
+    ).textContent =
+        money(
+            actualNet -
+            expectedNet
+        );
+
+}
+
+
+/* =========================================================
+   COMPARISON
+========================================================= */
+
+function renderComparison(){
+
+    const incomeVariance =
+        actualIncome -
+        expectedIncome;
+
+    const expenseVariance =
+        actualExpenses -
+        expectedExpenses;
+
+    const netVariance =
+        actualNet -
+        expectedNet;
+
+
+    setMoney(
+        "expectedIncome",
+        expectedIncome
+    );
+
+    setMoney(
+        "comparisonActualIncome",
+        actualIncome
+    );
+
+    setMoney(
+        "incomeVariance",
+        incomeVariance
+    );
+
+
+    setMoney(
+        "expectedExpenses",
+        expectedExpenses
+    );
+
+    setMoney(
+        "comparisonActualExpenses",
+        actualExpenses
+    );
+
+    setMoney(
+        "expenseVariance",
+        expenseVariance
+    );
+
+
+    setMoney(
+        "expectedNet",
+        expectedNet
+    );
+
+    setMoney(
+        "comparisonActualNet",
+        actualNet
+    );
+
+    setMoney(
+        "netVariance",
+        netVariance
+    );
+
+
+    document.getElementById(
+        "incomeAssessment"
+    ).textContent =
+        incomeVariance >= 0
+        ?
+        "Above target"
+        :
+        "Below target";
+
+
+    document.getElementById(
+        "expenseAssessment"
+    ).textContent =
+        expenseVariance <= 0
+        ?
+        "Within / below budget"
+        :
+        "Over budget";
+
+
+    document.getElementById(
+        "netAssessment"
+    ).textContent =
+        netVariance >= 0
+        ?
+        "Better than planned"
+        :
+        "Below planned result";
+
+
+    setVarianceClass(
+        "incomeVariance",
+        incomeVariance
+    );
+
+    setVarianceClass(
+        "expenseVariance",
+        -expenseVariance
+    );
+
+    setVarianceClass(
+        "netVariance",
+        netVariance
+    );
+
+}
+
+
+/* =========================================================
+   PERFORMANCE
+========================================================= */
+
+function renderPerformance(){
+
+    let incomeRate =
+        expectedIncome > 0
+        ?
+        actualIncome /
+        expectedIncome *
+        100
+        :
+        0;
+
+    let budgetRate =
+        expectedExpenses > 0
+        ?
+        actualExpenses /
+        expectedExpenses *
+        100
+        :
+        0;
+
+
+    document.getElementById(
+        "incomePerformance"
+    ).textContent =
+        expectedIncome > 0
+        ?
+        incomeRate.toFixed(1) + "%"
+        :
+        "No target";
+
+
+    document.getElementById(
+        "incomePerformanceNote"
+    ).textContent =
+        expectedIncome > 0
+        ?
+        "Actual income achieved against expected income."
+        :
+        "No expected income was recorded in the Pre-Audit.";
+
+
+    document.getElementById(
+        "expensePerformance"
+    ).textContent =
+        expectedExpenses > 0
+        ?
+        budgetRate.toFixed(1) + "%"
+        :
+        "No budget";
+
+
+    document.getElementById(
+        "expensePerformanceNote"
+    ).textContent =
+        expectedExpenses > 0
+        ?
+        "Percentage of the expected expense budget actually used."
+        :
+        "No expected expense budget was recorded.";
+
+
+    document.getElementById(
+        "budgetUtilization"
+    ).textContent =
+        expectedExpenses > 0
+        ?
+        budgetRate.toFixed(1) + "%"
+        :
+        "N/A";
+
+
+    document.getElementById(
+        "budgetUtilizationNote"
+    ).textContent =
+        budgetRate <= 100
+        ?
+        "Actual expenses stayed within the Pre-Audit budget."
+        :
+        "Actual expenses exceeded the Pre-Audit budget.";
+
+
+    document.getElementById(
+        "financialResult"
+    ).textContent =
+        actualNet >= 0
+        ?
+        "Positive"
+        :
+        "Negative";
+
+
+    document.getElementById(
+        "financialResultNote"
+    ).textContent =
+        "Final event result after all recorded income and expenses.";
+
+}
+
+
+/* =========================================================
+   VERDICT
+========================================================= */
+
+function renderVerdict(){
+
+    const box =
+        document.getElementById(
+            "verdictBox"
+        );
+
+    const title =
+        document.getElementById(
+            "verdictMain"
+        );
+
+    const text =
+        document.getElementById(
+            "verdictText"
+        );
+
+
+    box.className =
+        "verdict";
+
+
+    const incomeGood =
+        expectedIncome === 0 ||
+        actualIncome >= expectedIncome;
+
+
+    const expenseGood =
+        expectedExpenses === 0 ||
+        actualExpenses <= expectedExpenses;
+
+
+    const netGood =
+        actualNet >= expectedNet;
+
+
+    if(
+        incomeGood &&
+        expenseGood &&
+        netGood
+    ){
+
+        box.classList.add(
+            "good"
+        );
+
+        title.textContent =
+            "FINANCIALLY SUCCESSFUL";
+
+        text.textContent =
+            "The event performed at or above its Pre-Audit financial expectations. " +
+            "Income met the expected target, expenses remained controlled, and the " +
+            "final financial result was equal to or better than projected.";
+
+        return;
+
+    }
+
+
+    if(
+        !expenseGood &&
+        actualNet < expectedNet
+    ){
+
+        box.classList.add(
+            "bad"
+        );
+
+        title.textContent =
+            "FINANCIAL REVIEW REQUIRED";
+
+        text.textContent =
+            "The event requires financial review because actual expenses exceeded " +
+            "the approved expectation and the final result was below the planned outcome.";
+
+        return;
+
+    }
+
+
+    box.classList.add(
+        "warning"
+    );
+
+    title.textContent =
+        "ACCEPTABLE WITH OBSERVATIONS";
+
+    text.textContent =
+        "The event was completed with mixed financial results. Some areas performed " +
+        "well while others differed from the original Pre-Audit projection.";
+
+}
+
+
+/* =========================================================
+   SUGGESTIONS
+========================================================= */
+
+function renderSuggestions(){
+
+    const container =
+        document.getElementById(
+            "suggestions"
+        );
+
+    const suggestions = [];
+
+
+    const incomeVariance =
+        actualIncome -
+        expectedIncome;
+
+    const expenseVariance =
+        actualExpenses -
+        expectedExpenses;
+
+
+    if(
+        expectedIncome > 0 &&
+        incomeVariance < 0
+    ){
+
+        suggestions.push({
+
+            title:
+                "Review income generation",
+
+            text:
+                "Actual income was below the Pre-Audit expectation. " +
+                "For future events, review attendance assumptions, collection " +
+                "strategies, sponsorships, and other planned income sources."
+
+        });
+
+    }
+
+
+    if(
+        expectedIncome > 0 &&
+        incomeVariance > 0
+    ){
+
+        suggestions.push({
+
+            title:
+                "Document successful income sources",
+
+            text:
+                "Actual income exceeded the original projection. " +
+                "Identify which income sources performed better than expected " +
+                "and consider applying the same strategy to future events."
+
+        });
+
+    }
+
+
+    if(
+        expectedExpenses > 0 &&
+        expenseVariance > 0
+    ){
+
+        suggestions.push({
+
+            title:
+                "Control expense overruns",
+
+            text:
+                "Actual expenses exceeded the Pre-Audit budget. " +
+                "Review the transactions responsible for the variance and determine " +
+                "whether the increase was necessary, avoidable, or caused by inaccurate estimates."
+
+        });
+
+    }
+
+
+    if(
+        expectedExpenses > 0 &&
+        expenseVariance < 0
+    ){
+
+        suggestions.push({
+
+            title:
+                "Preserve efficient spending",
+
+            text:
+                "The event used less than its expected expense budget. " +
+                "Identify cost-saving practices that can be retained without reducing event quality."
+
+        });
+
+    }
+
+
+    if(
+        actualNet < 0
+    ){
+
+        suggestions.push({
+
+            title:
+                "Review overall event sustainability",
+
+            text:
+                "The event produced a negative net financial result. " +
+                "Future planning should examine whether projected income should be increased, " +
+                "expenses reduced, or the event structure redesigned."
+
+        });
+
+    }
+
+
+    if(
+        actualNet >= 0 &&
+        actualNet >= expectedNet
+    ){
+
+        suggestions.push({
+
+            title:
+                "Use this event as a planning benchmark",
+
+            text:
+                "The final financial result met or exceeded the original projection. " +
+                "The actual income and expense figures can be useful benchmarks for planning similar events."
+
+        });
+
+    }
+
+
+    suggestions.push({
+
+        title:
+            "Maintain complete transaction records",
+
+        text:
+            "Continue linking every event-related financial transaction to the correct Event ID. " +
+            "This keeps the Pre-Audit, Event Execution, and Post-Audit records connected and auditable."
+
+    });
+
+
+    container.innerHTML =
+        suggestions
+        .map(
+            function(item,index){
+
+                return `
+
+                    <div class="suggestion">
+
+                        <div class="suggestion-icon">
+                            ${index + 1}
+                        </div>
+
+                        <div>
+
+                            <div class="suggestion-title">
+                                ${escapeHtml(
+                                    item.title
+                                )}
+                            </div>
+
+                            <div class="suggestion-text">
+                                ${escapeHtml(
+                                    item.text
+                                )}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   TRANSACTIONS
+========================================================= */
+
+function renderTransactions(){
+
+    const container =
+        document.getElementById(
+            "transactionContainer"
+        );
+
+
+    if(
+        transactions.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="empty">
+                No financial transactions were recorded for this Event ID.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+
+        <div class="transaction-list">
+
+            <table class="transaction-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Type
+                        </th>
+
+                        <th>
+                            Description
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    ${
+                        transactions
+                        .map(
+                            function(transaction){
+
+                                const date =
+                                    getField(
+                                        transaction,
+                                        [
+                                            "date",
+                                            "Date",
+                                            "transactionDate",
+                                            "Transaction Date"
+                                        ]
+                                    );
+
+                                const type =
+                                    getTransactionType(
+                                        transaction
+                                    );
+
+                                const description =
+                                    getField(
+                                        transaction,
+                                        [
+                                            "description",
+                                            "Description",
+                                            "particulars",
+                                            "Particulars",
+                                            "details",
+                                            "Details"
+                                        ]
+                                    );
+
+                                const amount =
+                                    getAmount(
+                                        getField(
+                                            transaction,
+                                            [
+                                                "amount",
+                                                "Amount",
+                                                "transactionAmount",
+                                                "Transaction Amount"
+                                            ]
+                                        )
+                                    );
+
+
+                                return `
+
+                                    <tr>
+
+                                        <td>
+                                            ${escapeHtml(
+                                                date || "—"
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHtml(
+                                                type || "—"
+                                            )}
+                                        </td>
+
+                                        <td>
+                                            ${escapeHtml(
+                                                description || "—"
+                                            )}
+                                        </td>
+
+                                        <td class="money">
+                                            ₱${formatCurrency(
+                                                amount
+                                            )}
+                                        </td>
+
+                                    </tr>
+
+                                `;
+
+                            }
+                        )
+                        .join("")
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function money(
+value
+){
+
+    return "₱" +
+        formatCurrency(
+            value
+        );
+
+}
+
+
+function formatCurrency(
+value
+){
+
+    return Number(
+        value || 0
+    )
+    .toLocaleString(
+        "en-PH",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
+
+}
+
+
+function setMoney(
+id,
+value
+){
+
+    document.getElementById(
+        id
+    ).textContent =
+        money(value);
+
+}
+
+
+function setVarianceClass(
+id,
+value
+){
+
+    const element =
+        document.getElementById(
+            id
+        );
+
+    element.classList.remove(
+        "positive",
+        "negative",
+        "neutral"
+    );
+
+    if(value > 0){
+
+        element.classList.add(
+            "positive"
+        );
+
+    }
+
+    else if(value < 0){
+
+        element.classList.add(
+            "negative"
+        );
+
+    }
+
+    else{
+
+        element.classList.add(
+            "neutral"
+        );
+
+    }
+
+}
+
+
+function formatDate(
+value
+){
+
+    if(!value){
+
+        return "—";
+
+    }
+
+    const parts =
+        String(value).split("-");
+
+    if(
+        parts.length !== 3
+    ){
+
+        return value;
+
+    }
+
+    const date =
+        new Date(
+            Number(parts[0]),
+            Number(parts[1]) - 1,
+            Number(parts[2])
+        );
+
+    return date.toLocaleDateString(
+        "en-PH",
+        {
+            year:"numeric",
+            month:"short",
+            day:"numeric"
+        }
+    );
+
+}
+
+
+function escapeHtml(
+value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+function showError(
+message
+){
+
+    document.getElementById(
+        "eventIdentity"
+    ).innerHTML = `
+
+        <div class="empty">
+
+            <strong>
+                Unable to load Post-Audit
+            </strong>
+
+            <br><br>
+
+            ${escapeHtml(
+                message
+            )}
+
+        </div>
+
+    `;
+
+}
+
+
+function goBack(){
+
+    window.location.href =
+        "events.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

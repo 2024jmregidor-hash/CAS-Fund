@@ -1,0 +1,3395 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0"
+>
+
+<title>
+CAS FUND | Pre-Audit
+</title>
+
+<link
+rel="icon"
+href="https://mmclcassc.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png"
+>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#eef2f7;
+color:#172033;
+line-height:1.4;
+}
+
+button,
+input,
+select{
+font-family:inherit;
+}
+
+button{
+cursor:pointer;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+background:#0b5ed7;
+color:white;
+padding:28px 40px;
+}
+
+.header-inner{
+max-width:1200px;
+margin:auto;
+}
+
+.header h1{
+font-size:28px;
+}
+
+.header p{
+margin-top:5px;
+font-size:13px;
+opacity:.9;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:30px;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-bottom:20px;
+}
+
+.page-title{
+font-size:21px;
+font-weight:800;
+}
+
+.page-subtitle{
+font-size:12px;
+color:#778294;
+margin-top:3px;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+border:0;
+border-radius:8px;
+padding:11px 17px;
+font-size:12px;
+font-weight:700;
+transition:.2s;
+}
+
+.btn:hover{
+transform:translateY(-1px);
+}
+
+.btn-primary{
+background:#0b5ed7;
+color:white;
+}
+
+.btn-primary:hover{
+background:#094db1;
+}
+
+.btn-light{
+background:#f1f3f6;
+color:#172033;
+}
+
+.btn-success{
+background:#198754;
+color:white;
+}
+
+.btn-danger{
+background:#dc3545;
+color:white;
+}
+
+
+/* =========================================================
+   EVENT PANEL
+========================================================= */
+
+.event-panel{
+background:white;
+border:1px solid #e1e7ee;
+border-radius:14px;
+box-shadow:0 3px 12px rgba(0,0,0,.05);
+margin-bottom:20px;
+overflow:hidden;
+}
+
+.panel-header{
+padding:20px 22px;
+border-bottom:1px solid #edf0f4;
+}
+
+.panel-header h2{
+font-size:17px;
+}
+
+.panel-header p{
+font-size:11px;
+color:#7b8594;
+margin-top:4px;
+}
+
+.event-details{
+padding:22px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:16px;
+}
+
+.detail-box{
+background:#f8fafc;
+border:1px solid #e6ebf1;
+border-radius:9px;
+padding:14px;
+}
+
+.detail-label{
+font-size:9px;
+font-weight:700;
+text-transform:uppercase;
+letter-spacing:.5px;
+color:#7b8594;
+}
+
+.detail-value{
+font-size:14px;
+font-weight:700;
+margin-top:6px;
+}
+
+.detail-wide{
+grid-column:span 2;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status{
+display:inline-block;
+padding:6px 10px;
+border-radius:20px;
+font-size:10px;
+font-weight:700;
+}
+
+.status-planned{
+background:#e9f2ff;
+color:#0b5ed7;
+}
+
+.status-approval{
+background:#fff4d6;
+color:#9a6900;
+}
+
+.status-approved{
+background:#e7f7ee;
+color:#198754;
+}
+
+.status-rejected{
+background:#fdeaea;
+color:#dc3545;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.audit-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+margin-bottom:20px;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.panel{
+background:white;
+border:1px solid #e1e7ee;
+border-radius:14px;
+box-shadow:0 3px 12px rgba(0,0,0,.05);
+overflow:hidden;
+}
+
+.panel-title{
+padding:20px 22px;
+border-bottom:1px solid #edf0f4;
+}
+
+.panel-title h2{
+font-size:17px;
+}
+
+.panel-title p{
+font-size:11px;
+color:#7b8594;
+margin-top:4px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-body{
+padding:22px;
+}
+
+.form-group{
+margin-bottom:15px;
+}
+
+.form-group label{
+display:block;
+font-size:10px;
+font-weight:700;
+text-transform:uppercase;
+color:#596476;
+margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select{
+width:100%;
+border:1px solid #d9e0e8;
+border-radius:8px;
+padding:11px 12px;
+font-size:13px;
+outline:none;
+background:white;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+border-color:#0b5ed7;
+box-shadow:0 0 0 3px rgba(11,94,215,.08);
+}
+
+.form-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrapper{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#f6f8fb;
+font-size:10px;
+text-transform:uppercase;
+letter-spacing:.4px;
+color:#697486;
+text-align:left;
+padding:12px;
+border-bottom:1px solid #e2e7ed;
+white-space:nowrap;
+}
+
+td{
+font-size:12px;
+padding:12px;
+border-bottom:1px solid #edf0f4;
+vertical-align:middle;
+}
+
+tr:last-child td{
+border-bottom:0;
+}
+
+.number{
+text-align:right;
+white-space:nowrap;
+}
+
+
+/* =========================================================
+   ITEM ACTIONS
+========================================================= */
+
+.item-actions{
+display:flex;
+gap:6px;
+}
+
+.small-btn{
+border:0;
+border-radius:6px;
+padding:6px 9px;
+font-size:10px;
+font-weight:700;
+}
+
+.remove-btn{
+background:#fdeaea;
+color:#dc3545;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.summary{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-bottom:20px;
+}
+
+.summary-card{
+background:white;
+border:1px solid #e1e7ee;
+border-radius:12px;
+padding:18px;
+box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+.summary-label{
+font-size:9px;
+text-transform:uppercase;
+letter-spacing:.7px;
+color:#778294;
+}
+
+.summary-value{
+font-size:22px;
+font-weight:800;
+margin-top:7px;
+}
+
+
+/* =========================================================
+   ASSESSMENT
+========================================================= */
+
+.assessment{
+background:white;
+border:1px solid #e1e7ee;
+border-radius:14px;
+box-shadow:0 3px 12px rgba(0,0,0,.05);
+overflow:hidden;
+margin-bottom:20px;
+}
+
+.assessment-body{
+padding:24px;
+}
+
+.assessment-result{
+border-radius:12px;
+padding:20px;
+text-align:center;
+border:1px solid #e1e7ee;
+}
+
+.assessment-title{
+font-size:20px;
+font-weight:800;
+}
+
+.assessment-description{
+font-size:12px;
+color:#697486;
+margin-top:7px;
+}
+
+.feasible{
+background:#e7f7ee;
+border-color:#b9e5cc;
+color:#198754;
+}
+
+.not-feasible{
+background:#fdeaea;
+border-color:#f2b8be;
+color:#dc3545;
+}
+
+.review{
+background:#fff4d6;
+border-color:#f1dc9b;
+color:#9a6900;
+}
+
+
+/* =========================================================
+   ACTION PANEL
+========================================================= */
+
+.action-panel{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+background:white;
+border:1px solid #e1e7ee;
+border-radius:14px;
+padding:18px 22px;
+box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+
+.action-left{
+font-size:11px;
+color:#778294;
+}
+
+.action-right{
+display:flex;
+gap:8px;
+}
+
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.loading{
+text-align:center;
+padding:45px;
+color:#697486;
+font-size:12px;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+text-align:center;
+padding:45px 20px;
+color:#7b8594;
+}
+
+.empty-title{
+font-size:15px;
+font-weight:700;
+color:#172033;
+}
+
+.empty-text{
+font-size:12px;
+margin-top:5px;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+position:fixed;
+right:22px;
+bottom:22px;
+background:#172033;
+color:white;
+padding:13px 17px;
+border-radius:9px;
+font-size:12px;
+font-weight:700;
+box-shadow:0 8px 30px rgba(0,0,0,.2);
+opacity:0;
+transform:translateY(10px);
+pointer-events:none;
+transition:.25s;
+z-index:2000;
+}
+
+.toast.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.toast.success{
+background:#198754;
+}
+
+.toast.error{
+background:#dc3545;
+}
+
+
+/* =========================================================
+   LOADING OVERLAY
+========================================================= */
+
+.page-loading{
+position:fixed;
+inset:0;
+background:rgba(255,255,255,.88);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:3000;
+}
+
+.page-loading-box{
+background:white;
+padding:25px 30px;
+border-radius:12px;
+box-shadow:0 10px 40px rgba(0,0,0,.15);
+text-align:center;
+}
+
+.page-loading-title{
+font-size:15px;
+font-weight:800;
+}
+
+.page-loading-text{
+font-size:11px;
+color:#697486;
+margin-top:6px;
+}
+
+
+/* =========================================================
+   HIDDEN
+========================================================= */
+
+.hidden{
+display:none !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:950px){
+
+.event-details{
+grid-template-columns:1fr 1fr;
+}
+
+.summary{
+grid-template-columns:1fr 1fr;
+}
+
+.audit-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:650px){
+
+.header{
+padding:22px;
+}
+
+.container{
+padding:16px;
+}
+
+.topbar{
+align-items:flex-start;
+flex-direction:column;
+}
+
+.topbar .btn{
+width:100%;
+}
+
+.event-details{
+grid-template-columns:1fr;
+}
+
+.detail-wide{
+grid-column:span 1;
+}
+
+.summary{
+grid-template-columns:1fr 1fr;
+}
+
+.form-row{
+grid-template-columns:1fr;
+}
+
+.action-panel{
+align-items:flex-start;
+flex-direction:column;
+}
+
+.action-right{
+width:100%;
+}
+
+.action-right .btn{
+flex:1;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =======================================================
+     LOADING OVERLAY
+======================================================= -->
+
+<div
+id="pageLoading"
+class="page-loading"
+>
+
+<div class="page-loading-box">
+
+<div class="page-loading-title">
+Loading Pre-Audit
+</div>
+
+<div
+class="page-loading-text"
+id="pageLoadingText"
+>
+Loading event and saved financial records...
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
+<header class="header">
+
+<div class="header-inner">
+
+<h1>
+CAS FUND
+</h1>
+
+<p>
+Pre-Event Financial Audit
+</p>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- =======================================================
+     TOP BAR
+======================================================= -->
+
+<div class="topbar">
+
+<div>
+
+<div class="page-title">
+Pre-Audit
+</div>
+
+<div class="page-subtitle">
+Financial assessment and proposed budget for the selected event.
+</div>
+
+</div>
+
+<button
+class="btn btn-light"
+onclick="goBackToEvents()"
+>
+
+← Back to Events
+
+</button>
+
+</div>
+
+
+<!-- =======================================================
+     EVENT INFORMATION
+======================================================= -->
+
+<section class="event-panel">
+
+<div class="panel-header">
+
+<h2>
+Event Information
+</h2>
+
+<p>
+This information is automatically retrieved from the Event List using the Event ID.
+</p>
+
+</div>
+
+<div id="eventDetailsContainer">
+
+<div class="loading">
+Loading event details...
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     SUMMARY
+======================================================= -->
+
+<section class="summary">
+
+
+<div class="summary-card">
+
+<div class="summary-label">
+Available CAS FUND
+</div>
+
+<div
+class="summary-value"
+id="availableFund"
+>
+₱0.00
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<div class="summary-label">
+Expected Income
+</div>
+
+<div
+class="summary-value"
+id="expectedIncome"
+>
+₱0.00
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<div class="summary-label">
+Expected Expenses
+</div>
+
+<div
+class="summary-value"
+id="expectedExpenses"
+>
+₱0.00
+</div>
+
+</div>
+
+
+<div class="summary-card">
+
+<div class="summary-label">
+Expected Earnings
+</div>
+
+<div
+class="summary-value"
+id="expectedEarnings"
+>
+₱0.00
+</div>
+
+</div>
+
+
+</section>
+
+
+<!-- =======================================================
+     EXPENSES / INCOME
+======================================================= -->
+
+<div class="audit-grid">
+
+
+<!-- =====================================================
+     EXPENSES
+===================================================== -->
+
+<section class="panel">
+
+<div class="panel-title">
+
+<h2>
+Proposed Budget / Expected Expenses
+</h2>
+
+<p>
+List all expected expenses for this event.
+</p>
+
+</div>
+
+
+<div class="form-body">
+
+
+<div class="form-row">
+
+
+<div class="form-group">
+
+<label>
+Item
+</label>
+
+<input
+type="text"
+id="expenseItem"
+placeholder="e.g. Food"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Unit
+</label>
+
+<input
+type="number"
+id="expenseUnit"
+min="0"
+step="1"
+placeholder="0"
+>
+
+</div>
+
+
+</div>
+
+
+<div class="form-row">
+
+
+<div class="form-group">
+
+<label>
+Price Per Unit
+</label>
+
+<input
+type="number"
+id="expensePrice"
+min="0"
+step="0.01"
+placeholder="0.00"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Total Amount
+</label>
+
+<input
+type="text"
+id="expenseTotal"
+value="₱0.00"
+readonly
+>
+
+</div>
+
+
+</div>
+
+
+<button
+class="btn btn-primary"
+onclick="addExpense()"
+>
++ Add Expense
+</button>
+
+
+</div>
+
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Item
+</th>
+
+<th>
+Unit
+</th>
+
+<th>
+Price / Unit
+</th>
+
+<th>
+Total
+</th>
+
+<th>
+Action
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="expenseTableBody">
+
+<tr>
+
+<td colspan="5">
+
+<div class="empty">
+No proposed expenses added yet.
+</div>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     INCOME
+===================================================== -->
+
+<section class="panel">
+
+<div class="panel-title">
+
+<h2>
+Expected Income
+</h2>
+
+<p>
+List all expected sources of income for this event.
+</p>
+
+</div>
+
+
+<div class="form-body">
+
+
+<div class="form-row">
+
+
+<div class="form-group">
+
+<label>
+Item
+</label>
+
+<input
+type="text"
+id="incomeItem"
+placeholder="e.g. Registration Fee"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Unit
+</label>
+
+<input
+type="number"
+id="incomeUnit"
+min="0"
+step="1"
+placeholder="0"
+>
+
+</div>
+
+
+</div>
+
+
+<div class="form-row">
+
+
+<div class="form-group">
+
+<label>
+Price Per Unit
+</label>
+
+<input
+type="number"
+id="incomePrice"
+min="0"
+step="0.01"
+placeholder="0.00"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Total Amount
+</label>
+
+<input
+type="text"
+id="incomeTotal"
+value="₱0.00"
+readonly
+>
+
+</div>
+
+
+</div>
+
+
+<button
+class="btn btn-primary"
+onclick="addIncome()"
+>
++ Add Income
+</button>
+
+
+</div>
+
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Item
+</th>
+
+<th>
+Unit
+</th>
+
+<th>
+Price / Unit
+</th>
+
+<th>
+Total
+</th>
+
+<th>
+Action
+</th>
+
+</tr>
+
+</thead>
+
+<tbody id="incomeTableBody">
+
+<tr>
+
+<td colspan="5">
+
+<div class="empty">
+No expected income added yet.
+</div>
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- =======================================================
+     FINANCIAL ASSESSMENT
+======================================================= -->
+
+<section class="assessment">
+
+<div class="panel-header">
+
+<h2>
+Financial Feasibility Assessment
+</h2>
+
+<p>
+Assessment is based on available CAS FUND plus expected event income compared with expected expenses.
+</p>
+
+</div>
+
+
+<div class="assessment-body">
+
+<div
+id="assessmentResult"
+class="assessment-result review"
+>
+
+<div class="assessment-title">
+Awaiting Financial Assessment
+</div>
+
+<div class="assessment-description">
+Add the proposed expenses and expected income to calculate feasibility.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     ACTIONS
+======================================================= -->
+
+<section class="action-panel">
+
+<div class="action-left">
+
+<strong id="eventIdDisplay">
+Event ID: Loading...
+</strong>
+
+<br>
+
+Pre-Audit financial planning record.
+
+</div>
+
+
+<div class="action-right">
+
+<button
+class="btn btn-light"
+onclick="goBackToEvents()"
+>
+Cancel
+</button>
+
+
+<button
+class="btn btn-primary"
+id="saveButton"
+onclick="savePreAudit()"
+>
+Save Pre-Audit
+</button>
+
+</div>
+
+</section>
+
+
+<div
+style="
+text-align:center;
+font-size:10px;
+color:#8993a2;
+padding:18px;
+"
+>
+
+CAS FUND • Pre-Audit System
+
+</div>
+
+
+</main>
+
+
+<!-- =======================================================
+     TOAST
+======================================================= -->
+
+<div
+class="toast"
+id="toast"
+>
+</div>
+
+
+<script>
+
+
+/* =========================================================
+   CONFIGURATION
+========================================================= */
+
+
+/*
+ * EVENT PLANNING BACKEND
+ */
+
+const EVENT_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyqvQXIrBivAapKICFHPCLQHie6Dcnw84QBDbNfome16n2AF88Im8FtRntwaD93Ree8/exec";
+
+
+/*
+ * PRE-AUDIT BACKEND
+ */
+
+const PRE_AUDIT_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbwt8SePjlzyHGZ7-w7s-phygdxxKSTbCfaZiXT8x_pvtkPT6J2HJr3rYcVn7x6wP4Mq/exec";
+
+
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
+
+let currentEvent = null;
+
+let expenses = [];
+
+let incomes = [];
+
+let currentPreAudit = null;
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+setupCalculations();
+
+initializePreAudit();
+
+}
+);
+
+
+/* =========================================================
+   INITIALIZE PRE-AUDIT
+========================================================= */
+
+async function initializePreAudit(){
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+
+const eventId =
+String(
+params.get("eventId") || ""
+).trim();
+
+
+if(!eventId){
+
+hidePageLoading();
+
+showEventError(
+"No Event ID was provided."
+);
+
+return;
+
+}
+
+
+document.getElementById(
+"eventIdDisplay"
+).textContent =
+"Event ID: " +
+eventId;
+
+
+try{
+
+setLoadingText(
+"Loading event information..."
+);
+
+
+await loadSelectedEvent(
+eventId
+);
+
+
+setLoadingText(
+"Loading saved Pre-Audit..."
+);
+
+
+await loadSavedPreAudit(
+eventId
+);
+
+
+setLoadingText(
+"Preparing financial assessment..."
+);
+
+
+updateFinancialAssessment();
+
+
+hidePageLoading();
+
+
+}
+catch(error){
+
+console.error(error);
+
+hidePageLoading();
+
+showEventError(
+error.message ||
+"Unable to load Pre-Audit."
+);
+
+}
+
+}
+
+
+/* =========================================================
+   LOAD EVENT
+========================================================= */
+
+async function loadSelectedEvent(
+eventId
+){
+
+const container =
+document.getElementById(
+"eventDetailsContainer"
+);
+
+
+container.innerHTML = `
+<div class="loading">
+Loading event details...
+</div>
+`;
+
+
+const data =
+await eventApi(
+"list"
+);
+
+
+const eventList =
+Array.isArray(
+data.events
+)
+?
+data.events
+:
+[];
+
+
+const found =
+eventList.find(
+event =>
+String(
+event.id
+).trim() ===
+String(
+eventId
+).trim()
+);
+
+
+if(!found){
+
+throw new Error(
+"Event " +
+eventId +
+" could not be found in the Event List."
+);
+
+}
+
+
+currentEvent =
+found;
+
+
+renderEventDetails(
+found
+);
+
+}
+
+
+/* =========================================================
+   LOAD SAVED PRE-AUDIT
+========================================================= */
+
+async function loadSavedPreAudit(
+eventId
+){
+
+try{
+
+const data =
+await preAuditApi(
+"getPreAudit",
+{
+eventId:eventId
+}
+);
+
+
+if(
+!data ||
+data.success !== true
+){
+
+throw new Error(
+data &&
+data.message
+?
+data.message
+:
+"Unable to retrieve saved Pre-Audit."
+);
+
+}
+
+
+/*
+ * No saved record yet.
+ */
+
+if(
+data.exists === false ||
+!data.preAudit
+){
+
+currentPreAudit = null;
+
+expenses = [];
+
+incomes = [];
+
+renderExpenses();
+
+renderIncomes();
+
+return;
+
+}
+
+
+/*
+ * Existing record found.
+ */
+
+currentPreAudit =
+data.preAudit;
+
+
+/*
+ * Restore available fund.
+ */
+
+const savedFund =
+Number(
+data.preAudit.availableFund || 0
+);
+
+
+document.getElementById(
+"availableFund"
+).textContent =
+formatCurrency(
+savedFund
+);
+
+
+/*
+ * Restore expenses.
+ */
+
+expenses =
+Array.isArray(
+data.expenses
+)
+?
+data.expenses.map(
+function(item){
+
+return {
+
+item:
+String(
+item.item || ""
+),
+
+unit:
+Number(
+item.unit || 0
+),
+
+price:
+Number(
+item.pricePerUnit ??
+item.price ??
+0
+),
+
+total:
+Number(
+item.totalAmount ??
+item.total ??
+0
+),
+
+expenseId:
+item.expenseId || null
+
+};
+
+}
+)
+:
+[];
+
+
+/*
+ * Restore income.
+ */
+
+const savedIncome =
+Array.isArray(
+data.incomes
+)
+?
+data.incomes
+:
+(
+Array.isArray(
+data.income
+)
+?
+data.income
+:
+[]
+);
+
+
+incomes =
+savedIncome.map(
+function(item){
+
+return {
+
+item:
+String(
+item.item || ""
+),
+
+unit:
+Number(
+item.unit || 0
+),
+
+price:
+Number(
+item.pricePerUnit ??
+item.price ??
+0
+),
+
+total:
+Number(
+item.totalAmount ??
+item.total ??
+0
+),
+
+incomeId:
+item.incomeId || null
+
+};
+
+}
+);
+
+
+/*
+ * Render the restored data.
+ */
+
+renderExpenses();
+
+renderIncomes();
+
+
+/*
+ * Restore summary values.
+ */
+
+document.getElementById(
+"expectedExpenses"
+).textContent =
+formatCurrency(
+data.preAudit.totalExpectedExpenses
+);
+
+
+document.getElementById(
+"expectedIncome"
+).textContent =
+formatCurrency(
+data.preAudit.totalExpectedIncome
+);
+
+
+document.getElementById(
+"expectedEarnings"
+).textContent =
+formatCurrency(
+data.preAudit.expectedEarnings
+);
+
+
+}
+
+
+catch(error){
+
+console.error(
+"Could not load saved Pre-Audit:",
+error
+);
+
+
+/*
+ * We do not silently ignore a real backend error.
+ */
+
+throw error;
+
+}
+
+}
+
+
+/* =========================================================
+   RENDER EVENT
+========================================================= */
+
+function renderEventDetails(
+event
+){
+
+const statusClass =
+getStatusClass(
+event.status
+);
+
+
+document.getElementById(
+"eventDetailsContainer"
+).innerHTML = `
+
+<div class="event-details">
+
+<div class="detail-box">
+
+<div class="detail-label">
+Event ID
+</div>
+
+<div class="detail-value">
+${escapeHtml(event.id)}
+</div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Event Name
+</div>
+
+<div class="detail-value">
+${escapeHtml(event.name)}
+</div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Event Date
+</div>
+
+<div class="detail-value">
+${escapeHtml(
+formatDisplayDate(event.date)
+)}
+</div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Status
+</div>
+
+<div class="detail-value">
+
+<span class="status ${statusClass}">
+${escapeHtml(event.status)}
+</span>
+
+</div>
+
+</div>
+
+
+<div class="detail-box detail-wide">
+
+<div class="detail-label">
+Location
+</div>
+
+<div class="detail-value">
+${
+event.location
+?
+escapeHtml(event.location)
+:
+"—"
+}
+</div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Participants
+</div>
+
+<div class="detail-value">
+${Number(
+event.participants || 0
+).toLocaleString()}
+</div>
+
+</div>
+
+
+<div class="detail-box">
+
+<div class="detail-label">
+Organizer
+</div>
+
+<div class="detail-value">
+${
+event.organizer
+?
+escapeHtml(event.organizer)
+:
+"—"
+}
+</div>
+
+</div>
+
+</div>
+`;
+
+
+if(
+event.status !== "Planned"
+){
+
+showToast(
+"This event is not currently Planned.",
+"error"
+);
+
+}
+
+}
+
+
+/* =========================================================
+   EVENT API
+========================================================= */
+
+async function eventApi(
+action,
+params = {}
+){
+
+const query =
+new URLSearchParams();
+
+
+query.set(
+"action",
+action
+);
+
+
+Object.keys(params)
+.forEach(
+function(key){
+
+if(
+params[key] !== undefined &&
+params[key] !== null
+){
+
+query.set(
+key,
+String(params[key])
+);
+
+}
+
+}
+);
+
+
+const response =
+await fetch(
+EVENT_SCRIPT_URL +
+"?" +
+query.toString(),
+{
+method:"GET",
+cache:"no-store"
+}
+);
+
+
+if(!response.ok){
+
+throw new Error(
+"Event server returned HTTP " +
+response.status
+);
+
+}
+
+
+const data =
+await response.json();
+
+
+if(!data.success){
+
+throw new Error(
+data.message ||
+"Unable to retrieve event."
+);
+
+}
+
+
+return data;
+
+}
+
+
+/* =========================================================
+   PRE-AUDIT API
+========================================================= */
+
+async function preAuditApi(
+action,
+params = {}
+){
+
+const query =
+new URLSearchParams();
+
+
+query.set(
+"action",
+action
+);
+
+
+Object.keys(params)
+.forEach(
+function(key){
+
+if(
+params[key] !== undefined &&
+params[key] !== null
+){
+
+query.set(
+key,
+String(params[key])
+);
+
+}
+
+}
+);
+
+
+const response =
+await fetch(
+PRE_AUDIT_SCRIPT_URL +
+"?" +
+query.toString(),
+{
+method:"GET",
+cache:"no-store"
+}
+);
+
+
+if(!response.ok){
+
+throw new Error(
+"Pre-Audit server returned HTTP " +
+response.status
+);
+
+}
+
+
+const data =
+await response.json();
+
+
+if(!data.success){
+
+throw new Error(
+data.message ||
+"Pre-Audit request failed."
+);
+
+}
+
+
+return data;
+
+}
+
+
+/* =========================================================
+   CALCULATIONS
+========================================================= */
+
+function setupCalculations(){
+
+document.getElementById(
+"expenseUnit"
+).addEventListener(
+"input",
+calculateExpensePreview
+);
+
+
+document.getElementById(
+"expensePrice"
+).addEventListener(
+"input",
+calculateExpensePreview
+);
+
+
+document.getElementById(
+"incomeUnit"
+).addEventListener(
+"input",
+calculateIncomePreview
+);
+
+
+document.getElementById(
+"incomePrice"
+).addEventListener(
+"input",
+calculateIncomePreview
+);
+
+}
+
+
+/* =========================================================
+   EXPENSE PREVIEW
+========================================================= */
+
+function calculateExpensePreview(){
+
+const unit =
+Number(
+document.getElementById(
+"expenseUnit"
+).value
+) || 0;
+
+
+const price =
+Number(
+document.getElementById(
+"expensePrice"
+).value
+) || 0;
+
+
+document.getElementById(
+"expenseTotal"
+).value =
+formatCurrency(
+unit * price
+);
+
+}
+
+
+/* =========================================================
+   INCOME PREVIEW
+========================================================= */
+
+function calculateIncomePreview(){
+
+const unit =
+Number(
+document.getElementById(
+"incomeUnit"
+).value
+) || 0;
+
+
+const price =
+Number(
+document.getElementById(
+"incomePrice"
+).value
+) || 0;
+
+
+document.getElementById(
+"incomeTotal"
+).value =
+formatCurrency(
+unit * price
+);
+
+}
+
+
+/* =========================================================
+   ADD EXPENSE
+========================================================= */
+
+function addExpense(){
+
+const item =
+document.getElementById(
+"expenseItem"
+).value.trim();
+
+
+const unit =
+Number(
+document.getElementById(
+"expenseUnit"
+).value
+) || 0;
+
+
+const price =
+Number(
+document.getElementById(
+"expensePrice"
+).value
+) || 0;
+
+
+if(!item){
+
+showToast(
+"Expense item is required.",
+"error"
+);
+
+return;
+
+}
+
+
+if(unit <= 0){
+
+showToast(
+"Expense unit must be greater than zero.",
+"error"
+);
+
+return;
+
+}
+
+
+if(price < 0){
+
+showToast(
+"Expense price cannot be negative.",
+"error"
+);
+
+return;
+
+}
+
+
+expenses.push({
+
+item:item,
+
+unit:unit,
+
+price:price,
+
+total:
+unit * price
+
+});
+
+
+renderExpenses();
+
+clearExpenseForm();
+
+updateFinancialAssessment();
+
+}
+
+
+/* =========================================================
+   ADD INCOME
+========================================================= */
+
+function addIncome(){
+
+const item =
+document.getElementById(
+"incomeItem"
+).value.trim();
+
+
+const unit =
+Number(
+document.getElementById(
+"incomeUnit"
+).value
+) || 0;
+
+
+const price =
+Number(
+document.getElementById(
+"incomePrice"
+).value
+) || 0;
+
+
+if(!item){
+
+showToast(
+"Income item is required.",
+"error"
+);
+
+return;
+
+}
+
+
+if(unit <= 0){
+
+showToast(
+"Income unit must be greater than zero.",
+"error"
+);
+
+return;
+
+}
+
+
+if(price < 0){
+
+showToast(
+"Income price cannot be negative.",
+"error"
+);
+
+return;
+
+}
+
+
+incomes.push({
+
+item:item,
+
+unit:unit,
+
+price:price,
+
+total:
+unit * price
+
+});
+
+
+renderIncomes();
+
+clearIncomeForm();
+
+updateFinancialAssessment();
+
+}
+
+
+/* =========================================================
+   RENDER EXPENSES
+========================================================= */
+
+function renderExpenses(){
+
+const body =
+document.getElementById(
+"expenseTableBody"
+);
+
+
+if(
+expenses.length === 0
+){
+
+body.innerHTML = `
+
+<tr>
+
+<td colspan="5">
+
+<div class="empty">
+No proposed expenses added yet.
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+body.innerHTML =
+expenses.map(
+function(expense,index){
+
+return `
+
+<tr>
+
+<td>
+${escapeHtml(
+expense.item
+)}
+</td>
+
+<td>
+${Number(
+expense.unit || 0
+).toLocaleString()}
+</td>
+
+<td class="number">
+${formatCurrency(
+expense.price
+)}
+</td>
+
+<td class="number">
+${formatCurrency(
+expense.total
+)}
+</td>
+
+<td>
+
+<div class="item-actions">
+
+<button
+class="small-btn remove-btn"
+onclick="removeExpense(${index})"
+>
+Remove
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+}
+).join("");
+
+}
+
+
+/* =========================================================
+   RENDER INCOME
+========================================================= */
+
+function renderIncomes(){
+
+const body =
+document.getElementById(
+"incomeTableBody"
+);
+
+
+if(
+incomes.length === 0
+){
+
+body.innerHTML = `
+
+<tr>
+
+<td colspan="5">
+
+<div class="empty">
+No expected income added yet.
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+return;
+
+}
+
+
+body.innerHTML =
+incomes.map(
+function(income,index){
+
+return `
+
+<tr>
+
+<td>
+${escapeHtml(
+income.item
+)}
+</td>
+
+<td>
+${Number(
+income.unit || 0
+).toLocaleString()}
+</td>
+
+<td class="number">
+${formatCurrency(
+income.price
+)}
+</td>
+
+<td class="number">
+${formatCurrency(
+income.total
+)}
+</td>
+
+<td>
+
+<div class="item-actions">
+
+<button
+class="small-btn remove-btn"
+onclick="removeIncome(${index})"
+>
+Remove
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+}
+).join("");
+
+}
+
+
+/* =========================================================
+   REMOVE EXPENSE
+========================================================= */
+
+function removeExpense(
+index
+){
+
+expenses.splice(
+index,
+1
+);
+
+
+renderExpenses();
+
+updateFinancialAssessment();
+
+}
+
+
+/* =========================================================
+   REMOVE INCOME
+========================================================= */
+
+function removeIncome(
+index
+){
+
+incomes.splice(
+index,
+1
+);
+
+
+renderIncomes();
+
+updateFinancialAssessment();
+
+}
+
+
+/* =========================================================
+   CLEAR EXPENSE FORM
+========================================================= */
+
+function clearExpenseForm(){
+
+document.getElementById(
+"expenseItem"
+).value = "";
+
+
+document.getElementById(
+"expenseUnit"
+).value = "";
+
+
+document.getElementById(
+"expensePrice"
+).value = "";
+
+
+document.getElementById(
+"expenseTotal"
+).value =
+"₱0.00";
+
+}
+
+
+/* =========================================================
+   CLEAR INCOME FORM
+========================================================= */
+
+function clearIncomeForm(){
+
+document.getElementById(
+"incomeItem"
+).value = "";
+
+
+document.getElementById(
+"incomeUnit"
+).value = "";
+
+
+document.getElementById(
+"incomePrice"
+).value = "";
+
+
+document.getElementById(
+"incomeTotal"
+).value =
+"₱0.00";
+
+}
+
+
+/* =========================================================
+   FINANCIAL ASSESSMENT
+========================================================= */
+
+function updateFinancialAssessment(){
+
+const expectedExpenses =
+expenses.reduce(
+function(sum,item){
+
+return sum +
+Number(
+item.total || 0
+);
+
+},
+0
+);
+
+
+const expectedIncome =
+incomes.reduce(
+function(sum,item){
+
+return sum +
+Number(
+item.total || 0
+);
+
+},
+0
+);
+
+
+const expectedEarnings =
+expectedIncome -
+expectedExpenses;
+
+
+document.getElementById(
+"expectedExpenses"
+).textContent =
+formatCurrency(
+expectedExpenses
+);
+
+
+document.getElementById(
+"expectedIncome"
+).textContent =
+formatCurrency(
+expectedIncome
+);
+
+
+document.getElementById(
+"expectedEarnings"
+).textContent =
+formatCurrency(
+expectedEarnings
+);
+
+
+const availableFund =
+Number(
+document.getElementById(
+"availableFund"
+).textContent
+.replace(/[₱,]/g,"")
+) || 0;
+
+
+const totalResources =
+availableFund +
+expectedIncome;
+
+
+const result =
+document.getElementById(
+"assessmentResult"
+);
+
+
+if(
+expectedExpenses === 0
+){
+
+result.className =
+"assessment-result review";
+
+
+result.innerHTML = `
+
+<div class="assessment-title">
+Awaiting Financial Assessment
+</div>
+
+<div class="assessment-description">
+Add proposed expenses to determine whether the event is financially feasible.
+</div>
+
+`;
+
+return;
+
+}
+
+
+if(
+totalResources >=
+expectedExpenses
+){
+
+const remaining =
+totalResources -
+expectedExpenses;
+
+
+result.className =
+"assessment-result feasible";
+
+
+result.innerHTML = `
+
+<div class="assessment-title">
+FINANCIALLY FEASIBLE
+</div>
+
+<div class="assessment-description">
+Available CAS FUND plus expected income can cover the proposed expenses.
+<br><br>
+<strong>
+Projected Remaining Funds:
+${formatCurrency(
+remaining
+)}
+</strong>
+</div>
+
+`;
+
+}
+else{
+
+const shortage =
+expectedExpenses -
+totalResources;
+
+
+result.className =
+"assessment-result not-feasible";
+
+
+result.innerHTML = `
+
+<div class="assessment-title">
+NOT FINANCIALLY FEASIBLE
+</div>
+
+<div class="assessment-description">
+The available CAS FUND plus expected income is insufficient to cover the proposed expenses.
+<br><br>
+<strong>
+Projected Shortfall:
+${formatCurrency(
+shortage
+)}
+</strong>
+</div>
+
+`;
+
+}
+
+}
+
+
+/* =========================================================
+   SAVE PRE-AUDIT
+========================================================= */
+
+async function savePreAudit(){
+
+if(!currentEvent){
+
+showToast(
+"Event information has not loaded yet.",
+"error"
+);
+
+return;
+
+}
+
+
+if(
+currentEvent.status !== "Planned"
+){
+
+showToast(
+"Only Planned events can proceed to Pre-Audit.",
+"error"
+);
+
+return;
+
+}
+
+
+if(
+expenses.length === 0
+){
+
+showToast(
+"Add at least one proposed expense.",
+"error"
+);
+
+return;
+
+}
+
+
+const expectedExpenses =
+expenses.reduce(
+function(sum,item){
+
+return sum +
+Number(
+item.total || 0
+);
+
+},
+0
+);
+
+
+const expectedIncome =
+incomes.reduce(
+function(sum,item){
+
+return sum +
+Number(
+item.total || 0
+);
+
+},
+0
+);
+
+
+const availableFund =
+Number(
+document.getElementById(
+"availableFund"
+).textContent
+.replace(/[₱,]/g,"")
+) || 0;
+
+
+const expectedEarnings =
+expectedIncome -
+expectedExpenses;
+
+
+const totalResources =
+availableFund +
+expectedIncome;
+
+
+const feasible =
+totalResources >=
+expectedExpenses;
+
+
+const payload = {
+
+eventId:
+currentEvent.id,
+
+eventName:
+currentEvent.name,
+
+eventDate:
+currentEvent.date,
+
+status:
+currentEvent.status,
+
+availableFund:
+availableFund,
+
+expectedIncome:
+expectedIncome,
+
+expectedExpenses:
+expectedExpenses,
+
+expectedEarnings:
+expectedEarnings,
+
+financiallyFeasible:
+feasible
+?
+"Financially Feasible"
+:
+"Not Financially Feasible",
+
+expenses:
+JSON.stringify(
+expenses
+),
+
+incomes:
+JSON.stringify(
+incomes
+)
+
+};
+
+
+const saveButton =
+document.getElementById(
+"saveButton"
+);
+
+
+try{
+
+saveButton.disabled =
+true;
+
+
+saveButton.textContent =
+"Saving...";
+
+
+showToast(
+"Saving Pre-Audit...",
+"success"
+);
+
+
+const result =
+await preAuditApi(
+"save",
+payload
+);
+
+
+if(
+!result ||
+result.success !== true
+){
+
+throw new Error(
+result &&
+result.message
+?
+result.message
+:
+"Unable to save Pre-Audit."
+);
+
+}
+
+
+showToast(
+"Pre-Audit saved successfully.",
+"success"
+);
+
+
+currentPreAudit = {
+preAuditId:
+result.preAuditId,
+
+eventId:
+result.eventId,
+
+auditStatus:
+"Saved"
+
+};
+
+
+/*
+ * Keep the page state exactly as
+ * it was saved.
+ */
+
+setTimeout(
+function(){
+
+saveButton.disabled =
+false;
+
+saveButton.textContent =
+"Save Pre-Audit";
+
+},
+500
+);
+
+
+}
+catch(error){
+
+console.error(error);
+
+
+showToast(
+error.message ||
+"Unable to save Pre-Audit.",
+"error"
+);
+
+
+saveButton.disabled =
+false;
+
+
+saveButton.textContent =
+"Save Pre-Audit";
+
+}
+
+}
+
+
+/* =========================================================
+   BACK TO EVENTS
+========================================================= */
+
+function goBackToEvents(){
+
+window.location.href =
+"events.html";
+
+}
+
+
+/* =========================================================
+   STATUS CLASS
+========================================================= */
+
+function getStatusClass(
+status
+){
+
+switch(
+String(status || "")
+){
+
+case "For Approval":
+return "status-approval";
+
+case "Approved":
+return "status-approved";
+
+case "Rejected":
+return "status-rejected";
+
+default:
+return "status-planned";
+
+}
+
+}
+
+
+/* =========================================================
+   DATE FORMAT
+========================================================= */
+
+function formatDisplayDate(
+value
+){
+
+if(!value){
+
+return "—";
+
+}
+
+
+const parts =
+String(value).split("-");
+
+
+if(
+parts.length !== 3
+){
+
+return value;
+
+}
+
+
+const year =
+Number(parts[0]);
+
+
+const month =
+Number(parts[1]) - 1;
+
+
+const day =
+Number(parts[2]);
+
+
+const date =
+new Date(
+year,
+month,
+day
+);
+
+
+return date.toLocaleDateString(
+"en-PH",
+{
+year:"numeric",
+month:"short",
+day:"numeric"
+}
+);
+
+}
+
+
+/* =========================================================
+   CURRENCY
+========================================================= */
+
+function formatCurrency(
+value
+){
+
+return "₱" +
+Number(
+value || 0
+).toLocaleString(
+"en-PH",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}
+);
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+value
+){
+
+return String(
+value ?? ""
+)
+
+.replace(
+/&/g,
+"&amp;"
+)
+
+.replace(
+/</g,
+"&lt;"
+)
+
+.replace(
+/>/g,
+"&gt;"
+)
+
+.replace(
+/"/g,
+"&quot;"
+)
+
+.replace(
+/'/g,
+"&#039;"
+);
+
+}
+
+
+/* =========================================================
+   EVENT ERROR
+========================================================= */
+
+function showEventError(
+message
+){
+
+document.getElementById(
+"eventDetailsContainer"
+).innerHTML = `
+
+<div class="empty">
+
+<div class="empty-title">
+Unable to load event
+</div>
+
+<div class="empty-text">
+${escapeHtml(
+message
+)}
+</div>
+
+</div>
+
+`;
+
+}
+
+
+/* =========================================================
+   PAGE LOADING
+========================================================= */
+
+function setLoadingText(
+message
+){
+
+const element =
+document.getElementById(
+"pageLoadingText"
+);
+
+
+if(element){
+
+element.textContent =
+message;
+
+}
+
+}
+
+
+function hidePageLoading(){
+
+const overlay =
+document.getElementById(
+"pageLoading"
+);
+
+
+if(overlay){
+
+overlay.classList.add(
+"hidden"
+);
+
+}
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer;
+
+
+function showToast(
+message,
+type="success"
+){
+
+const toast =
+document.getElementById(
+"toast"
+);
+
+
+toast.textContent =
+message;
+
+
+toast.className =
+"toast show " +
+type;
+
+
+clearTimeout(
+toastTimer
+);
+
+
+toastTimer =
+setTimeout(
+function(){
+
+toast.className =
+"toast";
+
+},
+3500
+);
+
+}
+
+</script>
+
+</body>
+
+</html>

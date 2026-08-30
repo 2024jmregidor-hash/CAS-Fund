@@ -1,0 +1,3553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CAS FUND | Event Transactions</title>
+
+<link
+  rel="icon"
+  href="https://mmclcassc.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png"
+>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f7f9fc;
+  color:#172033;
+  line-height:1.4;
+}
+
+button,
+input,
+select,
+textarea{
+  font-family:inherit;
+}
+
+.transaction-page{
+  width:100%;
+  max-width:1500px;
+  margin:0 auto;
+}
+
+/* HEADER */
+
+.transaction-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin-bottom:18px;
+}
+
+.transaction-heading{
+  min-width:0;
+}
+
+.transaction-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:22px;
+  font-weight:800;
+  color:#172033;
+}
+
+.transaction-icon{
+  width:36px;
+  height:36px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#eaf2ff;
+  color:#1769e0;
+  border-radius:9px;
+  font-size:17px;
+}
+
+.transaction-subtitle{
+  margin-top:4px;
+  font-size:13px;
+  color:#7b8494;
+}
+
+/* BUTTONS */
+
+.primary-btn{
+  border:none;
+  background:#1769e0;
+  color:#fff;
+  padding:10px 15px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  transition:background .15s ease,transform .1s ease;
+}
+
+.primary-btn:hover{
+  background:#1259c0;
+}
+
+.primary-btn:active{
+  transform:translateY(1px);
+}
+
+.primary-btn:disabled{
+  opacity:.65;
+  cursor:not-allowed;
+}
+
+/* SUMMARY */
+
+.summary{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.summary-card{
+  background:#fff;
+  border:1px solid #e4e8ef;
+  border-radius:10px;
+  padding:15px 17px;
+  min-width:0;
+}
+
+.summary-label{
+  font-size:11px;
+  font-weight:600;
+  color:#7b8494;
+  margin-bottom:6px;
+}
+
+.summary-value{
+  font-size:20px;
+  font-weight:800;
+  color:#172033;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* MAIN CARD */
+
+.card{
+  background:#fff;
+  border:1px solid #e4e8ef;
+  border-radius:11px;
+  overflow:hidden;
+}
+
+.card-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px 18px;
+  border-bottom:1px solid #e8ecf2;
+}
+
+.card-title{
+  font-size:15px;
+  font-weight:800;
+  color:#172033;
+}
+
+.card-count{
+  font-size:11px;
+  font-weight:600;
+  color:#7b8494;
+}
+
+/* TOOLBAR */
+
+.toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 18px;
+  background:#fbfcfe;
+  border-bottom:1px solid #edf0f4;
+}
+
+.toolbar-left{
+  flex:1;
+  min-width:0;
+}
+
+.search{
+  width:100%;
+  max-width:390px;
+}
+
+.search input{
+  width:100%;
+  border:1px solid #dce2ea;
+  border-radius:7px;
+  padding:9px 11px;
+  outline:none;
+  background:#fff;
+  font-size:12px;
+}
+
+.search input:focus{
+  border-color:#1769e0;
+}
+
+/* TABLE */
+
+.table-container{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1000px;
+}
+
+thead{
+  background:#f8fafc;
+}
+
+th{
+  padding:11px 14px;
+  text-align:left;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.35px;
+  color:#697386;
+  font-weight:700;
+  border-bottom:1px solid #e8ecf2;
+  white-space:nowrap;
+}
+
+td{
+  padding:12px 14px;
+  font-size:12px;
+  color:#334155;
+  border-bottom:1px solid #eef1f5;
+  vertical-align:middle;
+}
+
+tbody tr:hover{
+  background:#fafcff;
+}
+
+tbody tr:last-child td{
+  border-bottom:none;
+}
+
+.transaction-id{
+  color:#1769e0;
+  font-weight:700;
+  font-size:11px;
+  white-space:nowrap;
+}
+
+.amount{
+  font-weight:800;
+  color:#172033;
+  white-space:nowrap;
+}
+
+.income-amount{
+  color:#16803c;
+}
+
+.expense-amount{
+  color:#172033;
+}
+
+.payee-name{
+  font-weight:700;
+  color:#334155;
+}
+
+.reference-text{
+  color:#64748b;
+  white-space:nowrap;
+}
+
+/* TYPE */
+
+.type-badge{
+  display:inline-flex;
+  padding:4px 8px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:700;
+}
+
+.type-expense{
+  background:#fff1f1;
+  color:#b91c1c;
+}
+
+.type-income{
+  background:#e9f8ef;
+  color:#16803c;
+}
+
+/* ACTIONS */
+
+.actions{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  white-space:nowrap;
+}
+
+.action-btn{
+  border:1px solid #dce2ea;
+  background:#fff;
+  color:#475569;
+  padding:5px 8px;
+  border-radius:6px;
+  font-size:10px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.action-btn:hover{
+  background:#f5f7fa;
+}
+
+.delete-btn{
+  color:#c62828;
+}
+
+.delete-btn:hover{
+  background:#fff5f5;
+  border-color:#f0caca;
+}
+
+/* EMPTY */
+
+.empty{
+  text-align:center;
+  padding:55px 20px;
+  color:#7b8494;
+}
+
+.empty-icon{
+  width:42px;
+  height:42px;
+  margin:0 auto 12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#f1f4f8;
+  color:#94a3b8;
+  font-size:18px;
+}
+
+.empty-title{
+  font-size:14px;
+  font-weight:700;
+  color:#475569;
+  margin-bottom:4px;
+}
+
+.empty-text{
+  font-size:12px;
+}
+
+/* DATABASE LOADING */
+
+.database-loading{
+  display:none;
+  align-items:center;
+  gap:8px;
+  padding:9px 18px;
+  background:#f7fbff;
+  border-bottom:1px solid #dceafb;
+  color:#1769e0;
+  font-size:11px;
+  font-weight:700;
+}
+
+.database-loading.show{
+  display:flex;
+}
+
+.loading-dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#1769e0;
+  animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:.35}
+  50%{opacity:1}
+}
+
+/* DATABASE ERROR */
+
+.database-error{
+  display:none;
+  padding:10px 18px;
+  background:#fff5f5;
+  border-bottom:1px solid #f2caca;
+  color:#b91c1c;
+  font-size:11px;
+  font-weight:700;
+}
+
+.database-error.show{
+  display:block;
+}
+
+/* MODAL */
+
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.50);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:1000;
+}
+
+.overlay.show{
+  display:flex;
+}
+
+.modal{
+  width:100%;
+  max-width:650px;
+  background:#fff;
+  border-radius:13px;
+  overflow:hidden;
+  max-height:92vh;
+  overflow-y:auto;
+  box-shadow:0 20px 50px rgba(15,23,42,.18);
+}
+
+.modal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:17px 20px;
+  border-bottom:1px solid #e8ecf2;
+}
+
+.modal-title{
+  font-size:16px;
+  font-weight:800;
+}
+
+.close{
+  width:32px;
+  height:32px;
+  border:none;
+  border-radius:50%;
+  background:#f1f4f8;
+  color:#475569;
+  font-size:19px;
+  cursor:pointer;
+}
+
+.close:hover{
+  background:#e7ebf1;
+}
+
+.modal-body{
+  padding:20px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.form-group{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+label{
+  font-size:11px;
+  font-weight:700;
+  color:#475569;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid #dce2ea;
+  border-radius:7px;
+  padding:9px 10px;
+  outline:none;
+  background:#fff;
+  font-size:12px;
+  color:#172033;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#1769e0;
+  box-shadow:0 0 0 2px rgba(23,105,224,.08);
+}
+
+textarea{
+  min-height:75px;
+  resize:vertical;
+}
+
+/* EVENT */
+
+.event-loading{
+  color:#64748b;
+}
+
+.event-loading option{
+  color:#172033;
+}
+
+/* ALLOCATION */
+
+.allocation-panel{
+  display:none;
+  grid-column:1/-1;
+  background:#f7fbff;
+  border:1px solid #cfe0f8;
+  border-radius:9px;
+  padding:13px 14px;
+}
+
+.allocation-panel.show{
+  display:block;
+}
+
+.allocation-label{
+  font-size:10px;
+  font-weight:700;
+  color:#64748b;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  margin-bottom:4px;
+}
+
+.allocation-event{
+  font-size:12px;
+  font-weight:700;
+  color:#1769e0;
+  margin-bottom:10px;
+}
+
+.allocation-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.allocation-item{
+  background:#fff;
+  border:1px solid #e5edf7;
+  border-radius:7px;
+  padding:9px 10px;
+}
+
+.allocation-item-label{
+  font-size:9px;
+  color:#7b8494;
+  margin-bottom:3px;
+}
+
+.allocation-item-value{
+  font-size:13px;
+  font-weight:800;
+  color:#172033;
+}
+
+.allocation-item-value.remaining{
+  color:#16803c;
+}
+
+.allocation-item-value.warning{
+  color:#a16207;
+}
+
+.allocation-item-value.danger{
+  color:#b91c1c;
+}
+
+/* AMOUNT */
+
+.amount-preview{
+  margin-top:4px;
+  padding:10px 12px;
+  border-radius:7px;
+  background:#f8fafc;
+  border:1px solid #e8ecf2;
+}
+
+.amount-preview-label{
+  font-size:9px;
+  color:#7b8494;
+  text-transform:uppercase;
+  font-weight:700;
+  margin-bottom:2px;
+}
+
+.amount-preview-value{
+  font-size:17px;
+  font-weight:800;
+  color:#172033;
+}
+
+/* WARNING */
+
+.form-warning,
+.event-error{
+  display:none;
+  grid-column:1/-1;
+  padding:10px 12px;
+  border-radius:7px;
+  background:#fff5f5;
+  border:1px solid #f2caca;
+  color:#b91c1c;
+  font-size:11px;
+  font-weight:700;
+}
+
+.form-warning.show,
+.event-error.show{
+  display:block;
+}
+
+/* FOOTER */
+
+.modal-footer{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  padding:14px 20px;
+  border-top:1px solid #e8ecf2;
+  background:#fbfcfe;
+}
+
+.cancel-btn{
+  border:1px solid #dce2ea;
+  background:#fff;
+  color:#475569;
+  padding:9px 14px;
+  border-radius:7px;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.cancel-btn:hover{
+  background:#f5f7fa;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+  .summary{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:700px){
+  .transaction-page{
+    padding:16px 12px;
+  }
+
+  .transaction-header{
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .transaction-header .primary-btn{
+    width:100%;
+  }
+
+  .summary{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .toolbar{
+    align-items:stretch;
+    flex-direction:column;
+  }
+
+  .search{
+    max-width:none;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .allocation-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:450px){
+  .summary{
+    grid-template-columns:1fr;
+  }
+
+  .transaction-title{
+    font-size:19px;
+  }
+}
+
+.table-container::-webkit-scrollbar{
+  height:7px;
+}
+
+.table-container::-webkit-scrollbar-track{
+  background:#f1f4f8;
+}
+
+.table-container::-webkit-scrollbar-thumb{
+  background:#cbd3df;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<main class="transaction-page">
+
+<section class="transaction-header">
+  <div class="transaction-heading">
+    <div class="transaction-title">
+    </div>
+
+  </div>
+
+  <button
+    class="primary-btn"
+    id="recordButton"
+    onclick="openModal()"
+  >
+    + Record Transaction
+  </button>
+</section>
+
+
+<section class="summary">
+
+  <div class="summary-card">
+    <div class="summary-label">
+      Total Transactions
+    </div>
+
+    <div
+      class="summary-value"
+      id="totalTransactions"
+    >
+      0
+    </div>
+  </div>
+
+
+  <div class="summary-card">
+    <div class="summary-label">
+      Total Expenses
+    </div>
+
+    <div
+      class="summary-value"
+      id="totalExpenses"
+    >
+      ₱0.00
+    </div>
+  </div>
+
+
+  <div class="summary-card">
+    <div class="summary-label">
+      Total Income
+    </div>
+
+    <div
+      class="summary-value"
+      id="totalIncome"
+    >
+      ₱0.00
+    </div>
+  </div>
+
+
+  <div class="summary-card">
+    <div class="summary-label">
+      Net Event Movement
+    </div>
+
+    <div
+      class="summary-value"
+      id="netMovement"
+    >
+      ₱0.00
+    </div>
+  </div>
+
+</section>
+
+
+<section class="card">
+
+  <div class="card-header">
+
+    <div class="card-title">
+      Transaction Records
+    </div>
+
+    <div
+      class="card-count"
+      id="recordCount"
+    >
+      0 records
+    </div>
+
+  </div>
+
+
+  <div
+    class="database-loading"
+    id="databaseLoading"
+  >
+    <span class="loading-dot"></span>
+    Loading transactions from database...
+  </div>
+
+
+  <div
+    class="database-error"
+    id="databaseError"
+  ></div>
+
+
+  <div class="toolbar">
+
+    <div class="toolbar-left">
+
+      <div class="search">
+
+        <input
+          type="text"
+          id="search"
+          placeholder="Search transactions..."
+          oninput="renderTransactions()"
+        >
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="table-container">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Transaction ID</th>
+          <th>Date</th>
+          <th>Event</th>
+          <th>Type</th>
+          <th>Item</th>
+          <th>Unit</th>
+          <th>Qty</th>
+          <th>Unit Price</th>
+          <th>Amount</th>
+          <th>Payment Method</th>
+          <th>Reference</th>
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="transactionTable"></tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- TRANSACTION MODAL -->
+
+<div
+  class="overlay"
+  id="transactionModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div
+        class="modal-title"
+        id="modalTitle"
+      >
+        Record Transaction
+      </div>
+
+      <button
+        class="close"
+        onclick="closeModal()"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <form id="transactionForm">
+
+        <div class="form-grid">
+
+
+          <!-- EVENT -->
+
+          <div class="form-group full">
+
+            <label for="transactionEvent">
+              Event
+            </label>
+
+            <select
+              id="transactionEvent"
+              onchange="handleEventChange()"
+              required
+            >
+
+              <option value="GENERAL">
+                General
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div
+            class="event-error"
+            id="eventError"
+          >
+            Unable to load approved events from the Event Database.
+          </div>
+
+
+          <!-- ALLOCATION -->
+
+          <div
+            class="allocation-panel"
+            id="allocationPanel"
+          >
+
+            <div class="allocation-label">
+              Event Fund
+            </div>
+
+            <div
+              class="allocation-event"
+              id="allocationEventName"
+            >
+              —
+            </div>
+
+
+            <div class="allocation-grid">
+
+
+              <div class="allocation-item">
+
+                <div class="allocation-item-label">
+                  Expected Expenses
+                </div>
+
+                <div
+                  class="allocation-item-value"
+                  id="expectedExpenseValue"
+                >
+                  ₱0.00
+                </div>
+
+              </div>
+
+
+              <div class="allocation-item">
+
+                <div class="allocation-item-label">
+                  Recorded Expenses
+                </div>
+
+                <div
+                  class="allocation-item-value"
+                  id="recordedExpenseValue"
+                >
+                  ₱0.00
+                </div>
+
+              </div>
+
+
+              <div class="allocation-item">
+
+                <div class="allocation-item-label">
+                  Allocated Fund Remaining
+                </div>
+
+                <div
+                  class="allocation-item-value remaining"
+                  id="remainingExpenseValue"
+                >
+                  ₱0.00
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+          <!-- TYPE -->
+
+          <div class="form-group">
+
+            <label for="transactionType">
+              Transaction Type
+            </label>
+
+            <select
+              id="transactionType"
+              onchange="handleTransactionTypeChange()"
+              required
+            >
+
+              <option value="EXPENSE">
+                Expense
+              </option>
+
+              <option value="INCOME">
+                Income
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- DATE -->
+
+          <div class="form-group">
+
+            <label for="transactionDate">
+              Transaction Date
+            </label>
+
+            <input
+              type="date"
+              id="transactionDate"
+              required
+            >
+
+          </div>
+
+
+          <!-- ITEM -->
+
+          <div class="form-group full">
+
+            <label for="item">
+              Item
+            </label>
+
+            <input
+              type="text"
+              id="item"
+              placeholder="Enter item or transaction description"
+              required
+            >
+
+          </div>
+
+
+          <!-- UNIT -->
+
+          <div class="form-group">
+
+            <label for="unit">
+              Unit
+            </label>
+
+            <input
+              type="text"
+              id="unit"
+              placeholder="pcs, box, meal, lot..."
+              required
+            >
+
+          </div>
+
+
+          <!-- QUANTITY -->
+
+          <div class="form-group">
+
+            <label for="quantity">
+              Quantity
+            </label>
+
+            <input
+              type="number"
+              id="quantity"
+              min="0.01"
+              step="0.01"
+              value="1"
+              oninput="calculateAmount()"
+              required
+            >
+
+          </div>
+
+
+          <!-- UNIT PRICE -->
+
+          <div class="form-group">
+
+            <label for="unitPrice">
+              Price per Unit
+            </label>
+
+            <input
+              type="number"
+              id="unitPrice"
+              min="0"
+              step="0.01"
+              placeholder="0.00"
+              oninput="calculateAmount()"
+              required
+            >
+
+          </div>
+
+
+          <!-- AMOUNT -->
+
+          <div class="form-group">
+
+            <label>
+              Amount
+            </label>
+
+            <div class="amount-preview">
+
+              <div class="amount-preview-label">
+                Quantity × Price per Unit
+              </div>
+
+              <div
+                class="amount-preview-value"
+                id="amountPreview"
+              >
+                ₱0.00
+              </div>
+
+            </div>
+
+            <input
+              type="hidden"
+              id="amount"
+              value="0"
+            >
+
+          </div>
+
+
+          <!-- WARNING -->
+
+          <div
+            class="form-warning"
+            id="fundWarning"
+          >
+            This expense exceeds the remaining allocated fund for the selected event.
+          </div>
+
+
+          <!-- PAYMENT METHOD -->
+
+          <div class="form-group">
+
+            <label for="paymentMethod">
+              Payment Method
+            </label>
+
+            <select
+              id="paymentMethod"
+              required
+            >
+
+              <option value="">
+                Select payment method
+              </option>
+
+              <option value="Cash">
+                Cash
+              </option>
+
+              <option value="Bank Transfer">
+                Bank Transfer
+              </option>
+
+              <option value="GCash">
+                GCash
+              </option>
+
+              <option value="Other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <!-- REFERENCE -->
+
+          <div class="form-group">
+
+            <label for="reference">
+              Receipt / Reference No.
+            </label>
+
+            <input
+              type="text"
+              id="reference"
+              placeholder="Optional reference number"
+            >
+
+          </div>
+
+
+          <!-- REMARKS -->
+
+          <div class="form-group full">
+
+            <label for="remarks">
+              Remarks
+            </label>
+
+            <textarea
+              id="remarks"
+              placeholder="Optional remarks..."
+            ></textarea>
+
+          </div>
+
+
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="cancel-btn"
+        onclick="closeModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="primary-btn"
+        id="saveButton"
+        onclick="saveTransaction()"
+      >
+        Save Transaction
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   DATABASE CONFIGURATION
+========================================================= */
+
+const TRANSACTION_DATABASE_URL =
+  "https://script.google.com/macros/s/AKfycbx4OatrrXO4TAbTpG87mqTxGY9tn2s4rqXQ3y2NSL1DFwrRM7-OZJYeWDTHRWIqkQMFLg/exec";
+
+
+/* =========================================================
+   EVENT DATABASE CONFIGURATION
+========================================================= */
+
+const EVENT_DATABASE_URL =
+  "https://script.google.com/macros/s/AKfycbyqvQXIrBivAapKICFHPCLQHie6Dcnw84QBDbNfome16n2AF88Im8FtRntwaD93Ree8/exec";
+
+
+/* =========================================================
+   APPLICATION STATE
+========================================================= */
+
+let transactions = [];
+let approvedEvents = [];
+let editingId = null;
+let databaseBusy = false;
+
+
+/* =========================================================
+   CURRENT EVENT
+========================================================= */
+
+const urlParams =
+  new URLSearchParams(
+    window.location.search
+  );
+
+let currentEventId =
+  urlParams.get("eventId") || "";
+
+let currentEventName =
+  urlParams.get("eventName") || "";
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  async function(){
+
+    setToday();
+
+    await loadApprovedEvents();
+
+    await loadTransactionsFromDatabase();
+
+    renderTransactions();
+
+    updateSummary();
+
+  }
+);
+
+
+/* =========================================================
+   DATABASE LOADING STATE
+========================================================= */
+
+function setDatabaseLoading(loading){
+
+  databaseBusy = loading;
+
+  const element =
+    document.getElementById(
+      "databaseLoading"
+    );
+
+  if(!element){
+    return;
+  }
+
+  if(loading){
+
+    element.classList.add("show");
+
+  }
+  else{
+
+    element.classList.remove("show");
+
+  }
+
+}
+
+
+/* =========================================================
+   DATABASE ERROR
+========================================================= */
+
+function showDatabaseError(message){
+
+  const element =
+    document.getElementById(
+      "databaseError"
+    );
+
+  element.textContent =
+    message;
+
+  element.classList.add("show");
+
+}
+
+
+function hideDatabaseError(){
+
+  document
+    .getElementById("databaseError")
+    .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   LOAD TRANSACTIONS
+========================================================= */
+
+async function loadTransactionsFromDatabase(){
+
+  setDatabaseLoading(true);
+
+  hideDatabaseError();
+
+  try{
+
+    const requestUrl =
+      TRANSACTION_DATABASE_URL +
+      (
+        TRANSACTION_DATABASE_URL.includes("?")
+          ? "&"
+          : "?"
+      ) +
+      "action=getTransactions&_=" +
+      Date.now();
+
+
+    const response =
+      await fetch(
+        requestUrl,
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Transaction Database returned HTTP " +
+        response.status
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !data ||
+      data.success !== true
+    ){
+
+      throw new Error(
+        data && data.message
+          ? data.message
+          : "Invalid response from Transaction Database."
+      );
+
+    }
+
+
+    transactions =
+      Array.isArray(data.transactions)
+        ? data.transactions
+        : [];
+
+
+    console.log(
+      "Transactions loaded:",
+      transactions
+    );
+
+  }
+  catch(error){
+
+    console.error(
+      "Unable to load transactions:",
+      error
+    );
+
+    transactions = [];
+
+    showDatabaseError(
+      "Unable to load transactions from the Google Sheets database. " +
+      error.message
+    );
+
+  }
+  finally{
+
+    setDatabaseLoading(false);
+
+  }
+
+}
+
+
+/* =========================================================
+   IMPORTANT:
+   CENTRAL REFRESH FUNCTION
+
+   Every successful SAVE, EDIT, or DELETE
+   comes through this function.
+
+   Google Sheets is re-read first.
+   Then the table and all four cards
+   are recalculated from the fresh data.
+========================================================= */
+
+async function refreshTransactionData(){
+
+  console.log(
+    "Refreshing transaction data from database..."
+  );
+
+  await loadTransactionsFromDatabase();
+
+  renderTransactions();
+
+  updateSummary();
+
+
+  /* Refresh Event Fund allocation too */
+
+  const eventSelector =
+    document.getElementById(
+      "transactionEvent"
+    );
+
+
+  if(
+    eventSelector &&
+    eventSelector.value &&
+    eventSelector.value !== "GENERAL"
+  ){
+
+    updateAllocationDisplay();
+
+  }
+
+  console.log(
+    "Transaction data refreshed."
+  );
+
+}
+
+function notifyEventPageToRefresh(){
+  try{
+    window.parent.postMessage(
+      {
+        type:"CAS_FUND_TRANSACTION_UPDATED",
+        eventId:currentEventId
+      },
+      "*"
+    );
+  }
+  catch(error){
+    console.warn(
+      "Unable to notify Event HTML:",
+      error
+    );
+  }
+}
+
+/* =========================================================
+   LOAD APPROVED EVENTS
+========================================================= */
+
+async function loadApprovedEvents(){
+
+  approvedEvents = [];
+
+  const selector =
+    document.getElementById(
+      "transactionEvent"
+    );
+
+  const errorElement =
+    document.getElementById(
+      "eventError"
+    );
+
+
+  errorElement.classList.remove("show");
+
+  selector.innerHTML = "";
+
+
+  const generalOption =
+    document.createElement("option");
+
+  generalOption.value =
+    "GENERAL";
+
+  generalOption.textContent =
+    "General";
+
+  selector.appendChild(
+    generalOption
+  );
+
+
+  try{
+
+    const requestUrl =
+      EVENT_DATABASE_URL +
+      (
+        EVENT_DATABASE_URL.includes("?")
+          ? "&"
+          : "?"
+      ) +
+      "action=approved&_=" +
+      Date.now();
+
+
+    const response =
+      await fetch(
+        requestUrl,
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Event Database returned HTTP " +
+        response.status
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !data ||
+      data.success !== true
+    ){
+
+      throw new Error(
+        data && data.message
+          ? data.message
+          : "Event Database returned an invalid response."
+      );
+
+    }
+
+
+    if(!Array.isArray(data.events)){
+
+      throw new Error(
+        "No event list was returned."
+      );
+
+    }
+
+
+    approvedEvents =
+      data.events.filter(
+        function(event){
+
+          return (
+            String(
+              event.status || ""
+            )
+            .trim()
+            .toLowerCase() ===
+            "approved"
+          );
+
+        }
+      );
+
+
+    approvedEvents.forEach(
+      function(event){
+
+        const id =
+          String(
+            event.id ||
+            event.eventId ||
+            ""
+          ).trim();
+
+
+        const name =
+          String(
+            event.name ||
+            event.eventName ||
+            event.title ||
+            id
+          ).trim();
+
+
+        if(!id){
+          return;
+        }
+
+
+        const option =
+          document.createElement(
+            "option"
+          );
+
+
+        option.value =
+          id;
+
+        option.textContent =
+          name +
+          " (" +
+          id +
+          ")";
+
+
+        selector.appendChild(
+          option
+        );
+
+      }
+    );
+
+
+    if(currentEventId){
+
+      const matchingOption =
+        Array.from(
+          selector.options
+        ).find(
+          function(option){
+
+            return (
+              String(option.value) ===
+              String(currentEventId)
+            );
+
+          }
+        );
+
+
+      if(matchingOption){
+
+        selector.value =
+          currentEventId;
+
+        handleEventChange();
+
+      }
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      "Unable to load approved events:",
+      error
+    );
+
+
+    errorElement.textContent =
+      "Unable to load approved events from the Event Database. " +
+      "Check the deployed Web App URL and deployment access.";
+
+
+    errorElement.classList.add(
+      "show"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal(id = null){
+
+  editingId = id;
+
+  const modal =
+    document.getElementById(
+      "transactionModal"
+    );
+
+  const title =
+    document.getElementById(
+      "modalTitle"
+    );
+
+
+  if(id){
+
+    const transaction =
+      transactions.find(
+        function(item){
+
+          return (
+            String(item.id) ===
+            String(id)
+          );
+
+        }
+      );
+
+
+    if(!transaction){
+      return;
+    }
+
+
+    title.textContent =
+      "Edit Transaction";
+
+
+    fillForm(
+      transaction
+    );
+
+  }
+  else{
+
+    title.textContent =
+      "Record Transaction";
+
+
+    document
+      .getElementById(
+        "transactionForm"
+      )
+      .reset();
+
+
+    document.getElementById(
+      "transactionEvent"
+    ).value =
+      currentEventId ||
+      "GENERAL";
+
+
+    document.getElementById(
+      "transactionType"
+    ).value =
+      "EXPENSE";
+
+
+    document.getElementById(
+      "quantity"
+    ).value =
+      "1";
+
+
+    setToday();
+
+    handleEventChange();
+
+    calculateAmount();
+
+  }
+
+
+  modal.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+  document
+    .getElementById(
+      "transactionModal"
+    )
+    .classList.remove("show");
+
+
+  editingId = null;
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function setToday(){
+
+  if(editingId){
+    return;
+  }
+
+
+  const today =
+    new Date();
+
+
+  const year =
+    today.getFullYear();
+
+
+  const month =
+    String(
+      today.getMonth() + 1
+    ).padStart(2,"0");
+
+
+  const day =
+    String(
+      today.getDate()
+    ).padStart(2,"0");
+
+
+  document.getElementById(
+    "transactionDate"
+  ).value =
+    `${year}-${month}-${day}`;
+
+}
+
+
+/* =========================================================
+   FILL FORM
+========================================================= */
+
+function fillForm(transaction){
+
+  document.getElementById(
+    "transactionEvent"
+  ).value =
+    transaction.eventId ||
+    "GENERAL";
+
+
+  document.getElementById(
+    "transactionType"
+  ).value =
+    transaction.type ||
+    "EXPENSE";
+
+
+  document.getElementById(
+    "transactionDate"
+  ).value =
+    transaction.date ||
+    "";
+
+
+  document.getElementById(
+    "item"
+  ).value =
+    transaction.item ||
+    "";
+
+
+  document.getElementById(
+    "unit"
+  ).value =
+    transaction.unit ||
+    "";
+
+
+  document.getElementById(
+    "quantity"
+  ).value =
+    transaction.quantity ||
+    1;
+
+
+  document.getElementById(
+    "unitPrice"
+  ).value =
+    transaction.unitPrice ||
+    "";
+
+
+  document.getElementById(
+    "paymentMethod"
+  ).value =
+    transaction.paymentMethod ||
+    "";
+
+
+  document.getElementById(
+    "reference"
+  ).value =
+    transaction.reference ||
+    "";
+
+
+  document.getElementById(
+    "remarks"
+  ).value =
+    transaction.remarks ||
+    "";
+
+
+  calculateAmount();
+
+  handleEventChange();
+
+  handleTransactionTypeChange();
+
+}
+
+
+/* =========================================================
+   EVENT CHANGE
+========================================================= */
+
+function handleEventChange(){
+
+  const eventId =
+    document.getElementById(
+      "transactionEvent"
+    ).value;
+
+
+  const panel =
+    document.getElementById(
+      "allocationPanel"
+    );
+
+
+  if(
+    !eventId ||
+    eventId === "GENERAL"
+  ){
+
+    panel.classList.remove("show");
+
+    clearAllocationDisplay();
+
+    return;
+
+  }
+
+
+  panel.classList.add("show");
+
+  updateAllocationDisplay();
+
+}
+
+
+/* =========================================================
+   TRANSACTION TYPE
+========================================================= */
+
+function handleTransactionTypeChange(){
+
+  const type =
+    document.getElementById(
+      "transactionType"
+    ).value;
+
+
+  const panel =
+    document.getElementById(
+      "allocationPanel"
+    );
+
+
+  if(type === "EXPENSE"){
+
+    if(
+      document.getElementById(
+        "transactionEvent"
+      ).value !== "GENERAL"
+    ){
+
+      panel.classList.add("show");
+
+      updateAllocationDisplay();
+
+    }
+
+  }
+  else{
+
+    panel.classList.remove("show");
+
+    hideFundWarning();
+
+  }
+
+}
+
+
+/* =========================================================
+   GET EVENT
+========================================================= */
+
+function getEventById(eventId){
+
+  return (
+    approvedEvents.find(
+      function(event){
+
+        return (
+          String(
+            event.id ||
+            event.eventId ||
+            ""
+          ) ===
+          String(eventId)
+        );
+
+      }
+    ) || null
+  );
+
+}
+
+
+/* =========================================================
+   EXPECTED EXPENSE
+========================================================= */
+
+function getExpectedExpense(eventId){
+
+  const event =
+    getEventById(eventId);
+
+
+  if(!event){
+    return 0;
+  }
+
+
+  const value =
+    event.expectedExpenses;
+
+
+  if(
+    value !== undefined &&
+    value !== null &&
+    value !== ""
+  ){
+
+    const number =
+      Number(value);
+
+
+    if(!isNaN(number)){
+      return number;
+    }
+
+  }
+
+
+  const alternateValues = [
+    event.expectedExpense,
+    event.expected_expenses
+  ];
+
+
+  for(
+    const alternate of alternateValues
+  ){
+
+    if(
+      alternate !== undefined &&
+      alternate !== null &&
+      alternate !== ""
+    ){
+
+      const number =
+        Number(alternate);
+
+
+      if(!isNaN(number)){
+        return number;
+      }
+
+    }
+
+  }
+
+
+  return 0;
+
+}
+
+
+/* =========================================================
+   RECORDED EVENT EXPENSES
+========================================================= */
+
+function getRecordedEventExpenses(
+  eventId,
+  excludeId = null
+){
+
+  return transactions
+
+    .filter(
+      function(transaction){
+
+        return (
+          String(
+            transaction.eventId
+          ) ===
+          String(eventId) &&
+
+          String(
+            transaction.type
+          ).toUpperCase() ===
+          "EXPENSE" &&
+
+          String(
+            transaction.id
+          ) !==
+          String(excludeId)
+        );
+
+      }
+    )
+
+    .reduce(
+      function(total,transaction){
+
+        return (
+          total +
+          (
+            Number(
+              transaction.amount
+            ) || 0
+          )
+        );
+
+      },
+      0
+    );
+
+}
+
+
+/* =========================================================
+   REMAINING EVENT FUND
+========================================================= */
+
+function getRemainingEventFund(
+  eventId,
+  excludeId = null
+){
+
+  const expected =
+    getExpectedExpense(
+      eventId
+    );
+
+
+  const recorded =
+    getRecordedEventExpenses(
+      eventId,
+      excludeId
+    );
+
+
+  return Math.max(
+    0,
+    expected - recorded
+  );
+
+}
+
+
+/* =========================================================
+   ALLOCATION DISPLAY
+========================================================= */
+
+function updateAllocationDisplay(){
+
+  const eventId =
+    document.getElementById(
+      "transactionEvent"
+    ).value;
+
+
+  if(
+    !eventId ||
+    eventId === "GENERAL"
+  ){
+
+    clearAllocationDisplay();
+
+    return;
+
+  }
+
+
+  const event =
+    getEventById(eventId);
+
+
+  const eventName =
+    event
+      ? (
+          event.name ||
+          event.eventName ||
+          event.title ||
+          eventId
+        )
+      : eventId;
+
+
+  const expected =
+    getExpectedExpense(
+      eventId
+    );
+
+
+  const recorded =
+    getRecordedEventExpenses(
+      eventId,
+      editingId
+    );
+
+
+  const remaining =
+    Math.max(
+      0,
+      expected - recorded
+    );
+
+
+  document.getElementById(
+    "allocationEventName"
+  ).textContent =
+    eventName;
+
+
+  document.getElementById(
+    "expectedExpenseValue"
+  ).textContent =
+    formatCurrency(expected);
+
+
+  document.getElementById(
+    "recordedExpenseValue"
+  ).textContent =
+    formatCurrency(recorded);
+
+
+  const remainingElement =
+    document.getElementById(
+      "remainingExpenseValue"
+    );
+
+
+  remainingElement.textContent =
+    formatCurrency(remaining);
+
+
+  remainingElement.classList.remove(
+    "remaining",
+    "warning",
+    "danger"
+  );
+
+
+  if(remaining <= 0){
+
+    remainingElement.classList.add(
+      "danger"
+    );
+
+  }
+  else if(
+    expected > 0 &&
+    remaining <= expected * 0.20
+  ){
+
+    remainingElement.classList.add(
+      "warning"
+    );
+
+  }
+  else{
+
+    remainingElement.classList.add(
+      "remaining"
+    );
+
+  }
+
+
+  validateFund();
+
+}
+
+
+/* =========================================================
+   CLEAR ALLOCATION
+========================================================= */
+
+function clearAllocationDisplay(){
+
+  document.getElementById(
+    "allocationEventName"
+  ).textContent =
+    "—";
+
+
+  document.getElementById(
+    "expectedExpenseValue"
+  ).textContent =
+    "₱0.00";
+
+
+  document.getElementById(
+    "recordedExpenseValue"
+  ).textContent =
+    "₱0.00";
+
+
+  document.getElementById(
+    "remainingExpenseValue"
+  ).textContent =
+    "₱0.00";
+
+
+  hideFundWarning();
+
+}
+
+
+/* =========================================================
+   CALCULATE AMOUNT
+========================================================= */
+
+function calculateAmount(){
+
+  const quantity =
+    Number(
+      document.getElementById(
+        "quantity"
+      ).value
+    ) || 0;
+
+
+  const unitPrice =
+    Number(
+      document.getElementById(
+        "unitPrice"
+      ).value
+    ) || 0;
+
+
+  const amount =
+    quantity * unitPrice;
+
+
+  document.getElementById(
+    "amount"
+  ).value =
+    amount.toFixed(2);
+
+
+  document.getElementById(
+    "amountPreview"
+  ).textContent =
+    formatCurrency(amount);
+
+
+  validateFund();
+
+}
+
+
+/* =========================================================
+   FUND WARNING
+========================================================= */
+
+function validateFund(){
+
+  const warning =
+    document.getElementById(
+      "fundWarning"
+    );
+
+
+  const type =
+    document.getElementById(
+      "transactionType"
+    ).value;
+
+
+  const eventId =
+    document.getElementById(
+      "transactionEvent"
+    ).value;
+
+
+  if(
+    type !== "EXPENSE" ||
+    !eventId ||
+    eventId === "GENERAL"
+  ){
+
+    hideFundWarning();
+
+    return true;
+
+  }
+
+
+  const amount =
+    Number(
+      document.getElementById(
+        "amount"
+      ).value
+    ) || 0;
+
+
+  const remaining =
+    getRemainingEventFund(
+      eventId,
+      editingId
+    );
+
+
+  const expected =
+    getExpectedExpense(
+      eventId
+    );
+
+
+  if(
+    expected > 0 &&
+    amount > remaining
+  ){
+
+    warning.classList.add("show");
+
+    return false;
+
+  }
+
+
+  hideFundWarning();
+
+  return true;
+
+}
+
+
+function hideFundWarning(){
+
+  document
+    .getElementById(
+      "fundWarning"
+    )
+    .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   SAVE / UPDATE TRANSACTION
+========================================================= */
+
+async function saveTransaction(){
+
+  const form =
+    document.getElementById(
+      "transactionForm"
+    );
+
+
+  if(!form.reportValidity()){
+    return;
+  }
+
+
+  calculateAmount();
+
+
+  /*
+    Capture the editing state BEFORE anything
+    changes it.
+
+    This prevents the success message from
+    changing from "updated" to "saved".
+  */
+
+  const wasEditing =
+    editingId !== null;
+
+
+  const editingTransactionId =
+    editingId;
+
+
+  const eventId =
+    document.getElementById(
+      "transactionEvent"
+    ).value;
+
+
+  const event =
+    getEventById(eventId);
+
+
+  const eventName =
+    eventId === "GENERAL"
+      ? "General"
+      : (
+          event
+            ? (
+                event.name ||
+                event.eventName ||
+                event.title ||
+                eventId
+              )
+            : eventId
+        );
+
+
+  const transaction = {
+
+    id:
+      editingTransactionId ||
+      generateId(),
+
+    eventId:
+      eventId,
+
+    eventName:
+      eventName,
+
+    type:
+      document.getElementById(
+        "transactionType"
+      ).value,
+
+    date:
+      document.getElementById(
+        "transactionDate"
+      ).value,
+
+    item:
+      document.getElementById(
+        "item"
+      ).value.trim(),
+
+    unit:
+      document.getElementById(
+        "unit"
+      ).value.trim(),
+
+    quantity:
+      Number(
+        document.getElementById(
+          "quantity"
+        ).value
+      ),
+
+    unitPrice:
+      Number(
+        document.getElementById(
+          "unitPrice"
+        ).value
+      ),
+
+    amount:
+      Number(
+        document.getElementById(
+          "amount"
+        ).value
+      ),
+
+    paymentMethod:
+      document.getElementById(
+        "paymentMethod"
+      ).value,
+
+    reference:
+      document.getElementById(
+        "reference"
+      ).value.trim(),
+
+    remarks:
+      document.getElementById(
+        "remarks"
+      ).value.trim()
+
+  };
+
+
+  const saveButton =
+    document.getElementById(
+      "saveButton"
+    );
+
+
+  saveButton.disabled =
+    true;
+
+
+  saveButton.textContent =
+    wasEditing
+      ? "Updating..."
+      : "Saving...";
+
+
+  try{
+
+    const action =
+      wasEditing
+        ? "updateTransaction"
+        : "saveTransaction";
+
+
+    const response =
+      await fetch(
+        TRANSACTION_DATABASE_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify({
+              action:
+                action,
+
+              transaction:
+                transaction
+            })
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Transaction Database returned HTTP " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result && result.message
+          ? result.message
+          : "Transaction was not saved."
+      );
+
+    }
+
+
+    /*
+      IMPORTANT:
+
+      Do NOT manually modify the local
+      transactions array here.
+
+      Instead, close the modal and
+      reload the actual Google Sheet data.
+
+      This guarantees the four cards
+      represent the database state.
+    */
+
+closeModal();
+await refreshTransactionData();
+
+notifyEventPageToRefresh();
+
+alert(
+  wasEditing
+    ? "Transaction updated successfully."
+    : "Transaction saved successfully."
+);
+
+  }
+  catch(error){
+
+    console.error(
+      "Save transaction error:",
+      error
+    );
+
+
+    alert(
+      "Unable to save transaction.\n\n" +
+      error.message
+    );
+
+  }
+  finally{
+
+    saveButton.disabled =
+      false;
+
+    saveButton.textContent =
+      "Save Transaction";
+
+  }
+
+}
+
+
+/* =========================================================
+   GENERATE ID
+========================================================= */
+
+function generateId(){
+
+  return (
+    "ET-" +
+    Date.now()
+      .toString()
+      .slice(-8)
+  );
+
+}
+
+
+/* =========================================================
+   DELETE TRANSACTION
+========================================================= */
+
+async function deleteTransaction(id){
+
+  const transaction =
+    transactions.find(
+      function(item){
+
+        return (
+          String(item.id) ===
+          String(id)
+        );
+
+      }
+    );
+
+
+  if(!transaction){
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      "Delete transaction " +
+      transaction.id +
+      "?"
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  try{
+
+    setDatabaseLoading(true);
+
+
+    const response =
+      await fetch(
+        TRANSACTION_DATABASE_URL,
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "text/plain;charset=utf-8"
+          },
+
+          body:
+            JSON.stringify({
+              action:
+                "deleteTransaction",
+
+              id:
+                transaction.id
+            })
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Transaction Database returned HTTP " +
+        response.status
+      );
+
+    }
+
+
+    const result =
+      await response.json();
+
+
+    if(
+      !result ||
+      result.success !== true
+    ){
+
+      throw new Error(
+        result && result.message
+          ? result.message
+          : "Transaction was not deleted."
+      );
+
+    }
+
+
+    /*
+      IMPORTANT:
+
+      Reload the actual database,
+      then recalculate the cards,
+      table, and event fund.
+    */
+
+await refreshTransactionData();
+
+notifyEventPageToRefresh();
+
+alert(
+  "Transaction deleted successfully."
+);
+
+  }
+  catch(error){
+
+    console.error(
+      "Delete transaction error:",
+      error
+    );
+
+
+    alert(
+      "Unable to delete transaction.\n\n" +
+      error.message
+    );
+
+  }
+  finally{
+
+    setDatabaseLoading(false);
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER TRANSACTIONS
+========================================================= */
+
+function renderTransactions(){
+
+  const table =
+    document.getElementById(
+      "transactionTable"
+    );
+
+
+  const search =
+    document.getElementById(
+      "search"
+    )
+    .value
+    .toLowerCase()
+    .trim();
+
+
+  const eventTransactions =
+    currentEventId
+
+      ? transactions.filter(
+          function(transaction){
+
+            return (
+              String(
+                transaction.eventId
+              ) ===
+              String(
+                currentEventId
+              )
+            );
+
+          }
+        )
+
+      : transactions;
+
+
+  const filtered =
+    eventTransactions.filter(
+      function(transaction){
+
+        const text = [
+
+          transaction.id,
+          transaction.eventName,
+          transaction.item,
+          transaction.unit,
+          transaction.type,
+          transaction.paymentMethod,
+          transaction.reference,
+          transaction.remarks
+
+        ]
+        .join(" ")
+        .toLowerCase();
+
+
+        return (
+          !search ||
+          text.includes(search)
+        );
+
+      }
+    );
+
+
+  const countElement =
+    document.getElementById(
+      "recordCount"
+    );
+
+
+  countElement.textContent =
+    filtered.length === 1
+      ? "1 record"
+      : `${filtered.length} records`;
+
+
+  if(!filtered.length){
+
+    table.innerHTML = `
+
+      <tr>
+
+        <td colspan="12">
+
+          <div class="empty">
+
+            <div class="empty-icon">
+              ₱
+            </div>
+
+            <div class="empty-title">
+              No transaction records
+            </div>
+
+            <div class="empty-text">
+              Click "+ Record Transaction"
+              to add a transaction.
+            </div>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  table.innerHTML =
+    filtered
+      .map(
+        function(transaction){
+
+          return createRow(
+            transaction
+          );
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =========================================================
+   CREATE ROW
+========================================================= */
+
+function createRow(transaction){
+
+  const typeClass =
+    transaction.type === "INCOME"
+      ? "type-income"
+      : "type-expense";
+
+
+  const amountClass =
+    transaction.type === "INCOME"
+      ? "income-amount"
+      : "expense-amount";
+
+
+  return `
+
+    <tr>
+
+      <td>
+        <span class="transaction-id">
+          ${escapeHtml(transaction.id)}
+        </span>
+      </td>
+
+
+      <td>
+        ${formatDate(transaction.date)}
+      </td>
+
+
+      <td>
+        <span class="payee-name">
+          ${escapeHtml(
+            transaction.eventName ||
+            "General"
+          )}
+        </span>
+      </td>
+
+
+      <td>
+        <span
+          class="type-badge ${typeClass}"
+        >
+          ${escapeHtml(
+            transaction.type ||
+            "EXPENSE"
+          )}
+        </span>
+      </td>
+
+
+      <td>
+        ${escapeHtml(
+          transaction.item ||
+          "—"
+        )}
+      </td>
+
+
+      <td>
+        ${escapeHtml(
+          transaction.unit ||
+          "—"
+        )}
+      </td>
+
+
+      <td>
+        ${Number(
+          transaction.quantity || 0
+        ).toLocaleString(
+          "en-PH",
+          {
+            maximumFractionDigits:2
+          }
+        )}
+      </td>
+
+
+      <td class="amount">
+        ${formatCurrency(
+          transaction.unitPrice
+        )}
+      </td>
+
+
+      <td class="amount ${amountClass}">
+        ${formatCurrency(
+          transaction.amount
+        )}
+      </td>
+
+
+      <td>
+        ${escapeHtml(
+          transaction.paymentMethod ||
+          "—"
+        )}
+      </td>
+
+
+      <td>
+        <span class="reference-text">
+          ${escapeHtml(
+            transaction.reference ||
+            "—"
+          )}
+        </span>
+      </td>
+
+
+      <td>
+
+        <div class="actions">
+
+          <button
+            class="action-btn"
+            onclick="openModal('${escapeJs(transaction.id)}')"
+          >
+            Edit
+          </button>
+
+
+          <button
+            class="action-btn delete-btn"
+            onclick="deleteTransaction('${escapeJs(transaction.id)}')"
+          >
+            Delete
+          </button>
+
+        </div>
+
+      </td>
+
+    </tr>
+
+  `;
+
+}
+
+
+/* =========================================================
+   SUMMARY
+
+   These four values ALWAYS calculate from the
+   current `transactions` array.
+
+   refreshTransactionData() reloads that array
+   from Google Sheets after every mutation.
+========================================================= */
+
+function updateSummary(){
+
+  const eventTransactions =
+    currentEventId
+
+      ? transactions.filter(
+          function(item){
+
+            return (
+              String(
+                item.eventId
+              ) ===
+              String(
+                currentEventId
+              )
+            );
+
+          }
+        )
+
+      : transactions;
+
+
+  const expenses =
+    eventTransactions
+      .filter(
+        function(item){
+
+          return (
+            String(
+              item.type
+            ).toUpperCase() ===
+            "EXPENSE"
+          );
+
+        }
+      )
+      .reduce(
+        function(sum,item){
+
+          return (
+            sum +
+            (
+              Number(
+                item.amount
+              ) || 0
+            )
+          );
+
+        },
+        0
+      );
+
+
+  const income =
+    eventTransactions
+      .filter(
+        function(item){
+
+          return (
+            String(
+              item.type
+            ).toUpperCase() ===
+            "INCOME"
+          );
+
+        }
+      )
+      .reduce(
+        function(sum,item){
+
+          return (
+            sum +
+            (
+              Number(
+                item.amount
+              ) || 0
+            )
+          );
+
+        },
+        0
+      );
+
+
+  const netMovement =
+    income - expenses;
+
+
+  document.getElementById(
+    "totalTransactions"
+  ).textContent =
+    eventTransactions.length;
+
+
+  document.getElementById(
+    "totalExpenses"
+  ).textContent =
+    formatCurrency(expenses);
+
+
+  document.getElementById(
+    "totalIncome"
+  ).textContent =
+    formatCurrency(income);
+
+
+  document.getElementById(
+    "netMovement"
+  ).textContent =
+    formatCurrency(netMovement);
+
+}
+
+
+/* =========================================================
+   CURRENCY
+========================================================= */
+
+function formatCurrency(amount){
+
+  return new Intl.NumberFormat(
+    "en-PH",
+    {
+      style:"currency",
+      currency:"PHP",
+      minimumFractionDigits:2
+    }
+  ).format(
+    Number(amount) || 0
+  );
+
+}
+
+
+/* =========================================================
+   DATE FORMAT
+========================================================= */
+
+function formatDate(date){
+
+  if(!date){
+    return "—";
+  }
+
+
+  const d =
+    new Date(
+      date +
+      "T00:00:00"
+    );
+
+
+  if(isNaN(d)){
+    return date;
+  }
+
+
+  return d.toLocaleDateString(
+    "en-PH",
+    {
+      year:"numeric",
+      month:"short",
+      day:"numeric"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   SECURITY
+========================================================= */
+
+function escapeHtml(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeJs(value){
+
+  return String(
+    value ?? ""
+  )
+  .replace(/\\/g,"\\\\")
+  .replace(/'/g,"\\'")
+  .replace(/"/g,'\\"')
+  .replace(/\r/g,"\\r")
+  .replace(/\n/g,"\\n");
+
+}
+
+
+/* =========================================================
+   CLOSE OUTSIDE MODAL
+========================================================= */
+
+document
+  .getElementById(
+    "transactionModal"
+  )
+  .addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target === this
+      ){
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      event.key === "Escape"
+    ){
+
+      closeModal();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>

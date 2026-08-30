@@ -1,0 +1,5748 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1.0"
+>
+
+<title>CAS FUND | Events</title>
+
+<link
+    rel="icon"
+    href="https://mmclcassc.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png"
+>
+
+<style>
+
+/* =========================================================
+   CAS FUND — EVENTS
+   NATIVE EVENT WORKSPACE
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        Inter,
+        Segoe UI,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:#f3f6fa;
+    color:#172033;
+
+    line-height:1.45;
+
+    -webkit-font-smoothing:antialiased;
+}
+
+button,
+input,
+select,
+textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+    width:100%;
+    max-width:1440px;
+    margin:auto;
+    padding:24px 28px 30px;
+}
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:20px;
+}
+
+.toolbar-title{
+    font-size:22px;
+    font-weight:800;
+}
+
+.toolbar-subtitle{
+    font-size:12px;
+    color:#7b8798;
+    margin-top:4px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+    border:0;
+    border-radius:9px;
+
+    padding:10px 16px;
+
+    font-size:11px;
+    font-weight:800;
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        background .18s ease;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn:active{
+    transform:translateY(0);
+}
+
+.btn:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+    box-shadow:none;
+}
+
+.btn-primary{
+    background:#0b5ed7;
+    color:#fff;
+
+    box-shadow:
+        0 5px 14px rgba(11,94,215,.18);
+}
+
+.btn-primary:hover{
+    background:#094db1;
+
+    box-shadow:
+        0 7px 18px rgba(11,94,215,.25);
+}
+
+.btn-secondary{
+    background:#6c757d;
+    color:#fff;
+}
+
+.btn-danger{
+    background:#dc3545;
+    color:#fff;
+}
+
+.btn-danger:hover{
+    background:#bb2d3b;
+}
+
+.btn-light{
+    background:#fff;
+    color:#344054;
+
+    border:1px solid #dfe5ec;
+}
+
+.btn-light:hover{
+    background:#f6f8fb;
+    border-color:#cfd7e2;
+}
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.summary{
+    display:grid;
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:14px;
+
+    margin-bottom:20px;
+}
+
+.summary-card{
+    position:relative;
+
+    background:#fff;
+
+    border:1px solid #e1e7ee;
+    border-radius:14px;
+
+    padding:18px 19px;
+
+    min-height:125px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 3px 14px rgba(20,40,70,.045);
+
+    transition:
+        transform .18s ease,
+        box-shadow .18s ease;
+}
+
+.summary-card:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 9px 25px rgba(20,40,70,.08);
+}
+
+.summary-card::after{
+    content:"";
+
+    position:absolute;
+
+    width:85px;
+    height:85px;
+
+    right:-28px;
+    bottom:-30px;
+
+    border-radius:50%;
+
+    background:
+        rgba(11,94,215,.035);
+}
+
+.summary-card.collection-card{
+    border-left:4px solid #198754;
+}
+
+.summary-card.expense-card{
+    border-left:4px solid #dc3545;
+}
+
+.summary-card.available-card{
+    border-left:4px solid #0b5ed7;
+}
+
+.summary-card.approved-card{
+    border-left:4px solid #6f42c1;
+}
+
+.summary-label{
+    font-size:9px;
+    font-weight:800;
+
+    text-transform:uppercase;
+    letter-spacing:.8px;
+
+    color:#778294;
+}
+
+.summary-value{
+    font-size:24px;
+    font-weight:800;
+
+    letter-spacing:-.4px;
+
+    margin-top:7px;
+
+    position:relative;
+    z-index:1;
+}
+
+.collection-value{
+    color:#198754;
+}
+
+.expense-value{
+    color:#dc3545;
+}
+
+.available-value{
+    color:#0b5ed7;
+}
+
+.approved-value{
+    color:#6f42c1;
+}
+
+.summary-note{
+    font-size:10px;
+    color:#8993a2;
+    margin-top:5px;
+}
+
+.summary-loading{
+    font-size:13px;
+    font-weight:600;
+    color:#9aa4b2;
+}
+
+/* =========================================================
+   WORKSPACE
+========================================================= */
+
+.workspace{
+    background:#fff;
+
+    border:1px solid #e1e7ee;
+    border-radius:15px;
+
+    box-shadow:
+        0 3px 14px rgba(20,40,70,.045);
+
+    overflow:hidden;
+}
+
+/* =========================================================
+   WORKSPACE HEADER
+========================================================= */
+
+.workspace-header{
+    padding:19px 22px;
+
+    border-bottom:1px solid #edf0f4;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    background:#fff;
+}
+
+.workspace-header-left{
+    min-width:0;
+}
+
+.workspace-title{
+    font-size:17px;
+    font-weight:800;
+}
+
+.workspace-subtitle{
+    font-size:11px;
+    color:#7b8594;
+    margin-top:3px;
+}
+
+/* =========================================================
+   NATIVE WORKSPACE NAVIGATION
+========================================================= */
+
+.workspace-nav{
+    display:flex;
+    align-items:center;
+
+    gap:4px;
+
+    padding:0 22px;
+
+    border-bottom:1px solid #edf0f4;
+
+    background:#fff;
+
+    overflow-x:auto;
+}
+
+.workspace-nav button{
+    position:relative;
+
+    border:0;
+    background:transparent;
+
+    color:#7b8594;
+
+    padding:13px 16px;
+
+    font-size:10px;
+    font-weight:800;
+
+    white-space:nowrap;
+}
+
+.workspace-nav button:hover{
+    color:#0b5ed7;
+    background:#f7f9fc;
+}
+
+.workspace-nav button.active{
+    color:#0b5ed7;
+}
+
+.workspace-nav button.active::after{
+    content:"";
+
+    position:absolute;
+
+    left:10px;
+    right:10px;
+
+    bottom:-1px;
+
+    height:3px;
+
+    border-radius:
+        3px 3px 0 0;
+
+    background:#0b5ed7;
+}
+
+/* =========================================================
+   VIEW
+========================================================= */
+
+.workspace-view{
+    display:none;
+}
+
+.workspace-view.active{
+    display:block;
+}
+
+/* =========================================================
+   EVENTS VIEW
+========================================================= */
+
+.search-box{
+    padding:14px 22px;
+
+    border-bottom:1px solid #edf0f4;
+
+    background:#fafbfd;
+}
+
+.search-box input{
+    width:100%;
+
+    height:40px;
+
+    border:1px solid #d9e0e8;
+    border-radius:8px;
+
+    padding:0 12px;
+
+    font-size:11px;
+
+    outline:none;
+
+    background:#fff;
+    color:#172033;
+}
+
+.search-box input:focus{
+    border-color:#0b5ed7;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(11,94,215,.08);
+}
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#f7f9fc;
+
+    font-size:9px;
+    font-weight:800;
+
+    text-transform:uppercase;
+    letter-spacing:.55px;
+
+    color:#697486;
+
+    text-align:left;
+
+    padding:12px 13px;
+
+    border-bottom:1px solid #e2e7ed;
+
+    white-space:nowrap;
+}
+
+td{
+    font-size:11px;
+
+    padding:14px 13px;
+
+    border-bottom:1px solid #edf0f4;
+
+    vertical-align:middle;
+}
+
+tbody tr{
+    transition:background .15s ease;
+}
+
+tbody tr:hover{
+    background:#fafcff;
+}
+
+tr:last-child td{
+    border-bottom:0;
+}
+
+.event-id{
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:.35px;
+
+    color:#8b95a4;
+
+    margin-bottom:2px;
+}
+
+.event-name{
+    font-size:11px;
+    font-weight:800;
+
+    color:#172033;
+}
+
+.event-location{
+    color:#697486;
+    font-size:10px;
+}
+
+.date-cell{
+    white-space:nowrap;
+
+    color:#445166;
+    font-weight:600;
+}
+
+.participants{
+    text-align:center;
+
+    font-weight:700;
+
+    color:#3e4b5e;
+}
+
+/* =========================================================
+   EXPENSE
+========================================================= */
+
+.expense-cell{
+    white-space:nowrap;
+
+    font-weight:800;
+
+    font-size:10px;
+}
+
+.expense-cell.loading{
+    color:#9aa4b2;
+    font-weight:500;
+}
+
+.expense-cell.has-expense{
+    color:#dc3545;
+}
+
+.expense-cell.no-expense{
+    color:#8993a2;
+    font-weight:500;
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status{
+    display:inline-flex;
+
+    align-items:center;
+    gap:5px;
+
+    padding:5px 9px;
+
+    border-radius:20px;
+
+    font-size:8px;
+    font-weight:800;
+
+    white-space:nowrap;
+}
+
+.status::before{
+    content:"";
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:currentColor;
+}
+
+.status-planned{
+    background:#e9f2ff;
+    color:#0b5ed7;
+}
+
+.status-approval{
+    background:#fff4d6;
+    color:#9a6900;
+}
+
+.status-approved{
+    background:#e7f7ee;
+    color:#198754;
+}
+
+.status-completed{
+    background:#dff6ea;
+    color:#087f5b;
+}
+
+.status-rejected{
+    background:#fdeaea;
+    color:#dc3545;
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.actions{
+    display:flex;
+
+    gap:5px;
+
+    white-space:nowrap;
+}
+
+.action-btn{
+    border:0;
+
+    border-radius:7px;
+
+    padding:6px 9px;
+
+    font-size:8px;
+    font-weight:800;
+
+    transition:
+        background .15s ease,
+        transform .15s ease;
+}
+
+.action-btn:hover{
+    transform:translateY(-1px);
+}
+
+.action-preaudit{
+    background:#e7f7ee;
+    color:#198754;
+}
+
+.action-preaudit:hover{
+    background:#d3f0df;
+}
+
+.action-postaudit{
+    background:#f0e9ff;
+    color:#6f42c1;
+}
+
+.action-postaudit:hover{
+    background:#e3d7ff;
+}
+
+.action-transaction{
+    background:#e9f2ff;
+    color:#0b5ed7;
+}
+
+.action-transaction:hover{
+    background:#d9e8ff;
+}
+
+.action-edit{
+    background:#f2f4f7;
+    color:#344054;
+}
+
+.action-edit:hover{
+    background:#e4e7ec;
+}
+
+.action-delete{
+    background:#fdeaea;
+    color:#dc3545;
+}
+
+.action-delete:hover{
+    background:#f9d8da;
+}
+
+/* =========================================================
+   EMBEDDED TRANSACTION VIEW
+========================================================= */
+
+.embedded-header{
+    padding:16px 22px;
+
+    background:#fafbfd;
+
+    border-bottom:1px solid #edf0f4;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.embedded-header-left{
+    display:flex;
+    align-items:center;
+    gap:11px;
+
+    min-width:0;
+}
+
+.embedded-icon{
+    width:36px;
+    height:36px;
+
+    border-radius:9px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#e9f2ff;
+    color:#0b5ed7;
+
+    font-size:16px;
+
+    flex:none;
+}
+
+.embedded-title{
+    font-size:13px;
+    font-weight:800;
+}
+
+.embedded-description{
+    font-size:10px;
+    color:#7b8594;
+    margin-top:2px;
+}
+
+/* =========================================================
+   EMBEDDED FRAME
+========================================================= */
+
+.embedded-frame{
+    width:100%;
+
+    height:850px;
+
+    min-height:850px;
+
+    border:0;
+
+    display:block;
+
+    background:#f3f6fa;
+}
+
+/* =========================================================
+   INTERNAL EVENT DETAIL
+========================================================= */
+
+.detail-shell{
+    padding:22px;
+    background:#f3f6fa;
+}
+
+.detail-card{
+    background:#fff;
+
+    border:1px solid #e1e7ee;
+
+    border-radius:13px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 3px 14px rgba(20,40,70,.04);
+}
+
+.detail-card-header{
+    padding:18px 20px;
+
+    border-bottom:1px solid #edf0f4;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.detail-event-id{
+    font-size:9px;
+    font-weight:800;
+    color:#8993a2;
+}
+
+.detail-event-name{
+    font-size:18px;
+    font-weight:800;
+    margin-top:3px;
+}
+
+.detail-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:1px;
+
+    background:#edf0f4;
+}
+
+.detail-item{
+    background:#fff;
+    padding:15px 18px;
+}
+
+.detail-label{
+    font-size:8px;
+    font-weight:800;
+
+    text-transform:uppercase;
+    letter-spacing:.6px;
+
+    color:#8993a2;
+}
+
+.detail-value{
+    margin-top:5px;
+
+    font-size:11px;
+    font-weight:700;
+
+    color:#344054;
+}
+
+/* =========================================================
+   EVENT DETAIL FINANCE
+========================================================= */
+
+.finance-strip{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:12px;
+
+    padding:16px 18px;
+
+    background:#fafbfd;
+
+    border-top:1px solid #edf0f4;
+}
+
+.finance-item{
+    background:#fff;
+
+    border:1px solid #e5e9ef;
+
+    border-radius:9px;
+
+    padding:13px;
+}
+
+.finance-label{
+    font-size:8px;
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    color:#8993a2;
+}
+
+.finance-value{
+    font-size:16px;
+    font-weight:800;
+
+    margin-top:4px;
+}
+
+/* =========================================================
+   EMPTY / LOADING
+========================================================= */
+
+.empty{
+    text-align:center;
+
+    padding:60px 20px;
+
+    color:#7b8594;
+}
+
+.empty-icon{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.empty-title{
+    font-size:14px;
+    font-weight:800;
+    color:#172033;
+}
+
+.empty-text{
+    font-size:10px;
+    margin-top:5px;
+    color:#8993a2;
+}
+
+.loading{
+    text-align:center;
+
+    padding:42px;
+
+    color:#697486;
+
+    font-size:11px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-backdrop{
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(10,20,35,.58);
+
+    backdrop-filter:blur(3px);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+
+    z-index:1000;
+}
+
+.modal-backdrop.show{
+    display:flex;
+}
+
+.modal{
+    background:#fff;
+
+    width:100%;
+    max-width:560px;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.27);
+
+    overflow:hidden;
+
+    animation:
+        modalIn .18s ease-out;
+}
+
+@keyframes modalIn{
+
+    from{
+        opacity:0;
+        transform:
+            translateY(8px)
+            scale(.985);
+    }
+
+    to{
+        opacity:1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+.modal-header{
+    padding:18px 22px;
+
+    border-bottom:1px solid #edf0f4;
+
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    background:#fafbfd;
+}
+
+.modal-header h2{
+    font-size:17px;
+    font-weight:800;
+}
+
+.modal-close{
+    width:32px;
+    height:32px;
+
+    border:0;
+    border-radius:8px;
+
+    background:transparent;
+
+    font-size:22px;
+
+    color:#697486;
+}
+
+.modal-close:hover{
+    background:#edf1f5;
+    color:#172033;
+}
+
+.modal-body{
+    padding:22px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group label{
+    display:block;
+
+    font-size:9px;
+    font-weight:800;
+
+    letter-spacing:.55px;
+
+    color:#596476;
+
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+
+    height:40px;
+
+    border:1px solid #d9e0e8;
+
+    border-radius:8px;
+
+    padding:0 12px;
+
+    font-size:11px;
+
+    outline:none;
+
+    background:#fff;
+
+    color:#172033;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:#0b5ed7;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(11,94,215,.08);
+}
+
+.form-row{
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:14px;
+}
+
+.modal-footer{
+    padding:15px 22px;
+
+    border-top:1px solid #edf0f4;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    background:#fafbfd;
+}
+
+.modal-footer-left,
+.modal-footer-right{
+    display:flex;
+    gap:8px;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+
+    right:22px;
+    bottom:22px;
+
+    background:#172033;
+
+    color:#fff;
+
+    padding:12px 16px;
+
+    border-radius:9px;
+
+    font-size:10px;
+    font-weight:700;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,.22);
+
+    opacity:0;
+
+    transform:
+        translateY(10px);
+
+    pointer-events:none;
+
+    transition:.25s;
+
+    z-index:2000;
+}
+
+.toast.show{
+    opacity:1;
+
+    transform:
+        translateY(0);
+}
+
+.toast.success{
+    background:#198754;
+}
+
+.toast.error{
+    background:#dc3545;
+}
+
+/* =========================================================
+   HIDDEN
+========================================================= */
+
+.hidden{
+    display:none !important;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px){
+
+    .summary{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .detail-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .container{
+        padding:
+            18px 16px 25px;
+    }
+
+    .toolbar{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .toolbar .btn{
+        width:100%;
+    }
+
+    .summary{
+        grid-template-columns:1fr;
+    }
+
+    .workspace-header{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
+    .detail-grid{
+        grid-template-columns:1fr;
+    }
+
+    .finance-strip{
+        grid-template-columns:1fr;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+    .actions{
+        flex-wrap:wrap;
+    }
+
+    .embedded-frame{
+        height:900px;
+        min-height:900px;
+    }
+
+}
+
+@media(max-width:450px){
+
+    .container{
+        padding:
+            17px 12px 25px;
+    }
+
+    .toolbar-title{
+        font-size:20px;
+    }
+
+    .workspace-nav{
+        padding:0 12px;
+    }
+
+    .workspace-nav button{
+        padding:
+            12px 13px;
+    }
+
+    .search-box{
+        padding:
+            13px 16px;
+    }
+
+    .detail-shell{
+        padding:14px;
+    }
+
+    .modal-body{
+        padding:18px;
+    }
+
+    .modal-footer{
+        padding:
+            14px 18px;
+    }
+
+    .modal-footer-left,
+    .modal-footer-right{
+        flex-wrap:wrap;
+    }
+
+    .toast{
+        left:15px;
+        right:15px;
+        bottom:15px;
+    }
+
+}
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+    body{
+        background:#fff;
+    }
+
+    .toolbar,
+    .workspace-nav,
+    .search-box,
+    .actions,
+    .modal-backdrop{
+        display:none !important;
+    }
+
+    .container{
+        max-width:none;
+        padding:10px;
+    }
+
+    .workspace,
+    .summary-card{
+        box-shadow:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<main class="container">
+
+<!-- =======================================================
+     TOOLBAR
+======================================================= -->
+
+<div class="toolbar">
+
+    <div></div>
+
+    <button
+        class="btn btn-primary"
+        onclick="openPlanModal()"
+    >
+        + PLAN EVENT
+    </button>
+
+</div>
+
+
+<!-- =======================================================
+     FINANCIAL SUMMARY
+======================================================= -->
+
+<section class="summary">
+
+    <div class="summary-card collection-card">
+
+        <div class="summary-label">
+            Available Fund
+        </div>
+
+        <div
+            class="summary-value collection-value"
+            id="casFundCollection"
+        >
+            <span class="summary-loading">
+                Loading...
+            </span>
+        </div>
+
+        <div class="summary-note">
+            Current CAS FUND balance
+        </div>
+
+    </div>
+
+
+    <div class="summary-card expense-card">
+
+        <div class="summary-label">
+            Allocated Fund
+        </div>
+
+        <div
+            class="summary-value expense-value"
+            id="approvedEventExpenses"
+        >
+            <span class="summary-loading">
+                Loading...
+            </span>
+        </div>
+
+        <div class="summary-note">
+            Approved event allocation
+        </div>
+
+    </div>
+
+
+    <div class="summary-card available-card">
+
+        <div class="summary-label">
+            Remaining Fund
+        </div>
+
+        <div
+            class="summary-value available-value"
+            id="availableFund"
+        >
+            <span class="summary-loading">
+                Loading...
+            </span>
+        </div>
+
+        <div class="summary-note">
+            Available after allocations
+        </div>
+
+    </div>
+
+
+    <div class="summary-card approved-card">
+
+        <div class="summary-label">
+            Approved Events
+        </div>
+
+        <div
+            class="summary-value approved-value"
+            id="approvedEvents"
+        >
+            0
+        </div>
+
+        <div class="summary-note">
+            Currently approved events
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     MAIN WORKSPACE
+======================================================= -->
+
+<section class="workspace">
+
+    <div class="workspace-header">
+
+        <div class="workspace-header-left">
+
+            <div
+                class="workspace-title"
+                id="workspaceTitle"
+            >
+                Event List
+            </div>
+
+            <div
+                class="workspace-subtitle"
+                id="workspaceSubtitle"
+            >
+                All events currently recorded in the CAS FUND event database.
+            </div>
+
+        </div>
+
+
+        <div id="workspaceRefresh">
+
+            <button
+                class="btn btn-light"
+                onclick="loadEvents()"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NATIVE NAVIGATION
+    ====================================================== -->
+
+    <nav class="workspace-nav">
+
+        <button
+            class="active"
+            id="navEvents"
+            onclick="showWorkspace('events')"
+        >
+            Events
+        </button>
+
+
+        <button
+            id="navTransactions"
+            onclick="showWorkspace('transactions')"
+        >
+            Event Transactions
+        </button>
+
+
+        <button
+            id="navDetails"
+            class="hidden"
+            onclick="showWorkspace('details')"
+        >
+            Event Details
+        </button>
+
+    </nav>
+
+
+    <!-- =====================================================
+         EVENTS VIEW
+    ====================================================== -->
+
+    <div
+        id="eventsView"
+        class="workspace-view active"
+    >
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search event name, location, organizer, status or event ID..."
+                oninput="renderEvents()"
+            >
+
+        </div>
+
+
+        <div
+            id="eventContainer"
+            class="table-wrapper"
+        >
+
+            <div class="loading">
+                Loading events...
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         EVENT TRANSACTIONS VIEW
+    ====================================================== -->
+
+    <div
+        id="transactionsView"
+        class="workspace-view"
+    >
+
+        <div class="embedded-header">
+
+            <div class="embedded-header-left">
+
+                <div class="embedded-icon">
+                    ₱
+                </div>
+
+                <div>
+
+                    <div class="embedded-title">
+                        Event Transactions
+                    </div>
+
+                    <div
+                        class="embedded-description"
+                        id="transactionEmbeddedDescription"
+                    >
+                        View transactions connected to the selected event.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <iframe
+            id="transactionFrame"
+            class="embedded-frame"
+            src="event-transaction.html"
+            title="CAS FUND Event Transactions"
+            loading="lazy"
+        ></iframe>
+
+    </div>
+
+
+    <!-- =====================================================
+         EVENT DETAILS VIEW
+    ====================================================== -->
+
+    <div
+        id="detailsView"
+        class="workspace-view"
+    >
+
+        <div class="detail-shell">
+
+            <div
+                id="eventDetailsContainer"
+            >
+
+                <div class="loading">
+                    Loading event details...
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div
+    style="
+        text-align:center;
+        font-size:10px;
+        color:#8993a2;
+        padding:17px;
+    "
+>
+    CAS FUND • Event Planning System
+</div>
+
+</main>
+
+
+<!-- =======================================================
+     EVENT MODAL
+======================================================= -->
+
+<div
+    class="modal-backdrop"
+    id="eventModal"
+>
+
+    <div class="modal">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Plan Event
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="closeModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <input
+                type="hidden"
+                id="eventId"
+            >
+
+
+            <div class="form-group">
+
+                <label>
+                    EVENT NAME
+                </label>
+
+                <input
+                    type="text"
+                    id="eventName"
+                    placeholder="Enter event name"
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        EVENT DATE
+                    </label>
+
+                    <input
+                        type="date"
+                        id="eventDate"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        PARTICIPANTS
+                    </label>
+
+                    <input
+                        type="number"
+                        id="eventParticipants"
+                        min="0"
+                        placeholder="0"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    LOCATION
+                </label>
+
+                <input
+                    type="text"
+                    id="eventLocation"
+                    placeholder="Enter event location"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    ORGANIZER
+                </label>
+
+                <input
+                    type="text"
+                    id="eventOrganizer"
+                    placeholder="Enter organizer"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    STATUS
+                </label>
+
+                <select id="eventStatus">
+
+                    <option value="Planned">
+                        Planned
+                    </option>
+
+                    <option value="For Approval">
+                        For Approval
+                    </option>
+
+                    <option value="Approved">
+                        Approved
+                    </option>
+
+                    <option value="Completed">
+                        Completed
+                    </option>
+
+                    <option value="Rejected">
+                        Rejected
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+
+            <div class="modal-footer-left">
+
+                <button
+                    id="deleteButton"
+                    class="btn btn-danger hidden"
+                    onclick="deleteCurrentEvent()"
+                >
+                    Delete Event
+                </button>
+
+            </div>
+
+
+            <div class="modal-footer-right">
+
+                <button
+                    class="btn btn-light"
+                    onclick="closeModal()"
+                >
+                    Close
+                </button>
+
+                <button
+                    class="btn btn-primary"
+                    id="saveButton"
+                    onclick="saveEvent()"
+                >
+                    Plan Event
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     TOAST
+======================================================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script>
+
+/* =========================================================
+   EVENT API
+========================================================= */
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyqvQXIrBivAapKICFHPCLQHie6Dcnw84QBDbNfome16n2AF88Im8FtRntwaD93Ree8/exec";
+
+
+/* =========================================================
+   CAS FUND TRANSACTION API
+========================================================= */
+
+const TRANSACTION_API_URL =
+"https://script.google.com/macros/s/AKfycbzOY63c-59sL4VziVsUxwJHiqG-irjplIF45WeGiKT52gnNaBxDTLr2OuhoSVs4duod5g/exec";
+
+
+/* =========================================================
+   EVENT TRANSACTION API
+========================================================= */
+
+const EVENT_TRANSACTION_API_URL =
+"https://script.google.com/macros/s/AKfycbx4OatrrXO4TAbTpG87mqTxGY9tn2s4rqXQ3y2NSL1DFwrRM7-OZJYeWDTHRWIqkQMFLg/exec";
+
+
+/* =========================================================
+   PRE-AUDIT API
+========================================================= */
+
+const PRE_AUDIT_API_URL =
+"https://script.google.com/macros/s/AKfycbwt8SePjlzyHGZ7-w7s-phygdxxKSTbCfaZiXT8x_pvtkPT6J2HJr3rYcVn7x6wP4Mq/exec";
+
+
+/* =========================================================
+   PAGE LINKS
+========================================================= */
+
+const PRE_AUDIT_PAGE =
+"pre-audit.html";
+
+const POST_AUDIT_PAGE =
+"post-audit.html";
+
+const EVENT_TRANSACTION_PAGE =
+"event-transaction.html";
+
+
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
+
+let events = [];
+
+let transactions = [];
+
+let eventTransactions = [];
+
+let preAuditRecords = {};
+
+let eventExpenseRecords = {};
+
+let editingEventId = null;
+
+let selectedEventId = null;
+
+let toastTimer;
+
+
+/* =========================================================
+   FINANCIAL GLOBALS
+========================================================= */
+
+let baseCasFund = 0;
+
+let totalEventIncome = 0;
+
+let totalEventExpenses = 0;
+
+let netMovement = 0;
+
+let adjustedAvailableFund = 0;
+
+let totalAllocatedFund = 0;
+
+let remainingFund = 0;
+
+
+/* =========================================================
+   AUTO SYNC GLOBALS
+========================================================= */
+
+let lastFinancialSignature = null;
+
+let financialSyncTimer = null;
+
+let financialSyncRunning = false;
+
+let financialRefreshQueued = false;
+
+const FINANCIAL_SYNC_INTERVAL = 3000;
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        loadEvents();
+
+        startAutomaticTransactionSync();
+
+    }
+);
+
+
+/* =========================================================
+   NATIVE WORKSPACE NAVIGATION
+========================================================= */
+
+function showWorkspace(view){
+
+    const views = {
+
+        events:
+            document.getElementById(
+                "eventsView"
+            ),
+
+        transactions:
+            document.getElementById(
+                "transactionsView"
+            ),
+
+        details:
+            document.getElementById(
+                "detailsView"
+            )
+
+    };
+
+
+    Object.values(views)
+        .forEach(function(element){
+
+            if(element){
+
+                element.classList.remove(
+                    "active"
+                );
+
+            }
+
+        });
+
+
+    const navButtons = [
+
+        "navEvents",
+        "navTransactions",
+        "navDetails"
+
+    ];
+
+
+    navButtons.forEach(function(id){
+
+        const button =
+            document.getElementById(id);
+
+        if(button){
+
+            button.classList.remove(
+                "active"
+            );
+
+        }
+
+    });
+
+
+    if(views[view]){
+
+        views[view].classList.add(
+            "active"
+        );
+
+    }
+
+
+    const titles = {
+
+        events:[
+            "Event List",
+            "All events currently recorded in the CAS FUND event database.",
+            "navEvents"
+        ],
+
+        transactions:[
+            "Event Transactions",
+            "Manage financial transactions connected to CAS events.",
+            "navTransactions"
+        ],
+
+        details:[
+            "Event Details",
+            "Detailed event and financial information.",
+            "navDetails"
+        ]
+
+    };
+
+
+    const info =
+        titles[view] ||
+        titles.events;
+
+
+    document.getElementById(
+        "workspaceTitle"
+    ).textContent =
+        info[0];
+
+
+    document.getElementById(
+        "workspaceSubtitle"
+    ).textContent =
+        info[1];
+
+
+    const activeNav =
+        document.getElementById(
+            info[2]
+        );
+
+
+    if(activeNav){
+
+        activeNav.classList.add(
+            "active"
+        );
+
+    }
+
+
+    const refreshArea =
+        document.getElementById(
+            "workspaceRefresh"
+        );
+
+
+    if(view === "events"){
+
+        refreshArea.innerHTML = `
+
+            <button
+                class="btn btn-light"
+                onclick="loadEvents()"
+            >
+                ↻ Refresh
+            </button>
+
+        `;
+
+    }
+
+    else if(view === "transactions"){
+
+        refreshArea.innerHTML = `
+
+            <div
+                style="
+                    display:flex;
+                    gap:7px;
+                    align-items:center;
+                "
+            >
+
+                <button
+                    class="btn btn-light"
+                    onclick="reloadEmbeddedFrame('transactionFrame')"
+                >
+                    ↻ Refresh
+                </button>
+
+                <button
+                    class="btn btn-primary"
+                    onclick="openFullEventTransactions()"
+                >
+                    ↗ FULL VIEW
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+    else{
+
+        refreshArea.innerHTML = "";
+
+    }
+
+}
+
+
+/* =========================================================
+   RETURN TO EVENTS
+========================================================= */
+
+function returnToEvents(){
+
+    showWorkspace(
+        "events"
+    );
+
+}
+
+
+/* =========================================================
+   OPEN EVENT DETAILS
+========================================================= */
+
+function openEventDetails(
+    eventId
+){
+
+    const event =
+        events.find(
+            function(item){
+
+                return String(item.id) ===
+                    String(eventId);
+
+            }
+        );
+
+
+    if(!event){
+
+        showToast(
+            "Event not found.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    selectedEventId =
+        event.id;
+
+
+    renderEventDetails(
+        event
+    );
+
+
+    document.getElementById(
+        "navDetails"
+    )
+    .classList.remove(
+        "hidden"
+    );
+
+
+    showWorkspace(
+        "details"
+    );
+
+}
+
+
+/* =========================================================
+   EVENT DETAILS
+========================================================= */
+
+function renderEventDetails(
+    event
+){
+
+    const eventId =
+        String(
+            event.id || ""
+        ).trim();
+
+
+    const preAudit =
+        preAuditRecords[eventId];
+
+
+    const expectedExpense =
+        Number(
+            preAudit?.expense || 0
+        );
+
+
+    const recordedExpense =
+        Number(
+            eventExpenseRecords[eventId] || 0
+        );
+
+
+    const remainingAllocation =
+        Math.max(
+            0,
+            expectedExpense -
+            recordedExpense
+        );
+
+
+    const container =
+        document.getElementById(
+            "eventDetailsContainer"
+        );
+
+
+    container.innerHTML = `
+
+        <div class="detail-card">
+
+            <div class="detail-card-header">
+
+                <div>
+
+                    <div class="detail-event-id">
+                        ${escapeHtml(event.id)}
+                    </div>
+
+                    <div class="detail-event-name">
+                        ${escapeHtml(event.name)}
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <span
+                        class="status ${getStatusClass(event.status)}"
+                    >
+                        ${escapeHtml(event.status)}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="detail-grid">
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        Event Date
+                    </div>
+
+                    <div class="detail-value">
+                        ${escapeHtml(
+                            formatDisplayDate(
+                                event.date
+                            )
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        Location
+                    </div>
+
+                    <div class="detail-value">
+                        ${escapeHtml(
+                            event.location ||
+                            "—"
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        Participants
+                    </div>
+
+                    <div class="detail-value">
+                        ${Number(
+                            event.participants || 0
+                        ).toLocaleString()}
+                    </div>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <div class="detail-label">
+                        Organizer
+                    </div>
+
+                    <div class="detail-value">
+                        ${escapeHtml(
+                            event.organizer ||
+                            "—"
+                        )}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="finance-strip">
+
+                <div class="finance-item">
+
+                    <div class="finance-label">
+                        Pre-Audit Expected
+                    </div>
+
+                    <div class="finance-value">
+                        ₱${formatCurrency(
+                            expectedExpense
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="finance-item">
+
+                    <div class="finance-label">
+                        Recorded Expenses
+                    </div>
+
+                    <div class="finance-value">
+                        ₱${formatCurrency(
+                            recordedExpense
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="finance-item">
+
+                    <div class="finance-label">
+                        Remaining Allocation
+                    </div>
+
+                    <div class="finance-value">
+                        ₱${formatCurrency(
+                            remainingAllocation
+                        )}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                style="
+                    padding:16px 18px;
+                    border-top:1px solid #edf0f4;
+                    display:flex;
+                    gap:8px;
+                    flex-wrap:wrap;
+                "
+            >
+
+                ${
+                    event.status === "Planned"
+                    ?
+                    `
+                    <button
+                        class="btn btn-primary"
+                        onclick="openPreAudit('${escapeJs(event.id)}')"
+                    >
+                        ↗ Open Pre-Audit
+                    </button>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    event.status === "Completed"
+                    ?
+                    `
+                    <button
+                        class="btn btn-primary"
+                        onclick="openPostAudit('${escapeJs(event.id)}')"
+                    >
+                        ↗ Open Post-Audit
+                    </button>
+                    `
+                    :
+                    ""
+                }
+
+
+                <button
+                    class="btn btn-light"
+                    onclick="openEditModal('${escapeJs(event.id)}')"
+                >
+                    Edit Event
+                </button>
+
+
+                <button
+                    class="btn btn-light"
+                    onclick="openEventTransactions('${escapeJs(event.id)}')"
+                >
+                    Event Transactions
+                </button>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   EMBEDDED FRAME RELOAD
+========================================================= */
+
+function reloadEmbeddedFrame(
+    frameId
+){
+
+    const frame =
+        document.getElementById(
+            frameId
+        );
+
+
+    if(!frame){
+
+        return;
+
+    }
+
+
+    const currentSrc =
+        frame.src;
+
+
+    frame.src =
+        "about:blank";
+
+
+    setTimeout(
+        function(){
+
+            frame.src =
+                currentSrc;
+
+        },
+        50
+    );
+
+}
+
+
+/* =========================================================
+   API
+========================================================= */
+
+async function api(
+    action,
+    params = {}
+){
+
+    const query =
+        new URLSearchParams();
+
+
+    query.set(
+        "action",
+        action
+    );
+
+
+    Object.keys(params)
+        .forEach(function(key){
+
+            if(
+                params[key] !== undefined &&
+                params[key] !== null
+            ){
+
+                query.set(
+                    key,
+                    String(params[key])
+                );
+
+            }
+
+        });
+
+
+    const url =
+        SCRIPT_URL +
+        "?" +
+        query.toString();
+
+
+    const response =
+        await fetch(
+            url,
+            {
+                method:"GET",
+                cache:"no-store"
+            }
+        );
+
+
+    if(!response.ok){
+
+        throw new Error(
+            "Server returned HTTP " +
+            response.status
+        );
+
+    }
+
+
+    const data =
+        await response.json();
+
+
+    if(!data.success){
+
+        throw new Error(
+            data.message ||
+            "Request failed."
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+/* =========================================================
+   PRE-AUDIT API
+========================================================= */
+
+async function preAuditApi(
+    action,
+    params = {}
+){
+
+    const query =
+        new URLSearchParams();
+
+
+    query.set(
+        "action",
+        action
+    );
+
+
+    Object.keys(params)
+        .forEach(function(key){
+
+            if(
+                params[key] !== undefined &&
+                params[key] !== null
+            ){
+
+                query.set(
+                    key,
+                    String(params[key])
+                );
+
+            }
+
+        });
+
+
+    const url =
+        PRE_AUDIT_API_URL +
+        "?" +
+        query.toString();
+
+
+    const response =
+        await fetch(
+            url,
+            {
+                method:"GET",
+                cache:"no-store"
+            }
+        );
+
+
+    if(!response.ok){
+
+        throw new Error(
+            "Pre-Audit API HTTP " +
+            response.status
+        );
+
+    }
+
+
+    const data =
+        await response.json();
+
+
+    if(
+        !data ||
+        data.success === false
+    ){
+
+        throw new Error(
+            data?.message ||
+            data?.error ||
+            "Pre-Audit request failed."
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+/* =========================================================
+   LOAD EVENTS
+========================================================= */
+
+async function loadEvents(){
+
+    const container =
+        document.getElementById(
+            "eventContainer"
+        );
+
+
+    container.innerHTML = `
+
+        <div class="loading">
+            Loading events...
+        </div>
+
+    `;
+
+
+    try{
+
+        const data =
+            await api(
+                "list"
+            );
+
+
+        events =
+            Array.isArray(
+                data.events
+            )
+            ?
+            data.events
+            :
+            [];
+
+
+        updateSummary();
+
+        renderEvents();
+
+        await loadFinancialSummary();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    ⚠
+                </div>
+
+                <div class="empty-title">
+                    Unable to load events
+                </div>
+
+                <div class="empty-text">
+                    ${escapeHtml(error.message)}
+                </div>
+
+            </div>
+
+        `;
+
+
+        showToast(
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   NORMALIZE FIELD
+========================================================= */
+
+function getField(
+    object,
+    possibleNames
+){
+
+    if(!object){
+
+        return "";
+
+    }
+
+
+    for(
+        const name of possibleNames
+    ){
+
+        if(
+            Object.prototype.hasOwnProperty.call(
+                object,
+                name
+            )
+        ){
+
+            const value =
+                object[name];
+
+
+            if(
+                value !== undefined &&
+                value !== null &&
+                String(value).trim() !== ""
+            ){
+
+                return value;
+
+            }
+
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   TRANSACTION EVENT ID
+========================================================= */
+
+function getTransactionEventId(
+    transaction
+){
+
+    return String(
+
+        getField(
+            transaction,
+            [
+                "eventId",
+                "Event ID",
+                "EventID",
+                "eventID",
+                "event_id",
+                "event",
+                "Event",
+                "linkedEventId",
+                "Linked Event ID",
+                "linkedEventID"
+            ]
+        ) || ""
+
+    )
+    .trim();
+
+}
+
+
+/* =========================================================
+   TRANSACTION TYPE
+========================================================= */
+
+function getTransactionType(
+    transaction
+){
+
+    return String(
+
+        getField(
+            transaction,
+            [
+                "type",
+                "Type",
+                "transactionType",
+                "Transaction Type",
+                "TransactionType",
+                "transaction_type"
+            ]
+        ) || ""
+
+    )
+    .trim()
+    .toUpperCase();
+
+}
+
+
+/* =========================================================
+   TRANSACTION AMOUNT
+========================================================= */
+
+function getTransactionAmount(
+    transaction
+){
+
+    let raw =
+        getField(
+            transaction,
+            [
+                "amount",
+                "Amount",
+                "transactionAmount",
+                "Transaction Amount",
+                "TransactionAmount"
+            ]
+        );
+
+
+    if(
+        typeof raw === "string"
+    ){
+
+        raw =
+            raw
+            .replace(/₱/g,"")
+            .replace(/,/g,"")
+            .trim();
+
+    }
+
+
+    const amount =
+        Number(
+            raw || 0
+        );
+
+
+    return Number.isFinite(amount)
+        ?
+        amount
+        :
+        0;
+
+}
+
+
+/* =========================================================
+   GENERAL TRANSACTION
+========================================================= */
+
+function isGeneralTransaction(
+    transaction
+){
+
+    const eventId =
+        getTransactionEventId(
+            transaction
+        );
+
+
+    const category =
+        String(
+
+            getField(
+                transaction,
+                [
+                    "category",
+                    "Category",
+                    "transactionCategory",
+                    "Transaction Category"
+                ]
+            ) || ""
+
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const scope =
+        String(
+
+            getField(
+                transaction,
+                [
+                    "scope",
+                    "Scope",
+                    "transactionScope",
+                    "Transaction Scope"
+                ]
+            ) || ""
+
+        )
+        .trim()
+        .toLowerCase();
+
+
+    return (
+
+        !eventId ||
+        eventId.toLowerCase() === "general" ||
+        category === "general" ||
+        scope === "general"
+
+    );
+
+}
+
+
+/* =========================================================
+   LOAD EVENT TRANSACTIONS
+========================================================= */
+
+async function loadEventTransactions(){
+
+    const response =
+        await fetch(
+            EVENT_TRANSACTION_API_URL +
+            "?action=transactions&t=" +
+            Date.now(),
+            {
+                method:"GET",
+                cache:"no-store"
+            }
+        );
+
+
+    if(!response.ok){
+
+        throw new Error(
+            "Event Transaction API HTTP error " +
+            response.status
+        );
+
+    }
+
+
+    const data =
+        await response.json();
+
+
+    if(
+        !data ||
+        data.success === false
+    ){
+
+        throw new Error(
+            data?.error ||
+            data?.message ||
+            "Event Transaction API returned an error."
+        );
+
+    }
+
+
+    eventTransactions =
+        Array.isArray(
+            data.transactions
+        )
+        ?
+        data.transactions
+        :
+        Array.isArray(
+            data.data
+        )
+        ?
+        data.data
+        :
+        Array.isArray(
+            data.records
+        )
+        ?
+        data.records
+        :
+        [];
+
+
+    return eventTransactions;
+
+}
+
+
+/* =========================================================
+   EVENT FINANCIAL TEST
+========================================================= */
+
+async function loadEventFinancialTest(){
+
+    const response =
+        await fetch(
+            EVENT_TRANSACTION_API_URL +
+            "?action=testExpenseIncome&t=" +
+            Date.now(),
+            {
+                method:"GET",
+                cache:"no-store"
+            }
+        );
+
+
+    if(!response.ok){
+
+        throw new Error(
+            "Event Transaction Financial API HTTP error " +
+            response.status
+        );
+
+    }
+
+
+    const data =
+        await response.json();
+
+
+    if(
+        !data ||
+        data.success === false
+    ){
+
+        throw new Error(
+            data?.error ||
+            data?.message ||
+            "Event Transaction Financial API returned an error."
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+/* =========================================================
+   FINANCIAL SIGNATURE
+========================================================= */
+
+function createFinancialSignature(
+    data
+){
+
+    const income =
+        Number(
+            data?.totalIncome || 0
+        );
+
+
+    const expenses =
+        Number(
+            data?.totalExpenses || 0
+        );
+
+
+    const movement =
+        Number(
+            data?.netMovement || 0
+        );
+
+
+    return [
+        income,
+        expenses,
+        movement
+    ].join("|");
+
+}
+
+
+/* =========================================================
+   TRANSACTION CHANGE CHECK
+========================================================= */
+
+async function checkTransactionChanges(){
+
+    if(
+        financialSyncRunning
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        document.hidden
+    ){
+
+        return;
+
+    }
+
+
+    financialSyncRunning =
+        true;
+
+
+    try{
+
+        const financial =
+            await loadEventFinancialTest();
+
+
+        const signature =
+            createFinancialSignature(
+                financial
+            );
+
+
+        if(
+            lastFinancialSignature === null
+        ){
+
+            lastFinancialSignature =
+                signature;
+
+            return;
+
+        }
+
+
+        if(
+            signature !==
+            lastFinancialSignature
+        ){
+
+            console.log(
+                "EVENT TRANSACTION CHANGE DETECTED"
+            );
+
+
+            lastFinancialSignature =
+                signature;
+
+
+            await refreshAfterTransactionChange();
+
+        }
+
+    }
+
+    catch(error){
+
+        console.warn(
+            "Automatic transaction sync check failed:",
+            error
+        );
+
+    }
+
+    finally{
+
+        financialSyncRunning =
+            false;
+
+    }
+
+}
+
+
+/* =========================================================
+   REFRESH AFTER TRANSACTION CHANGE
+========================================================= */
+
+async function refreshAfterTransactionChange(){
+
+    if(
+        financialRefreshQueued
+    ){
+
+        return;
+
+    }
+
+
+    financialRefreshQueued =
+        true;
+
+
+    try{
+
+        await loadFinancialSummary();
+
+        renderEvents();
+
+
+        if(
+            selectedEventId
+        ){
+
+            const event =
+                events.find(
+                    function(item){
+
+                        return String(item.id) ===
+                            String(selectedEventId);
+
+                    }
+                );
+
+
+            if(event){
+
+                renderEventDetails(
+                    event
+                );
+
+            }
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Automatic Event refresh failed:",
+            error
+        );
+
+    }
+
+    finally{
+
+        financialRefreshQueued =
+            false;
+
+    }
+
+}
+
+
+/* =========================================================
+   START AUTOMATIC SYNC
+========================================================= */
+
+function startAutomaticTransactionSync(){
+
+    if(
+        financialSyncTimer
+    ){
+
+        clearInterval(
+            financialSyncTimer
+        );
+
+    }
+
+
+    setTimeout(
+        function(){
+
+            checkTransactionChanges();
+
+        },
+        1500
+    );
+
+
+    financialSyncTimer =
+        setInterval(
+            function(){
+
+                checkTransactionChanges();
+
+            },
+            FINANCIAL_SYNC_INTERVAL
+        );
+
+}
+
+
+/* =========================================================
+   CALCULATE EVENT EXPENSES
+========================================================= */
+
+function calculateEventExpenses(){
+
+    eventExpenseRecords = {};
+
+    let totalEventExpensesLocal = 0;
+
+
+    eventTransactions.forEach(
+        function(transaction){
+
+            const type =
+                getTransactionType(
+                    transaction
+                );
+
+
+            if(
+                type !== "EXPENSE"
+            ){
+
+                return;
+
+            }
+
+
+            if(
+                isGeneralTransaction(
+                    transaction
+                )
+            ){
+
+                return;
+
+            }
+
+
+            const eventId =
+                getTransactionEventId(
+                    transaction
+                );
+
+
+            if(!eventId){
+
+                return;
+
+            }
+
+
+            const amount =
+                getTransactionAmount(
+                    transaction
+                );
+
+
+            if(
+                !Number.isFinite(amount) ||
+                amount <= 0
+            ){
+
+                return;
+
+            }
+
+
+            if(
+                !eventExpenseRecords[eventId]
+            ){
+
+                eventExpenseRecords[eventId] =
+                    0;
+
+            }
+
+
+            eventExpenseRecords[eventId] +=
+                amount;
+
+
+            totalEventExpensesLocal +=
+                amount;
+
+        }
+    );
+
+
+    return totalEventExpensesLocal;
+
+}
+
+
+/* =========================================================
+   LOAD FINANCIAL SUMMARY
+========================================================= */
+
+async function loadFinancialSummary(){
+
+    const collectionElement =
+        document.getElementById(
+            "casFundCollection"
+        );
+
+
+    const expenseElement =
+        document.getElementById(
+            "approvedEventExpenses"
+        );
+
+
+    const availableElement =
+        document.getElementById(
+            "availableFund"
+        );
+
+
+    collectionElement.innerHTML =
+        '<span class="summary-loading">Loading...</span>';
+
+
+    expenseElement.innerHTML =
+        '<span class="summary-loading">Loading...</span>';
+
+
+    availableElement.innerHTML =
+        '<span class="summary-loading">Loading...</span>';
+
+
+    try{
+
+        /* =====================================================
+           STEP 1
+           LOAD ORIGINAL CAS FUND
+        ===================================================== */
+
+        const transactionResponse =
+            await fetch(
+                TRANSACTION_API_URL +
+                "?action=transactions&t=" +
+                Date.now(),
+                {
+                    method:"GET",
+                    cache:"no-store"
+                }
+            );
+
+
+        if(!transactionResponse.ok){
+
+            throw new Error(
+                "CAS FUND Transaction API HTTP error " +
+                transactionResponse.status
+            );
+
+        }
+
+
+        const transactionData =
+            await transactionResponse.json();
+
+
+        if(
+            !transactionData ||
+            !transactionData.success
+        ){
+
+            throw new Error(
+                transactionData?.error ||
+                "CAS FUND Transaction API returned an error."
+            );
+
+        }
+
+
+        transactions =
+            Array.isArray(
+                transactionData.transactions
+            )
+            ?
+            transactionData.transactions
+            :
+            [];
+
+
+        /* =====================================================
+           STEP 2
+           ORIGINAL CAS FUND
+        ===================================================== */
+
+        baseCasFund =
+            transactions.reduce(
+                function(sum, transaction){
+
+                    const amount =
+                        Number(
+                            transaction.amount || 0
+                        );
+
+
+                    return sum +
+                        (
+                            Number.isFinite(amount)
+                            ?
+                            amount
+                            :
+                            0
+                        );
+
+                },
+                0
+            );
+
+
+        /* =====================================================
+           STEP 3
+           EVENT TRANSACTIONS
+        ===================================================== */
+
+        await loadEventTransactions();
+
+
+        /* =====================================================
+           STEP 4
+           PER EVENT EXPENSES
+        ===================================================== */
+
+        const calculatedEventExpenses =
+            calculateEventExpenses();
+
+
+        /* =====================================================
+           STEP 5
+           AUTHORITATIVE TOTALS
+        ===================================================== */
+
+        const eventFinancial =
+            await loadEventFinancialTest();
+
+
+        /* =====================================================
+           STEP 6
+           BACKEND TOTALS
+        ===================================================== */
+
+        totalEventIncome =
+            Number(
+                eventFinancial.totalIncome || 0
+            );
+
+
+        const backendTotalExpenses =
+            Number(
+                eventFinancial.totalExpenses || 0
+            );
+
+
+        netMovement =
+            Number(
+                eventFinancial.netMovement || 0
+            );
+
+
+        totalEventExpenses =
+            backendTotalExpenses;
+
+
+        lastFinancialSignature =
+            createFinancialSignature(
+                eventFinancial
+            );
+
+
+        /* =====================================================
+           STEP 7
+           AVAILABLE FUND
+        ===================================================== */
+
+        adjustedAvailableFund =
+            baseCasFund +
+            netMovement;
+
+
+        /* =====================================================
+           STEP 8
+           APPROVED EVENTS
+        ===================================================== */
+
+        const approvedEvents =
+            events.filter(
+                function(event){
+
+                    return String(
+                        event.status || ""
+                    )
+                    .trim()
+                    .toLowerCase() ===
+                    "approved";
+
+                }
+            );
+
+
+        document.getElementById(
+            "approvedEvents"
+        ).textContent =
+            approvedEvents.length;
+
+
+        /* =====================================================
+           STEP 9
+           PRE-AUDIT EXPECTED EXPENSES
+        ===================================================== */
+
+        preAuditRecords = {};
+
+
+        const expenseResults =
+            await Promise.all(
+
+                approvedEvents.map(
+
+                    async function(event){
+
+                        const eventId =
+                            String(
+                                event.id || ""
+                            ).trim();
+
+
+                        if(!eventId){
+
+                            return {
+                                eventId:"",
+                                expense:0
+                            };
+
+                        }
+
+
+                        try{
+
+                            const data =
+                                await preAuditApi(
+                                    "getPreAudit",
+                                    {
+                                        eventId:
+                                            eventId
+                                    }
+                                );
+
+
+                            let preAudit =
+                                data.preAudit ||
+                                data.data ||
+                                null;
+
+
+                            if(
+                                Array.isArray(
+                                    preAudit
+                                )
+                            ){
+
+                                preAudit =
+                                    preAudit.find(
+                                        function(record){
+
+                                            return String(
+                                                record.eventId ||
+                                                record.id ||
+                                                record["Event ID"] ||
+                                                ""
+                                            )
+                                            .trim() ===
+                                            eventId;
+
+                                        }
+                                    );
+
+                            }
+
+
+                            const expense =
+                                Number(
+
+                                    preAudit?.totalExpectedExpenses ??
+                                    preAudit?.expectedExpenses ??
+                                    preAudit?.total_expected_expenses ??
+                                    data.totalExpectedExpenses ??
+                                    data.expectedExpenses ??
+                                    0
+
+                                );
+
+
+                            preAuditRecords[eventId] = {
+
+                                expense:
+                                    Number.isFinite(
+                                        expense
+                                    )
+                                    ?
+                                    expense
+                                    :
+                                    0,
+
+                                found:
+                                    !!preAudit
+
+                            };
+
+
+                            return {
+
+                                eventId:
+                                    eventId,
+
+                                expense:
+                                    Number.isFinite(
+                                        expense
+                                    )
+                                    ?
+                                    expense
+                                    :
+                                    0
+
+                            };
+
+                        }
+
+                        catch(error){
+
+                            console.warn(
+                                "Pre-Audit lookup failed for Event ID:",
+                                eventId,
+                                error
+                            );
+
+
+                            preAuditRecords[eventId] = {
+
+                                expense:0,
+
+                                found:false,
+
+                                error:
+                                    error.message
+
+                            };
+
+
+                            return {
+
+                                eventId:
+                                    eventId,
+
+                                expense:
+                                    0
+
+                            };
+
+                        }
+
+                    }
+
+                )
+
+            );
+
+
+        /* =====================================================
+           STEP 10
+           TOTAL PRE-AUDIT EXPECTED
+        ===================================================== */
+
+        const totalPreAuditExpectedExpenses =
+            expenseResults.reduce(
+                function(sum,result){
+
+                    const amount =
+                        Number(
+                            result.expense || 0
+                        );
+
+
+                    return sum +
+                        (
+                            Number.isFinite(amount)
+                            ?
+                            amount
+                            :
+                            0
+                        );
+
+                },
+                0
+            );
+
+
+        /* =====================================================
+           STEP 11
+           ALLOCATED FUND
+        ===================================================== */
+
+        totalAllocatedFund =
+            totalPreAuditExpectedExpenses -
+            calculatedEventExpenses;
+
+
+        if(
+            totalAllocatedFund < 0
+        ){
+
+            totalAllocatedFund =
+                0;
+
+        }
+
+
+        /* =====================================================
+           STEP 12
+           REMAINING FUND
+        ===================================================== */
+
+        remainingFund =
+            adjustedAvailableFund -
+            totalAllocatedFund;
+
+
+        /* =====================================================
+           STEP 13
+           DISPLAY
+        ===================================================== */
+
+        collectionElement.textContent =
+            "₱" +
+            formatCurrency(
+                adjustedAvailableFund
+            );
+
+
+        expenseElement.textContent =
+            "₱" +
+            formatCurrency(
+                totalAllocatedFund
+            );
+
+
+        availableElement.textContent =
+            "₱" +
+            formatCurrency(
+                remainingFund
+            );
+
+
+        renderEvents();
+
+
+        if(
+            selectedEventId
+        ){
+
+            const selectedEvent =
+                events.find(
+                    function(item){
+
+                        return String(item.id) ===
+                            String(selectedEventId);
+
+                    }
+                );
+
+
+            if(selectedEvent){
+
+                renderEventDetails(
+                    selectedEvent
+                );
+
+            }
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Financial summary loading error:",
+            error
+        );
+
+
+        collectionElement.textContent =
+            "₱0.00";
+
+
+        expenseElement.textContent =
+            "₱0.00";
+
+
+        availableElement.textContent =
+            "₱0.00";
+
+
+        showToast(
+            "Unable to load financial information: " +
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   FORMAT CURRENCY
+========================================================= */
+
+function formatCurrency(
+    value
+){
+
+    return Number(
+        value || 0
+    )
+    .toLocaleString(
+        "en-PH",
+        {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+function updateSummary(){
+
+    const approved =
+        events.filter(
+            event =>
+
+                String(
+                    event.status || ""
+                )
+                .trim()
+                .toLowerCase() ===
+                "approved"
+
+        ).length;
+
+
+    document.getElementById(
+        "approvedEvents"
+    ).textContent =
+        approved;
+
+}
+
+
+/* =========================================================
+   RENDER EVENTS
+========================================================= */
+
+function renderEvents(){
+
+    const container =
+        document.getElementById(
+            "eventContainer"
+        );
+
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const filtered =
+        events.filter(
+            function(event){
+
+                const text = [
+
+                    event.id,
+                    event.name,
+                    event.date,
+                    event.location,
+                    event.organizer,
+                    event.status
+
+                ]
+                .join(" ")
+                .toLowerCase();
+
+
+                return text.includes(
+                    search
+                );
+
+            }
+        );
+
+
+    if(
+        filtered.length === 0
+    ){
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    📅
+                </div>
+
+                <div class="empty-title">
+                    No events found
+                </div>
+
+                <div class="empty-text">
+                    Click PLAN EVENT above to create your first event.
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = `
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Event
+                    </th>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Location
+                    </th>
+
+                    <th>
+                        Participants
+                    </th>
+
+                    <th>
+                        Organizer
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Expected Expenses
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                ${filtered.map(
+                    renderEventRow
+                ).join("")}
+
+            </tbody>
+
+        </table>
+
+    `;
+
+}
+
+
+/* =========================================================
+   EVENT ROW
+========================================================= */
+
+function renderEventRow(
+    event
+){
+
+    const statusClass =
+        getStatusClass(
+            event.status
+        );
+
+
+    const preAuditButton =
+        event.status === "Planned"
+
+        ?
+
+        `
+        <button
+            class="action-btn action-preaudit"
+            onclick="openPreAudit('${escapeJs(event.id)}')"
+            title="Open Pre-Audit in a new tab"
+        >
+            ↗ Pre-Audit
+        </button>
+        `
+
+        :
+
+        "";
+
+
+    const postAuditButton =
+        event.status === "Completed"
+
+        ?
+
+        `
+        <button
+            class="action-btn action-postaudit"
+            onclick="openPostAudit('${escapeJs(event.id)}')"
+            title="Open Post-Audit in a new tab"
+        >
+            ↗ Post-Audit
+        </button>
+        `
+
+        :
+
+        "";
+
+
+    let expenseHtml =
+        '<span class="expense-cell no-expense">—</span>';
+
+
+    if(
+        event.status === "Approved"
+    ){
+
+        const eventId =
+            String(
+                event.id || ""
+            ).trim();
+
+
+        const record =
+            preAuditRecords[eventId];
+
+
+        const recordedEventExpense =
+            Number(
+                eventExpenseRecords[eventId] || 0
+            );
+
+
+        if(!record){
+
+            expenseHtml =
+                '<span class="expense-cell loading">Loading...</span>';
+
+        }
+
+        else if(
+            record.found &&
+            Number(record.expense || 0) > 0
+        ){
+
+            const remainingEventAllocation =
+                Math.max(
+                    0,
+                    Number(record.expense || 0) -
+                    recordedEventExpense
+                );
+
+
+            expenseHtml = `
+
+                <span
+                    class="expense-cell has-expense"
+                    title="
+                        Pre-Audit: ₱${formatCurrency(record.expense)}
+                        |
+                        Recorded Expenses: ₱${formatCurrency(recordedEventExpense)}
+                    "
+                >
+
+                    ₱${formatCurrency(
+                        remainingEventAllocation
+                    )}
+
+                </span>
+
+            `;
+
+        }
+
+        else{
+
+            expenseHtml =
+                '<span class="expense-cell no-expense">₱0.00</span>';
+
+        }
+
+    }
+
+
+    return `
+
+        <tr>
+
+            <td>
+
+                <div class="event-id">
+                    ${escapeHtml(event.id)}
+                </div>
+
+                <div class="event-name">
+                    ${escapeHtml(event.name)}
+                </div>
+
+            </td>
+
+
+            <td class="date-cell">
+
+                ${escapeHtml(
+                    formatDisplayDate(
+                        event.date
+                    )
+                )}
+
+            </td>
+
+
+            <td>
+
+                <div class="event-location">
+
+                    ${
+                        event.location
+                        ?
+
+                        "📍 " +
+                        escapeHtml(
+                            event.location
+                        )
+
+                        :
+
+                        "—"
+                    }
+
+                </div>
+
+            </td>
+
+
+            <td class="participants">
+
+                ${Number(
+                    event.participants || 0
+                ).toLocaleString()}
+
+            </td>
+
+
+            <td>
+
+                ${
+                    event.organizer
+                    ?
+
+                    escapeHtml(
+                        event.organizer
+                    )
+
+                    :
+
+                    "—"
+                }
+
+            </td>
+
+
+            <td>
+
+                <span
+                    class="status ${statusClass}"
+                >
+
+                    ${escapeHtml(
+                        event.status
+                    )}
+
+                </span>
+
+            </td>
+
+
+            <td>
+
+                ${expenseHtml}
+
+            </td>
+
+
+            <td>
+
+                <div class="actions">
+
+                    <button
+                        class="action-btn action-transaction"
+                        onclick="openEventTransactions('${escapeJs(event.id)}')"
+                    >
+                        Transactions
+                    </button>
+
+
+                    ${preAuditButton}
+
+
+                    ${postAuditButton}
+
+
+                    <button
+                        class="action-btn action-edit"
+                        onclick="openEditModal('${escapeJs(event.id)}')"
+                    >
+                        Edit
+                    </button>
+
+
+                    <button
+                        class="action-btn action-delete"
+                        onclick="confirmDelete('${escapeJs(event.id)}')"
+                    >
+                        Delete
+                    </button>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+    `;
+
+}
+
+
+/* =========================================================
+   OPEN EVENT TRANSACTIONS
+========================================================= */
+
+function openEventTransactions(
+    eventId
+){
+
+    selectedEventId =
+        eventId;
+
+
+    const frame =
+        document.getElementById(
+            "transactionFrame"
+        );
+
+
+    const event =
+        events.find(
+            function(item){
+
+                return String(item.id) ===
+                    String(eventId);
+
+            }
+        );
+
+
+    if(event){
+
+        document.getElementById(
+            "workspaceSubtitle"
+        ).textContent =
+            "Transactions connected to " +
+            event.name +
+            " (" +
+            event.id +
+            ").";
+
+
+        const description =
+            document.getElementById(
+                "transactionEmbeddedDescription"
+            );
+
+
+        if(description){
+
+            description.textContent =
+                event.name +
+                " • Event ID: " +
+                event.id;
+
+        }
+
+    }
+
+
+    frame.src =
+        EVENT_TRANSACTION_PAGE +
+        "?eventId=" +
+        encodeURIComponent(
+            eventId
+        );
+
+
+    showWorkspace(
+        "transactions"
+    );
+
+}
+
+
+/* =========================================================
+   OPEN FULL EVENT TRANSACTIONS
+========================================================= */
+
+function openFullEventTransactions(){
+
+    if(!selectedEventId){
+
+        showToast(
+            "Please select an event first.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const url =
+        EVENT_TRANSACTION_PAGE +
+        "?eventId=" +
+        encodeURIComponent(
+            selectedEventId
+        );
+
+
+    const newWindow =
+        window.open(
+            url,
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+
+    if(!newWindow){
+
+        showToast(
+            "The browser blocked the new tab. Please allow pop-ups for this site.",
+            "error"
+        );
+
+        return;
+
+    }
+
+}
+
+
+/* =========================================================
+   OPEN PRE-AUDIT
+========================================================= */
+
+function openPreAudit(
+    eventId
+){
+
+    const event =
+        events.find(
+            item =>
+                String(item.id) ===
+                String(eventId)
+        );
+
+
+    if(!event){
+
+        showToast(
+            "Event not found.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        event.status !==
+        "Planned"
+    ){
+
+        showToast(
+            "Pre-Audit is only available for Planned events.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    selectedEventId =
+        event.id;
+
+
+    const url =
+        PRE_AUDIT_PAGE +
+        "?eventId=" +
+        encodeURIComponent(
+            event.id
+        );
+
+
+    const newWindow =
+        window.open(
+            url,
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+
+    if(!newWindow){
+
+        showToast(
+            "The browser blocked the new tab. Please allow pop-ups for this site.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   OPEN POST-AUDIT
+========================================================= */
+
+function openPostAudit(
+    eventId
+){
+
+    const event =
+        events.find(
+            item =>
+                String(item.id) ===
+                String(eventId)
+        );
+
+
+    if(!event){
+
+        showToast(
+            "Event not found.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        String(event.status || "")
+        .trim()
+        .toLowerCase() !==
+        "completed"
+    ){
+
+        showToast(
+            "Post-Audit is only available for Completed events.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    selectedEventId =
+        event.id;
+
+
+    const url =
+        POST_AUDIT_PAGE +
+        "?eventId=" +
+        encodeURIComponent(
+            event.id
+        );
+
+
+    const newWindow =
+        window.open(
+            url,
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+
+    if(!newWindow){
+
+        showToast(
+            "The browser blocked the new tab. Please allow pop-ups for this site.",
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   STATUS CLASS
+========================================================= */
+
+function getStatusClass(
+    status
+){
+
+    switch(
+        String(status || "").trim()
+    ){
+
+        case "For Approval":
+            return "status-approval";
+
+        case "Approved":
+            return "status-approved";
+
+        case "Completed":
+            return "status-completed";
+
+        case "Rejected":
+            return "status-rejected";
+
+        case "Planned":
+        default:
+            return "status-planned";
+
+    }
+
+}
+
+
+/* =========================================================
+   OPEN PLAN MODAL
+========================================================= */
+
+function openPlanModal(){
+
+    editingEventId =
+        null;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Plan Event";
+
+
+    document.getElementById(
+        "saveButton"
+    ).textContent =
+        "Plan Event";
+
+
+    document.getElementById(
+        "deleteButton"
+    ).classList.add(
+        "hidden"
+    );
+
+
+    clearForm();
+
+
+    document.getElementById(
+        "eventStatus"
+    ).value =
+        "Planned";
+
+
+    document.getElementById(
+        "eventModal"
+    ).classList.add(
+        "show"
+    );
+
+
+    setTimeout(
+        function(){
+
+            document.getElementById(
+                "eventName"
+            ).focus();
+
+        },
+        100
+    );
+
+}
+
+
+/* =========================================================
+   OPEN EDIT MODAL
+========================================================= */
+
+function openEditModal(
+    eventId
+){
+
+    const event =
+        events.find(
+            item =>
+                String(item.id) ===
+                String(eventId)
+        );
+
+
+    if(!event){
+
+        showToast(
+            "Event not found.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    editingEventId =
+        event.id;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Edit Event";
+
+
+    document.getElementById(
+        "saveButton"
+    ).textContent =
+        "Save Changes";
+
+
+    document.getElementById(
+        "deleteButton"
+    ).classList.remove(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "eventId"
+    ).value =
+        event.id;
+
+
+    document.getElementById(
+        "eventName"
+    ).value =
+        event.name || "";
+
+
+    document.getElementById(
+        "eventDate"
+    ).value =
+        event.date || "";
+
+
+    document.getElementById(
+        "eventParticipants"
+    ).value =
+        event.participants || "";
+
+
+    document.getElementById(
+        "eventLocation"
+    ).value =
+        event.location || "";
+
+
+    document.getElementById(
+        "eventOrganizer"
+    ).value =
+        event.organizer || "";
+
+
+    document.getElementById(
+        "eventStatus"
+    ).value =
+        event.status ||
+        "Planned";
+
+
+    document.getElementById(
+        "eventModal"
+    ).classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   CLEAR FORM
+========================================================= */
+
+function clearForm(){
+
+    document.getElementById(
+        "eventId"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "eventName"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "eventDate"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "eventParticipants"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "eventLocation"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "eventOrganizer"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "eventStatus"
+    ).value =
+        "Planned";
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeModal(){
+
+    document.getElementById(
+        "eventModal"
+    ).classList.remove(
+        "show"
+    );
+
+
+    editingEventId =
+        null;
+
+}
+
+
+/* =========================================================
+   SAVE EVENT
+========================================================= */
+
+async function saveEvent(){
+
+    const name =
+        document.getElementById(
+            "eventName"
+        ).value.trim();
+
+
+    const date =
+        document.getElementById(
+            "eventDate"
+        ).value;
+
+
+    const participants =
+        document.getElementById(
+            "eventParticipants"
+        ).value;
+
+
+    const location =
+        document.getElementById(
+            "eventLocation"
+        ).value.trim();
+
+
+    const organizer =
+        document.getElementById(
+            "eventOrganizer"
+        ).value.trim();
+
+
+    const status =
+        document.getElementById(
+            "eventStatus"
+        ).value;
+
+
+    if(!name){
+
+        showToast(
+            "Event name is required.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(!date){
+
+        showToast(
+            "Event date is required.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const saveButton =
+        document.getElementById(
+            "saveButton"
+        );
+
+
+    const wasEditing =
+        !!editingEventId;
+
+
+    saveButton.disabled =
+        true;
+
+
+    saveButton.textContent =
+        "Saving...";
+
+
+    try{
+
+        if(wasEditing){
+
+            await api(
+                "update",
+                {
+                    id:
+                        editingEventId,
+
+                    name:
+                        name,
+
+                    date:
+                        date,
+
+                    participants:
+                        participants,
+
+                    location:
+                        location,
+
+                    organizer:
+                        organizer,
+
+                    status:
+                        status
+                }
+            );
+
+
+            showToast(
+                "Event updated successfully.",
+                "success"
+            );
+
+        }
+
+        else{
+
+            await api(
+                "add",
+                {
+                    name:
+                        name,
+
+                    date:
+                        date,
+
+                    participants:
+                        participants,
+
+                    location:
+                        location,
+
+                    organizer:
+                        organizer,
+
+                    status:
+                        "Planned"
+                }
+            );
+
+
+            showToast(
+                "Event planned successfully.",
+                "success"
+            );
+
+        }
+
+
+        closeModal();
+
+        await loadEvents();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        showToast(
+            error.message,
+            "error"
+        );
+
+    }
+
+    finally{
+
+        saveButton.disabled =
+            false;
+
+
+        saveButton.textContent =
+            wasEditing
+            ?
+            "Save Changes"
+            :
+            "Plan Event";
+
+    }
+
+}
+
+
+/* =========================================================
+   CONFIRM DELETE
+========================================================= */
+
+function confirmDelete(
+    eventId
+){
+
+    const event =
+        events.find(
+            item =>
+                String(item.id) ===
+                String(eventId)
+        );
+
+
+    if(!event){
+
+        showToast(
+            "Event not found.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+
+            "Delete this event?\n\n" +
+
+            event.name +
+
+            "\n\n" +
+
+            event.id +
+
+            "\n\n" +
+
+            "This action cannot be undone."
+
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    deleteEvent(
+        event.id
+    );
+
+}
+
+
+/* =========================================================
+   DELETE CURRENT EVENT
+========================================================= */
+
+function deleteCurrentEvent(){
+
+    if(!editingEventId){
+
+        return;
+
+    }
+
+
+    confirmDelete(
+        editingEventId
+    );
+
+}
+
+
+/* =========================================================
+   DELETE EVENT
+========================================================= */
+
+async function deleteEvent(
+    eventId
+){
+
+    try{
+
+        await api(
+            "delete",
+            {
+                id:
+                    eventId
+            }
+        );
+
+
+        closeModal();
+
+
+        if(
+            String(selectedEventId) ===
+            String(eventId)
+        ){
+
+            selectedEventId =
+                null;
+
+        }
+
+
+        showToast(
+            "Event deleted successfully.",
+            "success"
+        );
+
+
+        await loadEvents();
+
+
+        showWorkspace(
+            "events"
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        showToast(
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   DISPLAY DATE
+========================================================= */
+
+function formatDisplayDate(
+    value
+){
+
+    if(!value){
+
+        return "—";
+
+    }
+
+
+    const parts =
+        String(value).split("-");
+
+
+    if(
+        parts.length !== 3
+    ){
+
+        return value;
+
+    }
+
+
+    const year =
+        Number(parts[0]);
+
+
+    const month =
+        Number(parts[1]) - 1;
+
+
+    const day =
+        Number(parts[2]);
+
+
+    const date =
+        new Date(
+            year,
+            month,
+            day
+        );
+
+
+    return date.toLocaleDateString(
+        "en-PH",
+        {
+            year:"numeric",
+            month:"short",
+            day:"numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE JS
+========================================================= */
+
+function escapeJs(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /\\/g,
+        "\\\\"
+    )
+    .replace(
+        /'/g,
+        "\\'"
+    )
+    .replace(
+        /"/g,
+        '\\"'
+    )
+    .replace(
+        /\n/g,
+        "\\n"
+    )
+    .replace(
+        /\r/g,
+        "\\r"
+    );
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(
+    message,
+    type="success"
+){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.className =
+        "toast show " +
+        type;
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            function(){
+
+                toast.className =
+                    "toast";
+
+            },
+            3000
+        );
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL OUTSIDE
+========================================================= */
+
+document.getElementById(
+    "eventModal"
+)
+.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            this
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            closeModal();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   MESSAGE FROM EMBEDDED EVENT TRANSACTION PAGE
+========================================================= */
+
+window.addEventListener(
+    "message",
+    async function(event){
+
+        if(
+            !event.data
+        ){
+
+            return;
+
+        }
+
+
+        const iframe =
+            document.getElementById(
+                "transactionFrame"
+            );
+
+
+        const validFrame =
+            iframe &&
+            event.source ===
+            iframe.contentWindow;
+
+
+        if(!validFrame){
+
+            return;
+
+        }
+
+
+        if(
+            event.data.type ===
+            "EVENT_TRANSACTION_UPDATED"
+        ){
+
+            console.log(
+                "Event transaction update received:",
+                event.data.action
+            );
+
+
+            try{
+
+                await refreshAfterTransactionChange();
+
+            }
+
+            catch(error){
+
+                console.error(
+                    error
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+        if(
+            event.data.type ===
+            "CAS_FUND_TRANSACTION_UPDATED"
+        ){
+
+            console.log(
+                "CAS FUND transaction update received."
+            );
+
+
+            try{
+
+                await loadFinancialSummary();
+
+            }
+
+            catch(error){
+
+                console.error(
+                    error
+                );
+
+            }
+
+
+            return;
+
+        }
+
+
+        if(
+            event.data.type ===
+            "PRE_AUDIT_UPDATED"
+        ){
+
+            console.log(
+                "Pre-Audit update received."
+            );
+
+
+            await loadFinancialSummary();
+
+
+            if(selectedEventId){
+
+                const eventRecord =
+                    events.find(
+                        function(item){
+
+                            return String(item.id) ===
+                                String(selectedEventId);
+
+                        }
+                    );
+
+
+                if(eventRecord){
+
+                    renderEventDetails(
+                        eventRecord
+                    );
+
+                }
+
+            }
+
+
+            return;
+
+        }
+
+
+        if(
+            event.data.type ===
+            "POST_AUDIT_UPDATED"
+        ){
+
+            console.log(
+                "Post-Audit update received."
+            );
+
+
+            await loadEvents();
+
+            return;
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   PAGE VISIBILITY
+========================================================= */
+
+document.addEventListener(
+    "visibilitychange",
+    function(){
+
+        if(
+            !document.hidden
+        ){
+
+            checkTransactionChanges();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   TRANSACTION IFRAME LOAD
+========================================================= */
+
+document.getElementById(
+    "transactionFrame"
+)
+.addEventListener(
+    "load",
+    function(){
+
+        console.log(
+            "Event Transaction iframe loaded."
+        );
+
+
+        setTimeout(
+            function(){
+
+                checkTransactionChanges();
+
+            },
+            1000
+        );
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

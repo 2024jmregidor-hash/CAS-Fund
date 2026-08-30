@@ -1,679 +1,3399 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAS Fund | Payment Receipt</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>CAS FUND | Events</title>
+
+<link
+rel="icon"
+href="https://mmclcassc.github.io/CAS-SC-FINANCE-REPORT/CALENDAR_LOGO.png">
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f4f6f9;
-    color: #1f2937;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#eef2f7;
+color:#172033;
+line-height:1.4;
 }
 
-.receipt {
-    width: 100%;
-    max-width: 600px;
-    background: white;
-    border-radius: 12px;
-    border: 1px solid #e5e7eb;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+button,
+input,
+select{
+font-family:inherit;
 }
 
-.receipt-header {
-    background: #0f3d5e;
-    color: white;
-    padding: 28px;
-    text-align: center;
+button{
+cursor:pointer;
 }
 
-.receipt-header h1 {
-    font-size: 25px;
-    margin-bottom: 6px;
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+background:#0b5ed7;
+color:white;
+padding:28px 40px;
 }
 
-.receipt-header p {
-    font-size: 13px;
-    opacity: .8;
+.header-inner{
+max-width:1200px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:20px;
 }
 
-.receipt-body {
-    padding: 30px;
+.header h1{
+font-size:28px;
 }
 
-.receipt-title {
-    text-align: center;
-    margin-bottom: 25px;
+.header p{
+margin-top:5px;
+font-size:13px;
+opacity:.9;
 }
 
-.receipt-title h2 {
-    font-size: 21px;
-    margin-bottom: 5px;
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:30px;
 }
 
-.receipt-title p {
-    color: #6b7280;
-    font-size: 13px;
+/* =========================================================
+   PAGE TABS
+========================================================= */
+
+.page-tabs{
+display:flex;
+gap:4px;
+margin-bottom:22px;
+border-bottom:1px solid #dfe5ec;
 }
 
-.transaction-id {
-    background: #f8fafc;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 14px;
-    text-align: center;
-    margin-bottom: 25px;
+.page-tab{
+border:0;
+background:transparent;
+padding:13px 22px;
+font-size:12px;
+font-weight:700;
+color:#697486;
+border-bottom:3px solid transparent;
+transition:.2s;
 }
 
-.transaction-id span {
-    display: block;
-    color: #6b7280;
-    font-size: 12px;
-    margin-bottom: 5px;
+.page-tab:hover{
+color:#0b5ed7;
+background:#f5f8fc;
 }
 
-.transaction-id strong {
-    font-size: 16px;
-    letter-spacing: .5px;
+.page-tab.active{
+color:#0b5ed7;
+border-bottom-color:#0b5ed7;
 }
 
-.info-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-    margin-bottom: 25px;
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.toolbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+margin-bottom:20px;
 }
 
-.info-item {
-    border-bottom: 1px solid #e5e7eb;
-    padding-bottom: 10px;
+.toolbar-title{
+font-size:20px;
+font-weight:800;
 }
 
-.info-label {
-    color: #6b7280;
-    font-size: 12px;
-    margin-bottom: 5px;
+.toolbar-subtitle{
+font-size:12px;
+color:#778294;
+margin-top:3px;
 }
 
-.info-value {
-    font-size: 14px;
-    font-weight: 600;
-    word-break: break-word;
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+border:0;
+border-radius:8px;
+padding:11px 17px;
+font-size:12px;
+font-weight:700;
+transition:.2s;
 }
 
-.amount-box {
-    border-top: 2px solid #0f3d5e;
-    border-bottom: 2px solid #0f3d5e;
-    padding: 18px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
+.btn:hover{
+transform:translateY(-1px);
 }
 
-.amount-label {
-    font-weight: bold;
+.btn:disabled{
+opacity:.6;
+cursor:not-allowed;
+transform:none;
 }
 
-.amount {
-    font-size: 25px;
-    font-weight: bold;
-    color: #0f3d5e;
+.btn-primary{
+background:#0b5ed7;
+color:white;
 }
 
-.status {
-    text-align: center;
-    margin-bottom: 25px;
+.btn-primary:hover{
+background:#094db1;
 }
 
-.status span {
-    display: inline-block;
-    background: #dcfce7;
-    color: #166534;
-    padding: 7px 15px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: bold;
+.btn-secondary{
+background:#6c757d;
+color:white;
 }
 
-.receipt-footer {
-    border-top: 1px solid #e5e7eb;
-    padding-top: 20px;
-    text-align: center;
-    color: #6b7280;
-    font-size: 12px;
-    line-height: 1.6;
+.btn-danger{
+background:#dc3545;
+color:white;
 }
 
-.actions {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 25px;
+.btn-light{
+background:#f1f3f6;
+color:#172033;
 }
 
-button {
-    border: none;
-    padding: 11px 18px;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 14px;
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.summary{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-bottom:20px;
 }
 
-.print-btn {
-    background: #0f3d5e;
-    color: white;
+.summary-card{
+background:white;
+border:1px solid #e1e7ee;
+border-radius:12px;
+padding:18px;
+box-shadow:0 3px 12px rgba(0,0,0,.05);
 }
 
-.close-btn {
-    background: #e5e7eb;
-    color: #374151;
+.summary-card.collection-card{
+border-left:4px solid #198754;
 }
 
-.loading {
-    text-align: center;
-    padding: 60px 20px;
-    color: #6b7280;
+.summary-card.expense-card{
+border-left:4px solid #dc3545;
 }
 
-.error {
-    text-align: center;
-    padding: 60px 20px;
-    color: #b91c1c;
+.summary-card.available-card{
+border-left:4px solid #0b5ed7;
 }
 
-@media print {
+.summary-card.approved-card{
+border-left:4px solid #6f42c1;
+}
 
-    body {
-        background: white;
-        padding: 0;
-    }
+.summary-label{
+font-size:9px;
+text-transform:uppercase;
+letter-spacing:.7px;
+color:#778294;
+}
 
-    .receipt {
-        max-width: none;
-        border: none;
-        box-shadow: none;
-    }
+.summary-value{
+font-size:24px;
+font-weight:800;
+margin-top:7px;
+}
 
-    .actions {
-        display: none;
-    }
+.collection-value{
+color:#198754;
+}
+
+.expense-value{
+color:#dc3545;
+}
+
+.available-value{
+color:#0b5ed7;
+}
+
+.approved-value{
+color:#6f42c1;
+}
+
+.summary-note{
+font-size:10px;
+color:#8993a2;
+margin-top:5px;
+}
+
+.summary-loading{
+font-size:15px;
+color:#8993a2;
+}
+
+/* =========================================================
+   MAIN PANEL
+========================================================= */
+
+.panel{
+background:white;
+border:1px solid #e1e7ee;
+border-radius:14px;
+box-shadow:0 3px 12px rgba(0,0,0,.05);
+overflow:hidden;
+}
+
+.panel-header{
+padding:20px 22px;
+border-bottom:1px solid #edf0f4;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:15px;
+}
+
+.panel-header h2{
+font-size:17px;
+}
+
+.panel-header p{
+font-size:11px;
+color:#7b8594;
+margin-top:4px;
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-box{
+padding:16px 22px;
+border-bottom:1px solid #edf0f4;
+}
+
+.search-box input{
+width:100%;
+border:1px solid #d9e0e8;
+border-radius:8px;
+padding:11px 13px;
+font-size:13px;
+outline:none;
+}
+
+.search-box input:focus{
+border-color:#0b5ed7;
+box-shadow:0 0 0 3px rgba(11,94,215,.08);
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrapper{
+overflow-x:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#f6f8fb;
+font-size:10px;
+text-transform:uppercase;
+letter-spacing:.4px;
+color:#697486;
+text-align:left;
+padding:13px;
+border-bottom:1px solid #e2e7ed;
+white-space:nowrap;
+}
+
+td{
+font-size:13px;
+padding:14px 13px;
+border-bottom:1px solid #edf0f4;
+vertical-align:middle;
+}
+
+tr:last-child td{
+border-bottom:0;
+}
+
+.event-id{
+font-size:10px;
+font-weight:700;
+color:#8993a2;
+}
+
+.event-name{
+font-weight:700;
+}
+
+.event-location{
+color:#697486;
+font-size:12px;
+}
+
+.date-cell{
+white-space:nowrap;
+}
+
+.participants{
+text-align:center;
+}
+
+/* =========================================================
+   EXPECTED EXPENSE
+========================================================= */
+
+.expense-cell{
+white-space:nowrap;
+font-weight:700;
+}
+
+.expense-cell.loading{
+color:#8993a2;
+font-weight:400;
+}
+
+.expense-cell.has-expense{
+color:#dc3545;
+}
+
+.expense-cell.no-expense{
+color:#8993a2;
+font-weight:400;
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status{
+display:inline-block;
+padding:6px 10px;
+border-radius:20px;
+font-size:10px;
+font-weight:700;
+white-space:nowrap;
+}
+
+.status-planned{
+background:#e9f2ff;
+color:#0b5ed7;
+}
+
+.status-approval{
+background:#fff4d6;
+color:#9a6900;
+}
+
+.status-approved{
+background:#e7f7ee;
+color:#198754;
+}
+
+.status-rejected{
+background:#fdeaea;
+color:#dc3545;
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.actions{
+display:flex;
+gap:6px;
+white-space:nowrap;
+}
+
+.action-btn{
+border:0;
+border-radius:6px;
+padding:7px 10px;
+font-size:10px;
+font-weight:700;
+}
+
+.action-preaudit{
+background:#e7f7ee;
+color:#198754;
+}
+
+.action-preaudit:hover{
+background:#d3f0df;
+}
+
+.action-edit{
+background:#e9f2ff;
+color:#0b5ed7;
+}
+
+.action-delete{
+background:#fdeaea;
+color:#dc3545;
+}
+
+/* =========================================================
+   TRANSACTIONS PAGE
+========================================================= */
+
+.transactions-intro{
+padding:35px 25px;
+text-align:center;
+}
+
+.transactions-icon{
+font-size:40px;
+margin-bottom:12px;
+}
+
+.transactions-title{
+font-size:17px;
+font-weight:800;
+color:#172033;
+}
+
+.transactions-text{
+font-size:12px;
+color:#7b8594;
+margin-top:6px;
+max-width:600px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.transaction-status-card{
+margin:20px;
+padding:18px;
+background:#f6f8fb;
+border:1px solid #e1e7ee;
+border-radius:10px;
+text-align:left;
+}
+
+.transaction-status-title{
+font-size:11px;
+font-weight:800;
+text-transform:uppercase;
+color:#697486;
+}
+
+.transaction-status-text{
+font-size:12px;
+color:#596476;
+margin-top:5px;
+}
+
+/* =========================================================
+   EMPTY / LOADING
+========================================================= */
+
+.empty{
+text-align:center;
+padding:55px 20px;
+color:#7b8594;
+}
+
+.empty-icon{
+font-size:35px;
+margin-bottom:10px;
+}
+
+.empty-title{
+font-size:15px;
+font-weight:700;
+color:#172033;
+}
+
+.empty-text{
+font-size:12px;
+margin-top:5px;
+}
+
+.loading{
+text-align:center;
+padding:35px;
+color:#697486;
+font-size:12px;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-backdrop{
+position:fixed;
+inset:0;
+background:rgba(10,20,35,.55);
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:1000;
+}
+
+.modal-backdrop.show{
+display:flex;
+}
+
+.modal{
+background:white;
+width:100%;
+max-width:560px;
+border-radius:14px;
+box-shadow:0 20px 60px rgba(0,0,0,.25);
+overflow:hidden;
+}
+
+.modal-header{
+padding:20px 22px;
+border-bottom:1px solid #edf0f4;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.modal-header h2{
+font-size:18px;
+}
+
+.modal-close{
+border:0;
+background:none;
+font-size:22px;
+color:#697486;
+cursor:pointer;
+}
+
+.modal-body{
+padding:22px;
+}
+
+.form-group{
+margin-bottom:15px;
+}
+
+.form-group label{
+display:block;
+font-size:11px;
+font-weight:700;
+color:#596476;
+margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select{
+width:100%;
+border:1px solid #d9e0e8;
+border-radius:8px;
+padding:11px 12px;
+font-size:13px;
+outline:none;
+background:white;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+border-color:#0b5ed7;
+box-shadow:0 0 0 3px rgba(11,94,215,.08);
+}
+
+.form-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+.modal-footer{
+padding:16px 22px;
+border-top:1px solid #edf0f4;
+display:flex;
+justify-content:space-between;
+gap:10px;
+}
+
+.modal-footer-left,
+.modal-footer-right{
+display:flex;
+gap:8px;
+}
+
+.hidden{
+display:none !important;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+position:fixed;
+right:22px;
+bottom:22px;
+background:#172033;
+color:white;
+padding:13px 17px;
+border-radius:9px;
+font-size:12px;
+font-weight:700;
+box-shadow:0 8px 30px rgba(0,0,0,.2);
+opacity:0;
+transform:translateY(10px);
+pointer-events:none;
+transition:.25s;
+z-index:2000;
+}
+
+.toast.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.toast.success{
+background:#198754;
+}
+
+.toast.error{
+background:#dc3545;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px){
+
+.summary{
+grid-template-columns:repeat(2,1fr);
+}
 
 }
+
+@media(max-width:650px){
+
+.header{
+padding:22px;
+}
+
+.header-inner{
+align-items:flex-start;
+flex-direction:column;
+}
+
+.container{
+padding:16px;
+}
+
+.toolbar{
+align-items:flex-start;
+flex-direction:column;
+}
+
+.toolbar .btn{
+width:100%;
+}
+
+.summary{
+grid-template-columns:1fr;
+}
+
+.panel-header{
+align-items:flex-start;
+flex-direction:column;
+}
+
+.form-row{
+grid-template-columns:1fr;
+}
+
+.actions{
+flex-wrap:wrap;
+}
+
+.page-tabs{
+overflow-x:auto;
+}
+
+.page-tab{
+white-space:nowrap;
+}
+
+}
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+body{
+background:white;
+}
+
+.header{
+background:white;
+color:#172033;
+padding:15px;
+}
+
+.toolbar,
+.search-box,
+.actions,
+.modal-backdrop,
+.page-tabs{
+display:none !important;
+}
+
+.container{
+max-width:none;
+padding:10px;
+}
+
+.panel,
+.summary-card{
+box-shadow:none;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<div class="receipt">
+<header class="header">
 
-    <div class="receipt-header">
+<div class="header-inner">
 
-        <h1>
-            CAS FUND
-        </h1>
+<div>
 
-        <p>
-            Fund Collection System
-        </p>
+<h1>CAS FUND</h1>
 
-    </div>
-
-    <div
-        id="receiptContent"
-        class="receipt-body">
-
-        <div class="loading">
-            Loading receipt...
-        </div>
-
-    </div>
+<p>Event Planning & Event Database</p>
 
 </div>
 
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- =======================================================
+     PAGE NAVIGATION
+======================================================= -->
+
+<div class="page-tabs">
+
+<button
+class="page-tab active"
+id="eventsTab"
+onclick="switchPage('events')">
+
+Events
+
+</button>
+
+
+<button
+class="page-tab"
+id="transactionsTab"
+onclick="switchPage('transactions')">
+
+Transactions
+
+</button>
+
+</div>
+
+
+<!-- =======================================================
+     EVENTS PAGE
+======================================================= -->
+
+<div id="eventsPage">
+
+
+<div class="toolbar">
+
+<div>
+
+<div class="toolbar-title">
+
+Events
+
+</div>
+
+<div class="toolbar-subtitle">
+
+Manage planned CAS events and their approval status.
+
+</div>
+
+</div>
+
+
+<button
+class="btn btn-primary"
+onclick="openPlanModal()">
+
++ PLAN EVENT
+
+</button>
+
+</div>
+
+
+<!-- =======================================================
+     SUMMARY
+======================================================= -->
+
+<section class="summary">
+
+
+<div class="summary-card collection-card">
+
+<div class="summary-label">
+
+CAS FUND Collection
+
+</div>
+
+<div
+class="summary-value collection-value"
+id="casFundCollection">
+
+<span class="summary-loading">
+
+Loading...
+
+</span>
+
+</div>
+
+<div class="summary-note">
+
+Total collected from CAS FUND transactions
+
+</div>
+
+</div>
+
+
+<div class="summary-card expense-card">
+
+<div class="summary-label">
+
+Approved Event Expenses
+
+</div>
+
+<div
+class="summary-value expense-value"
+id="approvedEventExpenses">
+
+<span class="summary-loading">
+
+Loading...
+
+</span>
+
+</div>
+
+<div class="summary-note">
+
+Expected expenses linked to approved events
+
+</div>
+
+</div>
+
+
+<div class="summary-card available-card">
+
+<div class="summary-label">
+
+Available Fund
+
+</div>
+
+<div
+class="summary-value available-value"
+id="availableFund">
+
+<span class="summary-loading">
+
+Loading...
+
+</span>
+
+</div>
+
+<div class="summary-note">
+
+CAS FUND collection less approved event expenses
+
+</div>
+
+</div>
+
+
+<div class="summary-card approved-card">
+
+<div class="summary-label">
+
+Approved Events
+
+</div>
+
+<div
+class="summary-value approved-value"
+id="approvedEvents">
+
+0
+
+</div>
+
+<div class="summary-note">
+
+Approved events with Event ID linkage
+
+</div>
+
+</div>
+
+
+</section>
+
+
+<section class="panel">
+
+
+<div class="panel-header">
+
+<div>
+
+<h2>
+
+Event List
+
+</h2>
+
+<p>
+
+All events currently recorded in the CAS FUND event database.
+
+</p>
+
+</div>
+
+
+<button
+class="btn btn-light"
+onclick="loadEvents()">
+
+↻ Refresh
+
+</button>
+
+</div>
+
+
+<div class="search-box">
+
+<input
+type="text"
+id="searchInput"
+placeholder="Search event name, location, organizer, status or event ID..."
+oninput="renderEvents()">
+
+</div>
+
+
+<div
+id="eventContainer"
+class="table-wrapper">
+
+<div class="loading">
+
+Loading events...
+
+</div>
+
+</div>
+
+
+</section>
+
+
+<div
+style="
+text-align:center;
+font-size:10px;
+color:#8993a2;
+padding:18px;
+">
+
+CAS FUND • Event Planning System
+
+</div>
+
+
+</div>
+
+
+<!-- =======================================================
+     TRANSACTIONS PAGE
+======================================================= -->
+
+<div
+id="transactionsPage"
+class="hidden">
+
+
+<div class="toolbar">
+
+<div>
+
+<div class="toolbar-title">
+
+Transactions
+
+</div>
+
+<div class="toolbar-subtitle">
+
+Actual income and expenses for CAS FUND events.
+
+</div>
+
+</div>
+
+
+<button
+class="btn btn-primary"
+onclick="openTransactionModal()">
+
++ RECORD TRANSACTION
+
+</button>
+
+</div>
+
+
+<section class="panel">
+
+
+<div class="panel-header">
+
+<div>
+
+<h2>
+
+Event Transactions
+
+</h2>
+
+<p>
+
+Record actual income and expenses linked to approved events or general transactions.
+
+</p>
+
+</div>
+
+
+<button
+class="btn btn-light"
+onclick="showTransactionConnectionStatus()">
+
+↻ Refresh
+
+</button>
+
+</div>
+
+
+<div class="transactions-intro">
+
+
+<div class="transactions-icon">
+
+💰
+
+</div>
+
+
+<div class="transactions-title">
+
+Transactions Database
+
+</div>
+
+
+<div class="transactions-text">
+
+This section is prepared for the independent Event Transactions database.
+
+Each transaction will be connected to an approved Event ID when applicable.
+
+</div>
+
+
+<div class="transaction-status-card">
+
+<div class="transaction-status-title">
+
+Transaction System
+
+</div>
+
+
+<div class="transaction-status-text">
+
+Event Transactions database connection will be activated after the new transaction database backend is finalized.
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+<div
+style="
+text-align:center;
+font-size:10px;
+color:#8993a2;
+padding:18px;
+">
+
+CAS FUND • Event Transactions
+
+</div>
+
+
+</div>
+
+
+</main>
+
+
+<!-- =======================================================
+     EVENT MODAL
+======================================================= -->
+
+<div
+class="modal-backdrop"
+id="eventModal">
+
+
+<div class="modal">
+
+
+<div class="modal-header">
+
+<h2 id="modalTitle">
+
+Plan Event
+
+</h2>
+
+
+<button
+class="modal-close"
+onclick="closeModal()">
+
+×
+
+</button>
+
+</div>
+
+
+<div class="modal-body">
+
+
+<input
+type="hidden"
+id="eventId">
+
+
+<div class="form-group">
+
+<label>
+
+EVENT NAME
+
+</label>
+
+<input
+type="text"
+id="eventName"
+placeholder="Enter event name">
+
+</div>
+
+
+<div class="form-row">
+
+
+<div class="form-group">
+
+<label>
+
+EVENT DATE
+
+</label>
+
+<input
+type="date"
+id="eventDate">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+
+PARTICIPANTS
+
+</label>
+
+<input
+type="number"
+id="eventParticipants"
+min="0"
+placeholder="0">
+
+</div>
+
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+
+LOCATION
+
+</label>
+
+<input
+type="text"
+id="eventLocation"
+placeholder="Enter event location">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+
+ORGANIZER
+
+</label>
+
+<input
+type="text"
+id="eventOrganizer"
+placeholder="Enter organizer">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+
+STATUS
+
+</label>
+
+<select id="eventStatus">
+
+<option value="Planned">
+
+Planned
+
+</option>
+
+<option value="For Approval">
+
+For Approval
+
+</option>
+
+<option value="Approved">
+
+Approved
+
+</option>
+
+<option value="Rejected">
+
+Rejected
+
+</option>
+
+</select>
+
+</div>
+
+
+</div>
+
+
+<div class="modal-footer">
+
+
+<div class="modal-footer-left">
+
+<button
+id="deleteButton"
+class="btn btn-danger hidden"
+onclick="deleteCurrentEvent()">
+
+Delete Event
+
+</button>
+
+</div>
+
+
+<div class="modal-footer-right">
+
+<button
+class="btn btn-light"
+onclick="closeModal()">
+
+Close
+
+</button>
+
+
+<button
+class="btn btn-primary"
+id="saveButton"
+onclick="saveEvent()">
+
+Plan Event
+
+</button>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- =======================================================
+     TOAST
+======================================================= -->
+
+<div
+class="toast"
+id="toast">
+
+</div>
+
+
 <script>
 
-/* =========================================
+/* =========================================================
+   EVENT API
+========================================================= */
+
+const SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbyqvQXIrBivAapKICFHPCLQHie6Dcnw84QBDbNfome16n2AF88Im8FtRntwaD93Ree8/exec";
+
+
+/* =========================================================
+   TRANSACTION API
+========================================================= */
+
+const TRANSACTION_API_URL =
+"https://script.google.com/macros/s/AKfycbzOY63c-59sL4VziVsUxwJHiqG-irjplIF45WeGiKT52gnNaBxDTLr2OuhoSVs4duod5g/exec";
+
+
+/* =========================================================
+   PRE-AUDIT API
+========================================================= */
+
+const PRE_AUDIT_API_URL =
+"https://script.google.com/macros/s/AKfycbwt8SePjlzyHGZ7-w7s-phygdxxKSTbCfaZiXT8x_pvtkPT6J2HJr3rYcVn7x6wP4Mq/exec";
+
+
+/* =========================================================
+   PRE-AUDIT PAGE
+========================================================= */
+
+const PRE_AUDIT_PAGE =
+"pre-audit.html";
+
+
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
+
+let events = [];
+
+let transactions = [];
+
+let preAuditRecords = {};
+
+let editingEventId = null;
+
+let toastTimer;
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+loadEvents();
+
+loadFinancialSummary();
+
+}
+);
+
+
+/* =========================================================
+   PAGE NAVIGATION
+========================================================= */
+
+function switchPage(page){
+
+const eventsPage =
+document.getElementById(
+"eventsPage"
+);
+
+const transactionsPage =
+document.getElementById(
+"transactionsPage"
+);
+
+const eventsTab =
+document.getElementById(
+"eventsTab"
+);
+
+const transactionsTab =
+document.getElementById(
+"transactionsTab"
+);
+
+
+if(page === "transactions"){
+
+eventsPage.classList.add(
+"hidden"
+);
+
+transactionsPage.classList.remove(
+"hidden"
+);
+
+eventsTab.classList.remove(
+"active"
+);
+
+transactionsTab.classList.add(
+"active"
+);
+
+}
+else{
+
+transactionsPage.classList.add(
+"hidden"
+);
+
+eventsPage.classList.remove(
+"hidden"
+);
+
+transactionsTab.classList.remove(
+"active"
+);
+
+eventsTab.classList.add(
+"active"
+);
+
+}
+
+}
+
+
+/* =========================================================
+   GENERIC EVENT API
+========================================================= */
+
+async function api(
+action,
+params = {}
+){
+
+const query =
+new URLSearchParams();
+
+query.set(
+"action",
+action
+);
+
+Object.keys(params)
+.forEach(function(key){
+
+if(
+params[key] !== undefined &&
+params[key] !== null
+){
+
+query.set(
+key,
+String(params[key])
+);
+
+}
+
+});
+
+
+const url =
+SCRIPT_URL +
+"?" +
+query.toString();
+
+
+const response =
+await fetch(
+url,
+{
+method:"GET",
+cache:"no-store"
+}
+);
+
+
+if(!response.ok){
+
+throw new Error(
+"Server returned HTTP " +
+response.status
+);
+
+}
+
+
+const data =
+await response.json();
+
+
+if(!data.success){
+
+throw new Error(
+data.message ||
+"Request failed."
+);
+
+}
+
+
+return data;
+
+}
+
+
+/* =========================================================
+   PRE-AUDIT API
+========================================================= */
+
+async function preAuditApi(
+action,
+params = {}
+){
+
+const query =
+new URLSearchParams();
+
+query.set(
+"action",
+action
+);
+
+
+Object.keys(params)
+.forEach(function(key){
+
+if(
+params[key] !== undefined &&
+params[key] !== null
+){
+
+query.set(
+key,
+String(params[key])
+);
+
+}
+
+});
+
+
+const url =
+PRE_AUDIT_API_URL +
+"?" +
+query.toString();
+
+
+const response =
+await fetch(
+url,
+{
+method:"GET",
+cache:"no-store"
+}
+);
+
+
+if(!response.ok){
+
+throw new Error(
+"Pre-Audit API HTTP " +
+response.status
+);
+
+}
+
+
+const data =
+await response.json();
+
+
+if(
+!data ||
+data.success === false
+){
+
+throw new Error(
+data?.message ||
+data?.error ||
+"Pre-Audit request failed."
+);
+
+}
+
+
+return data;
+
+}
+
+
+/* =========================================================
+   LOAD EVENTS
+========================================================= */
+
+async function loadEvents(){
+
+const container =
+document.getElementById(
+"eventContainer"
+);
+
+
+container.innerHTML = `
+
+<div class="loading">
+
+Loading events...
+
+</div>
+
+`;
+
+
+try{
+
+const data =
+await api(
+"list"
+);
+
+
+events =
+Array.isArray(
+data.events
+)
+?
+data.events
+:
+[];
+
+
+updateSummary();
+
+renderEvents();
+
+
+await loadFinancialSummary();
+
+}
+catch(error){
+
+console.error(error);
+
+
+container.innerHTML = `
+
+<div class="empty">
+
+<div class="empty-icon">
+
+⚠
+
+</div>
+
+<div class="empty-title">
+
+Unable to load events
+
+</div>
+
+<div class="empty-text">
+
+${escapeHtml(error.message)}
+
+</div>
+
+</div>
+
+`;
+
+
+showToast(
+error.message,
+"error"
+);
+
+}
+
+}
+
+
+/* =========================================================
+   LOAD FINANCIAL SUMMARY
+========================================================= */
+
+async function loadFinancialSummary(){
+
+const collectionElement =
+document.getElementById(
+"casFundCollection"
+);
+
+const expenseElement =
+document.getElementById(
+"approvedEventExpenses"
+);
+
+const availableElement =
+document.getElementById(
+"availableFund"
+);
+
+
+collectionElement.innerHTML =
+'<span class="summary-loading">Loading...</span>';
+
+expenseElement.innerHTML =
+'<span class="summary-loading">Loading...</span>';
+
+availableElement.innerHTML =
+'<span class="summary-loading">Loading...</span>';
+
+
+try{
+
+
+const transactionResponse =
+await fetch(
+TRANSACTION_API_URL +
+"?action=transactions&t=" +
+Date.now(),
+{
+method:"GET",
+cache:"no-store"
+}
+);
+
+
+if(!transactionResponse.ok){
+
+throw new Error(
+"Transaction API HTTP error " +
+transactionResponse.status
+);
+
+}
+
+
+const transactionData =
+await transactionResponse.json();
+
+
+if(
+!transactionData ||
+!transactionData.success
+){
+
+throw new Error(
+transactionData?.error ||
+"Transaction API returned an error."
+);
+
+}
+
+
+transactions =
+Array.isArray(
+transactionData.transactions
+)
+?
+transactionData.transactions
+:
+[];
+
+
+const totalCollected =
+transactions.reduce(
+function(sum,transaction){
+
+return (
+sum +
+Number(
+transaction.amount || 0
+)
+);
+
+},
+0
+);
+
+
+const approvedEvents =
+events.filter(
+function(event){
+
+return String(
+event.status || ""
+)
+.trim()
+.toLowerCase() ===
+"approved";
+
+}
+);
+
+
+document.getElementById(
+"approvedEvents"
+).textContent =
+approvedEvents.length;
+
+
+preAuditRecords = {};
+
+
+const expenseResults =
+await Promise.all(
+
+approvedEvents.map(
+async function(event){
+
+const eventId =
+String(
+event.id || ""
+).trim();
+
+
+if(!eventId){
+
+return {
+eventId:"",
+expense:0
+};
+
+}
+
+
+try{
+
+const data =
+await preAuditApi(
+"getPreAudit",
+{
+eventId:eventId
+}
+);
+
+
+let preAudit =
+data.preAudit ||
+data.data ||
+null;
+
+
+if(
+Array.isArray(preAudit)
+){
+
+preAudit =
+preAudit.find(
+function(record){
+
+return String(
+record.eventId ||
+record.id ||
+""
+).trim() ===
+eventId;
+
+}
+);
+
+}
+
+
+const expense =
+Number(
+preAudit?.totalExpectedExpenses ||
+data.totalExpectedExpenses ||
+0
+);
+
+
+preAuditRecords[eventId] = {
+
+expense:expense,
+
+found:!!preAudit
+
+};
+
+
+return {
+
+eventId:eventId,
+
+expense:expense
+
+};
+
+}
+catch(error){
+
+console.warn(
+"Pre-Audit lookup failed for Event ID:",
+eventId,
+error
+);
+
+
+preAuditRecords[eventId] = {
+
+expense:0,
+
+found:false,
+
+error:error.message
+
+};
+
+
+return {
+
+eventId:eventId,
+
+expense:0
+
+};
+
+}
+
+}
+
+)
+
+);
+
+
+const totalApprovedExpenses =
+expenseResults.reduce(
+function(sum,result){
+
+return (
+sum +
+Number(
+result.expense || 0
+)
+);
+
+},
+0
+);
+
+
+const availableFund =
+totalCollected -
+totalApprovedExpenses;
+
+
+collectionElement.textContent =
+"₱" +
+formatCurrency(
+totalCollected
+);
+
+
+expenseElement.textContent =
+"₱" +
+formatCurrency(
+totalApprovedExpenses
+);
+
+
+availableElement.textContent =
+"₱" +
+formatCurrency(
+availableFund
+);
+
+
+renderEvents();
+
+}
+catch(error){
+
+console.error(
+"Financial summary loading error:",
+error
+);
+
+
+collectionElement.textContent =
+"₱0.00";
+
+expenseElement.textContent =
+"₱0.00";
+
+availableElement.textContent =
+"₱0.00";
+
+
+showToast(
+"Unable to load financial information: " +
+error.message,
+"error"
+);
+
+}
+
+}
+
+
+/* =========================================================
+   FORMAT CURRENCY
+========================================================= */
+
+function formatCurrency(value){
+
+return Number(
+value || 0
+)
+.toLocaleString(
+"en-PH",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}
+);
+
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+function updateSummary(){
+
+const approved =
+events.filter(
+event =>
+event.status ===
+"Approved"
+).length;
+
+
+document.getElementById(
+"approvedEvents"
+).textContent =
+approved;
+
+}
+
+
+/* =========================================================
+   RENDER EVENTS
+========================================================= */
+
+function renderEvents(){
+
+const container =
+document.getElementById(
+"eventContainer"
+);
+
+
+const search =
+document.getElementById(
+"searchInput"
+)
+.value
+.trim()
+.toLowerCase();
+
+
+const filtered =
+events.filter(
+function(event){
+
+const text = [
+
+event.id,
+event.name,
+event.date,
+event.location,
+event.organizer,
+event.status
+
+]
+.join(" ")
+.toLowerCase();
+
+
+return text.includes(
+search
+);
+
+}
+);
+
+
+if(
+filtered.length === 0
+){
+
+container.innerHTML = `
+
+<div class="empty">
+
+<div class="empty-icon">
+
+📅
+
+</div>
+
+<div class="empty-title">
+
+No events found
+
+</div>
+
+<div class="empty-text">
+
+Click PLAN EVENT above to create your first event.
+
+</div>
+
+</div>
+
+`;
+
+return;
+
+}
+
+
+container.innerHTML = `
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Event
+</th>
+
+<th>
+Date
+</th>
+
+<th>
+Location
+</th>
+
+<th>
+Participants
+</th>
+
+<th>
+Organizer
+</th>
+
+<th>
+Status
+</th>
+
+<th>
+Expected Expenses
+</th>
+
+<th>
+Action
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+${filtered.map(
+renderEventRow
+).join("")}
+
+</tbody>
+
+</table>
+
+`;
+
+}
+
+
+/* =========================================================
+   EVENT ROW
+========================================================= */
+
+function renderEventRow(
+event
+){
+
+const statusClass =
+getStatusClass(
+event.status
+);
+
+
+const preAuditButton =
+event.status === "Planned"
+?
+
+`
+
+<button
+class="action-btn action-preaudit"
+onclick="openPreAudit('${escapeJs(event.id)}')">
+
+Pre-Audit
+
+</button>
+
+`
+
+:
+
+"";
+
+
+let expenseHtml =
+'<span class="expense-cell no-expense">—</span>';
+
+
+if(
+event.status === "Approved"
+){
+
+const eventId =
+String(
+event.id || ""
+).trim();
+
+
+const record =
+preAuditRecords[eventId];
+
+
+if(!record){
+
+expenseHtml =
+'<span class="expense-cell loading">Loading...</span>';
+
+}
+else if(
+record.found &&
+Number(record.expense || 0) > 0
+){
+
+expenseHtml = `
+
+<span class="expense-cell has-expense">
+
+₱${formatCurrency(record.expense)}
+
+</span>
+
+`;
+
+}
+else{
+
+expenseHtml =
+'<span class="expense-cell no-expense">₱0.00</span>';
+
+}
+
+}
+
+
+return `
+
+<tr>
+
+
+<td>
+
+<div class="event-id">
+
+${escapeHtml(event.id)}
+
+</div>
+
+<div class="event-name">
+
+${escapeHtml(event.name)}
+
+</div>
+
+</td>
+
+
+<td class="date-cell">
+
+${escapeHtml(
+formatDisplayDate(
+event.date
+)
+)}
+
+</td>
+
+
+<td>
+
+<div class="event-location">
+
+${
+event.location
+?
+"📍 " +
+escapeHtml(
+event.location
+)
+:
+"—"
+}
+
+</div>
+
+</td>
+
+
+<td class="participants">
+
+${Number(
+event.participants || 0
+).toLocaleString()}
+
+</td>
+
+
+<td>
+
+${
+event.organizer
+?
+escapeHtml(
+event.organizer
+)
+:
+"—"
+}
+
+</td>
+
+
+<td>
+
+<span
+class="status ${statusClass}">
+
+${escapeHtml(
+event.status
+)}
+
+</span>
+
+</td>
+
+
+<td>
+
+${expenseHtml}
+
+</td>
+
+
+<td>
+
+<div class="actions">
+
+${preAuditButton}
+
+
+<button
+class="action-btn action-edit"
+onclick="openEditModal('${escapeJs(event.id)}')">
+
+Edit
+
+</button>
+
+
+<button
+class="action-btn action-delete"
+onclick="confirmDelete('${escapeJs(event.id)}')">
+
+Delete
+
+</button>
+
+</div>
+
+</td>
+
+
+</tr>
+
+`;
+
+}
+
+
+/* =========================================================
+   OPEN PRE-AUDIT
+========================================================= */
+
+function openPreAudit(
+eventId
+){
+
+const event =
+events.find(
+item =>
+String(item.id) ===
+String(eventId)
+);
+
+
+if(!event){
+
+showToast(
+"Event not found.",
+"error"
+);
+
+return;
+
+}
+
+
+if(
+event.status !==
+"Planned"
+){
+
+showToast(
+"Pre-Audit is only available for Planned events.",
+"error"
+);
+
+return;
+
+}
+
+
+const url =
+PRE_AUDIT_PAGE +
+"?eventId=" +
+encodeURIComponent(
+event.id
+);
+
+
+window.location.href =
+url;
+
+}
+
+
+/* =========================================================
+   STATUS CLASS
+========================================================= */
+
+function getStatusClass(
+status
+){
+
+switch(status){
+
+case "For Approval":
+return "status-approval";
+
+case "Approved":
+return "status-approved";
+
+case "Rejected":
+return "status-rejected";
+
+default:
+return "status-planned";
+
+}
+
+}
+
+
+/* =========================================================
+   OPEN PLAN MODAL
+========================================================= */
+
+function openPlanModal(){
+
+editingEventId =
+null;
+
+
+document.getElementById(
+"modalTitle"
+).textContent =
+"Plan Event";
+
+
+document.getElementById(
+"saveButton"
+).textContent =
+"Plan Event";
+
+
+document.getElementById(
+"deleteButton"
+).classList.add(
+"hidden"
+);
+
+
+clearForm();
+
+
+document.getElementById(
+"eventStatus"
+).value =
+"Planned";
+
+
+document.getElementById(
+"eventModal"
+).classList.add(
+"show"
+);
+
+
+setTimeout(
+function(){
+
+document.getElementById(
+"eventName"
+).focus();
+
+},
+100
+);
+
+}
+
+
+/* =========================================================
+   OPEN EDIT MODAL
+========================================================= */
+
+function openEditModal(
+eventId
+){
+
+const event =
+events.find(
+item =>
+String(item.id) ===
+String(eventId)
+);
+
+
+if(!event){
+
+showToast(
+"Event not found.",
+"error"
+);
+
+return;
+
+}
+
+
+editingEventId =
+event.id;
+
+
+document.getElementById(
+"modalTitle"
+).textContent =
+"Edit Event";
+
+
+document.getElementById(
+"saveButton"
+).textContent =
+"Save Changes";
+
+
+document.getElementById(
+"deleteButton"
+).classList.remove(
+"hidden"
+);
+
+
+document.getElementById(
+"eventId"
+).value =
+event.id;
+
+
+document.getElementById(
+"eventName"
+).value =
+event.name || "";
+
+
+document.getElementById(
+"eventDate"
+).value =
+event.date || "";
+
+
+document.getElementById(
+"eventParticipants"
+).value =
+event.participants || "";
+
+
+document.getElementById(
+"eventLocation"
+).value =
+event.location || "";
+
+
+document.getElementById(
+"eventOrganizer"
+).value =
+event.organizer || "";
+
+
+document.getElementById(
+"eventStatus"
+).value =
+event.status ||
+"Planned";
+
+
+document.getElementById(
+"eventModal"
+).classList.add(
+"show"
+);
+
+}
+
+
+/* =========================================================
+   CLEAR FORM
+========================================================= */
+
+function clearForm(){
+
+document.getElementById(
+"eventId"
+).value =
+"";
+
+
+document.getElementById(
+"eventName"
+).value =
+"";
+
+
+document.getElementById(
+"eventDate"
+).value =
+"";
+
+
+document.getElementById(
+"eventParticipants"
+).value =
+"";
+
+
+document.getElementById(
+"eventLocation"
+).value =
+"";
+
+
+document.getElementById(
+"eventOrganizer"
+).value =
+"";
+
+
+document.getElementById(
+"eventStatus"
+).value =
+"Planned";
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeModal(){
+
+document.getElementById(
+"eventModal"
+).classList.remove(
+"show"
+);
+
+
+editingEventId =
+null;
+
+}
+
+
+/* =========================================================
+   SAVE EVENT
+========================================================= */
+
+async function saveEvent(){
+
+const name =
+document.getElementById(
+"eventName"
+).value.trim();
+
+
+const date =
+document.getElementById(
+"eventDate"
+).value;
+
+
+const participants =
+document.getElementById(
+"eventParticipants"
+).value;
+
+
+const location =
+document.getElementById(
+"eventLocation"
+).value.trim();
+
+
+const organizer =
+document.getElementById(
+"eventOrganizer"
+).value.trim();
+
+
+const status =
+document.getElementById(
+"eventStatus"
+).value;
+
+
+if(!name){
+
+showToast(
+"Event name is required.",
+"error"
+);
+
+return;
+
+}
+
+
+if(!date){
+
+showToast(
+"Event date is required.",
+"error"
+);
+
+return;
+
+}
+
+
+const saveButton =
+document.getElementById(
+"saveButton"
+);
+
+
+const wasEditing =
+!!editingEventId;
+
+
+saveButton.disabled =
+true;
+
+
+saveButton.textContent =
+"Saving...";
+
+
+try{
+
+if(wasEditing){
+
+await api(
+"update",
+{
+id:editingEventId,
+name:name,
+date:date,
+participants:participants,
+location:location,
+organizer:organizer,
+status:status
+}
+);
+
+
+showToast(
+"Event updated successfully.",
+"success"
+);
+
+}
+else{
+
+await api(
+"add",
+{
+name:name,
+date:date,
+participants:participants,
+location:location,
+organizer:organizer,
+status:"Planned"
+}
+);
+
+
+showToast(
+"Event planned successfully.",
+"success"
+);
+
+}
+
+
+closeModal();
+
+
+await loadEvents();
+
+}
+catch(error){
+
+console.error(error);
+
+
+showToast(
+error.message,
+"error"
+);
+
+}
+finally{
+
+saveButton.disabled =
+false;
+
+
+saveButton.textContent =
+wasEditing
+?
+"Save Changes"
+:
+"Plan Event";
+
+}
+
+}
+
+
+/* =========================================================
+   CONFIRM DELETE
+========================================================= */
+
+function confirmDelete(
+eventId
+){
+
+const event =
+events.find(
+item =>
+String(item.id) ===
+String(eventId)
+);
+
+
+if(!event){
+
+showToast(
+"Event not found.",
+"error"
+);
+
+return;
+
+}
+
+
+const confirmed =
+confirm(
+"Delete this event?\n\n" +
+event.name +
+"\n\n" +
+event.id +
+"\n\n" +
+"This action cannot be undone."
+);
+
+
+if(!confirmed){
+
+return;
+
+}
+
+
+deleteEvent(
+event.id
+);
+
+}
+
+
+/* =========================================================
+   DELETE CURRENT EVENT
+========================================================= */
+
+function deleteCurrentEvent(){
+
+if(!editingEventId){
+
+return;
+
+}
+
+
+confirmDelete(
+editingEventId
+);
+
+}
+
+
+/* =========================================================
+   DELETE EVENT
+========================================================= */
+
+async function deleteEvent(
+eventId
+){
+
+try{
+
+await api(
+"delete",
+{
+id:eventId
+}
+);
+
+
+closeModal();
+
+
+showToast(
+"Event deleted successfully.",
+"success"
+);
+
+
+await loadEvents();
+
+}
+catch(error){
+
+console.error(error);
+
+
+showToast(
+error.message,
+"error"
+);
+
+}
+
+}
+
+
+/* =========================================================
+   DISPLAY DATE
+========================================================= */
+
+function formatDisplayDate(
+value
+){
+
+if(!value){
+
+return "—";
+
+}
+
+
+const parts =
+String(value).split("-");
+
+
+if(
+parts.length !== 3
+){
+
+return value;
+
+}
+
+
+const year =
+Number(parts[0]);
+
+
+const month =
+Number(parts[1]) - 1;
+
+
+const day =
+Number(parts[2]);
+
+
+const date =
+new Date(
+year,
+month,
+day
+);
+
+
+return date.toLocaleDateString(
+"en-PH",
+{
+year:"numeric",
+month:"short",
+day:"numeric"
+}
+);
+
+}
+
+
+/* =========================================================
    ESCAPE HTML
-========================================= */
+========================================================= */
 
-function escapeHTML(value) {
+function escapeHtml(
+value
+){
 
-    return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-}
-
-
-/* =========================================
-   GET RECEIPT DATA
-========================================= */
-
-function getReceiptData() {
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-    const encodedData =
-        params.get("data");
-
-    if (!encodedData) {
-
-        return null;
-
-    }
-
-    try {
-
-        return JSON.parse(
-            encodedData
-        );
-
-    } catch (error) {
-
-        console.error(
-            "Receipt data parsing error:",
-            error
-        );
-
-        return null;
-
-    }
+return String(
+value ?? ""
+)
+.replace(
+/&/g,
+"&amp;"
+)
+.replace(
+/</g,
+"&lt;"
+)
+.replace(
+/>/g,
+"&gt;"
+)
+.replace(
+/"/g,
+"&quot;"
+)
+.replace(
+/'/g,
+"&#039;"
+);
 
 }
 
 
-/* =========================================
-   GENERATE FALLBACK TRANSACTION ID
-========================================= */
+/* =========================================================
+   ESCAPE JAVASCRIPT STRING
+========================================================= */
 
-function getTransactionId(
-    transaction
-) {
+function escapeJs(
+value
+){
 
-    if (
-        transaction.transactionId
-    ) {
-
-        return String(
-            transaction.transactionId
-        );
-
-    }
-
-    if (
-        transaction.id
-    ) {
-
-        return String(
-            transaction.id
-        );
-
-    }
-
-    /*
-     * Some older transactions may not
-     * have a transaction ID.
-     *
-     * Create a readable fallback ID
-     * so the receipt can still display.
-     */
-
-    const timestamp =
-        transaction.date
-            ? new Date(
-                transaction.date
-            ).getTime()
-            : Date.now();
-
-    return (
-        "CAS-" +
-        String(
-            timestamp
-        )
-    );
+return String(
+value ?? ""
+)
+.replace(
+/\\/g,
+"\\\\"
+)
+.replace(
+/'/g,
+"\\'"
+)
+.replace(
+/"/g,
+'\\"'
+)
+.replace(
+/\n/g,
+"\\n"
+)
+.replace(
+/\r/g,
+"\\r"
+);
 
 }
 
 
-/* =========================================
-   LOAD RECEIPT
-========================================= */
+/* =========================================================
+   TRANSACTION PLACEHOLDER
+========================================================= */
 
-function loadReceipt() {
+function openTransactionModal(){
 
-    const container =
-        document.getElementById(
-            "receiptContent"
-        );
-
-    const transaction =
-        getReceiptData();
-
-
-    if (
-        !transaction
-        ||
-        typeof transaction !== "object"
-    ) {
-
-        container.innerHTML = `
-
-            <div class="error">
-
-                Unable to load receipt.
-
-                <br><br>
-
-                No valid transaction data
-                was provided.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    renderReceipt(
-        transaction
-    );
+showToast(
+"Transaction recording will be connected to the new Transactions database next.",
+"success"
+);
 
 }
 
 
-/* =========================================
-   RENDER RECEIPT
-========================================= */
-
-function renderReceipt(
-    transaction
-) {
-
-    const container =
-        document.getElementById(
-            "receiptContent"
-        );
-
-
-    const transactionId =
-        getTransactionId(
-            transaction
-        );
-
-
-    const rawDate =
-        transaction.date;
-
-
-    const date =
-        rawDate
-            ? new Date(rawDate)
-            : null;
-
-
-    const formattedDate =
-        date &&
-        !isNaN(
-            date.getTime()
-        )
-
-            ?
-
-        date.toLocaleString(
-            undefined,
-            {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-                hour: "numeric",
-                minute: "2-digit"
-            }
-        )
-
-            :
-
-        escapeHTML(
-            rawDate || ""
-        );
-
-
-    const studentNumber =
-        escapeHTML(
-            transaction.studentNumber
-        );
-
-
-    const studentName =
-        escapeHTML(
-            transaction.studentName
-        );
-
-
-    const program =
-        escapeHTML(
-            transaction.program
-        );
-
-
-    const schoolYear =
-        escapeHTML(
-            transaction.schoolYear
-        );
-
-
-    const term =
-        escapeHTML(
-            transaction.term
-        );
-
-
-    const amount =
-        Number(
-            transaction.amount || 0
-        );
-
-
-    container.innerHTML = `
-
-        <div class="receipt-title">
-
-            <h2>
-                Payment Receipt
-            </h2>
-
-            <p>
-                Official CAS Fund payment record
-            </p>
-
-        </div>
-
-
-        <div class="transaction-id">
-
-            <span>
-                Transaction ID
-            </span>
-
-            <strong>
-                ${escapeHTML(transactionId)}
-            </strong>
-
-        </div>
-
-
-        <div class="info-grid">
-
-
-            <div class="info-item">
-
-                <div class="info-label">
-                    Student Number
-                </div>
-
-                <div class="info-value">
-                    ${studentNumber}
-                </div>
-
-            </div>
-
-
-            <div class="info-item">
-
-                <div class="info-label">
-                    Student Name
-                </div>
-
-                <div class="info-value">
-                    ${studentName}
-                </div>
-
-            </div>
-
-
-            <div class="info-item">
-
-                <div class="info-label">
-                    Program
-                </div>
-
-                <div class="info-value">
-                    ${program}
-                </div>
-
-            </div>
-
-
-            <div class="info-item">
-
-                <div class="info-label">
-                    School Year
-                </div>
-
-                <div class="info-value">
-                    ${schoolYear}
-                </div>
-
-            </div>
-
-
-            <div class="info-item">
-
-                <div class="info-label">
-                    Payment Term
-                </div>
-
-                <div class="info-value">
-                    ${term}
-                </div>
-
-            </div>
-
-
-            <div class="info-item">
-
-                <div class="info-label">
-                    Date
-                </div>
-
-                <div class="info-value">
-                    ${formattedDate}
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <div class="amount-box">
-
-            <span class="amount-label">
-                Amount Paid
-            </span>
-
-            <span class="amount">
-                ₱${amount.toFixed(2)}
-            </span>
-
-        </div>
-
-
-        <div class="status">
-
-            <span>
-                PAYMENT RECEIVED
-            </span>
-
-        </div>
-
-
-        <div class="receipt-footer">
-
-            This receipt confirms the recorded
-            CAS Fund payment.
-
-            <br>
-
-            Please keep this receipt for your records.
-
-        </div>
-
-
-        <div class="actions">
-
-            <button
-                class="print-btn"
-                onclick="window.print()">
-
-                Print Receipt
-
-            </button>
-
-
-            <button
-                class="close-btn"
-                onclick="window.close()">
-
-                Close
-
-            </button>
-
-        </div>
-
-    `;
+function showTransactionConnectionStatus(){
+
+showToast(
+"Transactions database connection is not activated yet.",
+"success"
+);
 
 }
 
 
-/* =========================================
-   START
-========================================= */
+/* =========================================================
+   TOAST
+========================================================= */
 
-loadReceipt();
+function showToast(
+message,
+type="success"
+){
+
+const toast =
+document.getElementById(
+"toast"
+);
+
+
+toast.textContent =
+message;
+
+
+toast.className =
+"toast show " +
+type;
+
+
+clearTimeout(
+toastTimer
+);
+
+
+toastTimer =
+setTimeout(
+function(){
+
+toast.className =
+"toast";
+
+},
+3000
+);
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL OUTSIDE
+========================================================= */
+
+document.getElementById(
+"eventModal"
+).addEventListener(
+"click",
+function(event){
+
+if(
+event.target ===
+this
+){
+
+closeModal();
+
+}
+
+}
+);
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+if(
+event.key ===
+"Escape"
+){
+
+closeModal();
+
+}
+
+}
+);
 
 </script>
 
 </body>
+
 </html>
